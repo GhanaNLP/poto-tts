@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "poto-tts"
+version = "0.2.0"
+description = "Ghanaian English speech synthesis: a Piper voice trained on Ghanaian speech, with a Ghanaian espeak-ng dictionary"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [{ name = "GhanaNLP" }]
+keywords = ["ghana", "english", "tts", "speech-synthesis", "piper", "vits", "sherpa-onnx", "onnx", "ipa", "espeak-ng", "accent"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Natural Language :: English",
+]
+dependencies = [
+    # The Ghanaian pronunciation lexicon: 104,623 words. It is the source of
+    # every entry in the compiled espeak dictionary, so it is a build-time
+    # dependency as much as a runtime one.
+    "ghana-english-g2p>=0.1.0",
+]
+
+[project.optional-dependencies]
+# Synthesis. Not required to build the dictionary or inspect pronunciations, and
+# a deployment that only ships the patched espeak-ng-data to Android or iOS needs
+# none of it.
+tts = ["sherpa-onnx>=1.13.3"]
+# `espeak-english` bundles libespeak-ng, used to read pronunciations back for
+# verification without depending on a system espeak-ng. The `espeak-ng` *binary*
+# is still needed to compile a dictionary (tools/build_espeak_dict.py).
+dev = ["pytest>=7", "espeak-english>=0.1.1"]
+
+[project.urls]
+Homepage = "https://github.com/GhanaNLP/poto-tts"
+Source = "https://github.com/GhanaNLP/poto-tts"
+Issues = "https://github.com/GhanaNLP/poto-tts/issues"
+Trainer = "https://github.com/OHF-voice/piper1-gpl"
+
+
+
+[tool.setuptools]
+packages = ["poto_tts"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

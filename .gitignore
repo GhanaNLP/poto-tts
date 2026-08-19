@@ -1,0 +1,18 @@
+# Build artefacts. The patched espeak-ng-data is 29 MB and is *generated* from the
+# lexicon by tools/build_espeak_dict.py -- it belongs in a release asset next to a
+# trained voice, not in git history where every rebuild would add another copy.
+build/
+dist/
+
+# Downloaded or trained
+*.ckpt
+*.onnx
+*.wav
+runs/
+cache/
+
+__pycache__/
+*.py[cod]
+.venv*/
+*.egg-info/
+.pytest_cache/
