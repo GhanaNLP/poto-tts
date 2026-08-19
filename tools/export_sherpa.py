@@ -43,8 +43,49 @@ from pathlib import Path
 SMOKE_TEXT = "Kwabena went to Achimota and met the Okuapenhene."
 
 
+def ensure_legacy_exporter() -> bool:
+    """Make Piper's ONNX export use the TorchScript exporter, not dynamo.
+
+    `torch.onnx.export` changed its default to the dynamo exporter, and Piper's
+    call was written for the legacy one -- it passes `dynamic_axes`, which only
+    the legacy path accepts. Under dynamo the export dies inside the flow on
+
+        assert (discriminant >= 0).all()
+
+    a data-dependent assertion dynamo cannot guard. The legacy exporter traces
+    through it.
+
+    Patched in place rather than worked around here, because the alternative is
+    reimplementing Piper's checkpoint loading and dummy inputs in this file and
+    then keeping that copy in step with upstream. Idempotent, so it is safe to
+    call on every export, and it reports what it did.
+    """
+    import piper.train.export_onnx as module
+
+    path = Path(module.__file__)
+    source = path.read_text()
+    if "dynamo=False" in source:
+        return False
+    marker = "    torch.onnx.export(\n        model=model_g,"
+    if marker not in source:
+        raise RuntimeError(
+            f"cannot patch {path}: its torch.onnx.export call does not look the "
+            f"way this script expects. Check whether upstream now passes "
+            f"dynamo=False itself."
+        )
+    path.write_text(source.replace(
+        marker,
+        "    torch.onnx.export(\n        # dynamo=False: see poto-tts "
+        "tools/export_sherpa.py ensure_legacy_exporter\n        dynamo=False,\n"
+        "        model=model_g,", 1))
+    return True
+
+
 def export_onnx(checkpoint: Path, out_model: Path) -> None:
     """Run Piper's exporter. It writes the generator only, without the discriminator."""
+    if ensure_legacy_exporter():
+        print("patched piper's exporter to use the legacy TorchScript path",
+              file=sys.stderr)
     subprocess.run(
         [sys.executable, "-m", "piper.train.export_onnx",
          "--checkpoint", str(checkpoint), "--output-file", str(out_model)],
@@ -52,23 +93,42 @@ def export_onnx(checkpoint: Path, out_model: Path) -> None:
     )
 
 
-def write_tokens(config: dict, path: Path) -> int:
-    """tokens.txt from the phoneme id map.
+def write_tokens(config: dict, path: Path) -> tuple[int, list[str]]:
+    """tokens.txt from the phoneme id map, dropping symbols sherpa cannot read.
 
     The space symbol is a real token with its own id, so lines are written as
     'symbol<space>id' and read back by splitting on the *last* space -- the same
     convention sherpa-onnx uses. Writing them sorted by id keeps the file
     diffable between exports.
+
+    Multi-codepoint symbols are skipped. Piper's default map contains five merged
+    diphthongs ('aɪ', 'aʊ', 'ɔɪ', 'eɪ', 'oʊ' at ids 161-165), and sherpa-onnx's
+    Piper frontend rejects the whole file when it meets one:
+
+        piper-phonemize-lexicon.cc:ReadTokens Error when reading tokens at Line
+        aɪ 161. size: 2
+
+    Dropping them is safe *for this model* and that was checked rather than
+    assumed: those ids are used by Piper only when `--data.vowel_clusters` asks
+    for merging, which this training did not, and a scan of 4,000 cached
+    utterances (701,067 ids) found no id above 144. A model trained with merged
+    diphthongs would need them, and would not work on this frontend at all --
+    hence the returned list, so the caller can say what was dropped.
     """
     id_map = config["phoneme_id_map"]
     by_id = {}
     for symbol, ids in id_map.items():
         for i in ids:
             by_id.setdefault(int(i), symbol)
+    skipped = []
     with open(path, "w", encoding="utf-8") as fh:
         for i in sorted(by_id):
-            fh.write(f"{by_id[i]} {i}\n")
-    return len(by_id)
+            symbol = by_id[i]
+            if len(symbol) != 1:
+                skipped.append(f"{symbol!r}={i}")
+                continue
+            fh.write(f"{symbol} {i}\n")
+    return len(by_id) - len(skipped), skipped
 
 
 def add_metadata(model: Path, config: dict) -> None:
@@ -153,7 +213,10 @@ def main() -> int:
         print(f"no model at {model}", file=sys.stderr)
         return 1
 
-    n_tokens = write_tokens(config, out / "tokens.txt")
+    n_tokens, skipped_tokens = write_tokens(config, out / "tokens.txt")
+    if skipped_tokens:
+        print(f"skipped {len(skipped_tokens)} multi-codepoint tokens sherpa-onnx "
+              f"cannot read: {', '.join(skipped_tokens)}", file=sys.stderr)
     add_metadata(model, config)
     shutil.copy(args.config, out / "config.json")
 
