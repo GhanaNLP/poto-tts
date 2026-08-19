@@ -331,7 +331,28 @@ def read_extra(path: Path) -> dict:
                 f"{path}:{number}: expected 'word<TAB>pronunciation', got {line!r}")
         word, value = parts[0].strip().lower(), parts[1].strip()
         if value.startswith("="):
-            entries[word] = value[1:].strip()
+            # Raw mnemonics bypass the mapping, so they also bypass the checks the
+            # mapping provides -- and espeak answers an invalid mnemonic by
+            # discarding the rest of the entry and returning a fragment, with no
+            # error. `=kuf.'uor` becomes /kˈuf/. Checked here, because the
+            # verification pass later cannot catch it: it compares the dictionary
+            # against the same string, so a broken entry agrees with itself.
+            mnemonics = value[1:].strip()
+            spoken = _bare(espeak_ipa([f"[[{mnemonics}]]"]))
+            # Proportional, not a fixed floor: a truncated entry still returns
+            # something ('kuf.\'uor' returns /kˈuf/, three characters), so what
+            # gives it away is how much of the string went missing. Counting
+            # mnemonic characters overestimates phones -- 'tS' and 'A:' are one
+            # phone each -- so a valid entry lands near 0.8-1.0 and a truncated one
+            # well below.
+            units = len([c for c in mnemonics if c not in "',.:%"])
+            if units and len(spoken) / units < 0.7:
+                raise ValueError(
+                    f"{path}:{number}: espeak read [[{mnemonics}]] as {spoken!r} -- "
+                    f"too short, so one of those mnemonics is invalid and espeak "
+                    f"discarded the rest. Write the pronunciation as IPA instead, "
+                    f"or check it with: espeak-ng -q --ipa=3 \"[[{mnemonics}]]\"")
+            entries[word] = mnemonics
             continue
         from ghana_english_g2p import segment
 
