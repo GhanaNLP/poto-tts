@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "poto-tts"
-version = "0.2.0"
-description = "Ghanaian English speech synthesis: a Piper voice trained on Ghanaian speech, with a Ghanaian espeak-ng dictionary"
+version = "0.3.0"
+description = "Ghanaian English speech synthesis on sherpa-onnx: several engines, one Ghanaian espeak-ng dictionary, cross-platform voice files"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
@@ -27,32 +27,41 @@ classifiers = [
     "Natural Language :: English",
 ]
 dependencies = [
-    # The Ghanaian pronunciation lexicon: 104,623 words. It is the source of
-    # every entry in the compiled espeak dictionary, so it is a build-time
-    # dependency as much as a runtime one.
+    # The Ghanaian pronunciation lexicon: 104,623 words, and the source of every
+    # entry in the compiled dictionary. Needed at runtime too, because a user can
+    # rebuild the dictionary with their own words.
     "ghana-english-g2p>=0.1.0",
 ]
 
 [project.optional-dependencies]
-# Synthesis. Not required to build the dictionary or inspect pronunciations, and
-# a deployment that only ships the patched espeak-ng-data to Android or iOS needs
-# none of it.
-tts = ["sherpa-onnx>=1.13.3"]
+# Synthesis in Python. Not needed to build a dictionary, inspect pronunciations, or
+# ship voice files to Android, iOS or WebAssembly -- those runtimes carry their own
+# sherpa-onnx. huggingface_hub is here rather than in the base dependencies because
+# it is only used to fetch a voice, and downloads go through it so they are counted
+# against the model repository.
+tts = ["sherpa-onnx>=1.13.3", "huggingface_hub>=0.24", "numpy>=1.21"]
+# The REST server.
+api = ["poto-tts[tts]", "fastapi>=0.110", "uvicorn>=0.27", "pydantic>=2"]
 # `espeak-english` bundles libespeak-ng, used to read pronunciations back for
-# verification without depending on a system espeak-ng. The `espeak-ng` *binary*
-# is still needed to compile a dictionary (tools/build_espeak_dict.py).
-dev = ["pytest>=7", "espeak-english>=0.1.1"]
+# verification without a system espeak-ng. The espeak-ng *binary* is still required
+# to compile a dictionary (`poto-tts dict`).
+dev = ["poto-tts[api]", "pytest>=7", "espeak-english>=0.1.1", "onnx>=1.15"]
+all = ["poto-tts[api]"]
 
 [project.urls]
 Homepage = "https://github.com/GhanaNLP/poto-tts"
 Source = "https://github.com/GhanaNLP/poto-tts"
 Issues = "https://github.com/GhanaNLP/poto-tts/issues"
+Models = "https://huggingface.co/ghananlpcommunity/poto-tts-kokoro-gh"
 Trainer = "https://github.com/OHF-voice/piper1-gpl"
 
 
 
+[project.scripts]
+poto-tts = "poto_tts.cli:_entry"
+
 [tool.setuptools]
-packages = ["poto_tts"]
+packages = ["poto_tts", "poto_tts.backends"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
