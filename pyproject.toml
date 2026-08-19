@@ -26,27 +26,31 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
     "Natural Language :: English",
 ]
+# `pip install poto-tts` should speak, so the engine and the fetcher are base
+# dependencies rather than extras. huggingface_hub is here because voices come from
+# the Hub and downloads count against the repository that published them.
 dependencies = [
-    # The Ghanaian pronunciation lexicon: 104,623 words, and the source of every
-    # entry in the compiled dictionary. Needed at runtime too, because a user can
-    # rebuild the dictionary with their own words.
-    "ghana-english-g2p>=0.1.0",
+    "sherpa-onnx>=1.13.3",
+    "huggingface_hub>=0.24",
+    "numpy>=1.21",
 ]
 
 [project.optional-dependencies]
-# Synthesis in Python. Not needed to build a dictionary, inspect pronunciations, or
-# ship voice files to Android, iOS or WebAssembly -- those runtimes carry their own
-# sherpa-onnx. huggingface_hub is here rather than in the base dependencies because
-# it is only used to fetch a voice, and downloads go through it so they are counted
-# against the model repository.
-tts = ["sherpa-onnx>=1.13.3", "huggingface_hub>=0.24", "numpy>=1.21"]
+# Needed to *build* a dictionary (`poto-tts dict`) or inspect a pronunciation
+# (`--phonemes`), not to speak: the dictionary ships compiled inside each voice.
+# Depended on rather than vendored so a rebuild always uses the current lexicon, and
+# kept out of the base install because espeak-english bundles libespeak-ng (GPL-3.0)
+# and nobody who only wants to speak should have to take that on.
+lexicon = ["ghana-english-g2p>=0.1.0", "espeak-english>=0.1.1"]
+# Kept as an alias so `poto-tts[tts]` in older instructions still resolves.
+tts = []
 # The REST server.
-api = ["poto-tts[tts]", "fastapi>=0.110", "uvicorn>=0.27", "pydantic>=2"]
+api = ["fastapi>=0.110", "uvicorn>=0.27", "pydantic>=2"]
 # `espeak-english` bundles libespeak-ng, used to read pronunciations back for
 # verification without a system espeak-ng. The espeak-ng *binary* is still required
 # to compile a dictionary (`poto-tts dict`).
-dev = ["poto-tts[api]", "pytest>=7", "espeak-english>=0.1.1", "onnx>=1.15"]
-all = ["poto-tts[api]"]
+dev = ["poto-tts[api,lexicon]", "pytest>=7", "onnx>=1.15"]
+all = ["poto-tts[api,lexicon]"]
 
 [project.urls]
 Homepage = "https://github.com/GhanaNLP/poto-tts"

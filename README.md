@@ -112,7 +112,11 @@ latency, no server.
 
 The dictionary will still miss your grandmother's name. Rebuilding is the supported
 fix: it changes the data every runtime loads, so Android and iOS get it too. Needs
-the `espeak-ng` binary.
+the `espeak-ng` binary and the lexicon extra:
+
+```bash
+pip install 'poto-tts[lexicon]'
+```
 
 ```tsv
 # my_words.tsv — word<TAB>pronunciation
@@ -167,6 +171,7 @@ never emit but its tables define.
 
 | stage | |
 |---|---|
+| `fetch_shards.py` | download the dataset shard by shard, extract WAVs, drop the parquet |
 | `prepare_dataset.py filter` | duration, character set, disfluency, transcript/audio mismatch |
 | `prepare_dataset.py embed` | ECAPA speaker embeddings on GPU |
 | `prepare_dataset.py cluster` | pseudo-speakers, with per-speaker and total caps |
@@ -178,6 +183,9 @@ never emit but its tables define.
 
 Thresholds there are measured, and the comments record the distributions they came
 from — including the ones that were wrong first.
+
+`fetch_shards.py` takes `POTO_TTS_HF_REPO` and `POTO_TTS_DATA`; the rest read paths
+from the top of `prepare_dataset.py`.
 
 ## Credits
 

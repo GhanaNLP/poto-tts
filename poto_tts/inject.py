@@ -171,6 +171,7 @@ class GhanaInjector:
         english_stress: bool = True,
         verify: bool = False,
     ):
+        _require_lexicon()
         from ghana_english_g2p import GhanaEnglishG2P
 
         self._g2p = GhanaEnglishG2P(use_espeak=False, lexicon=lexicon)
@@ -244,3 +245,21 @@ class GhanaInjector:
         """Fraction of words the Ghana lexicon covers, i.e. how much is injected."""
         words = [t for t in TOKEN.findall(text) if t[:1].isalpha()]
         return self._g2p.coverage(words)
+
+
+def _require_lexicon():
+    """Import the lexicon package, or explain how to get it.
+
+    `ghana-english-g2p` is an optional dependency because speaking does not need it:
+    the dictionary is compiled into each voice, and the lexicon is what compiles it.
+    Kept as a dependency rather than vendored so that a rebuild always uses the
+    current lexicon rather than a copy that quietly falls behind.
+    """
+    try:
+        import ghana_english_g2p  # noqa: F401
+    except ImportError as exc:
+        raise RuntimeError(
+            "this needs the Ghanaian lexicon, an optional dependency used to build "
+            "or inspect a dictionary:\n  pip install 'poto-tts[lexicon]'"
+        ) from exc
+    return ghana_english_g2p

@@ -224,6 +224,9 @@ def english_vocabulary(cache: Path) -> set:
 
 def build_entries(quiet: bool = False):
     """Lexicon -> {word: mnemonics} for every word, before selection."""
+    from .inject import _require_lexicon
+
+    _require_lexicon()
     from ghana_english_g2p.core import _load_lexicon
 
     lexicon = _load_lexicon()

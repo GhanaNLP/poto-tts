@@ -3,6 +3,7 @@
 # trained voice, not in git history where every rebuild would add another copy.
 build/
 dist/
+dist_pypi/
 
 # Downloaded or trained
 *.ckpt
