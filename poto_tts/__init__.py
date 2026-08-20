@@ -17,7 +17,7 @@ from .backends import BACKENDS, DEFAULT_BACKEND, Backend, KokoroBackend, PiperBa
 from .inject import GhanaInjector
 from .mnemonics import CONSONANTS, LONG_VOWELS, VOWELS, MnemonicError, injection, verify
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 __all__ = [
     "load",
     "BACKENDS",

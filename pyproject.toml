@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "poto-tts"
-version = "0.3.0"
+version = "0.4.0"
 description = "Ghanaian English speech synthesis on sherpa-onnx: several engines, one Ghanaian espeak-ng dictionary, cross-platform voice files"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -45,7 +45,7 @@ lexicon = ["ghana-english-g2p>=0.1.0", "espeak-english>=0.1.1"]
 # Kept as an alias so `poto-tts[tts]` in older instructions still resolves.
 tts = []
 # The REST server.
-api = ["fastapi>=0.110", "uvicorn>=0.27", "pydantic>=2"]
+api = ["fastapi>=0.110", "uvicorn>=0.27", "pydantic>=2", "python-multipart>=0.0.9"]
 # `espeak-english` bundles libespeak-ng, used to read pronunciations back for
 # verification without a system espeak-ng. The espeak-ng *binary* is still required
 # to compile a dictionary (`poto-tts dict`).
@@ -66,6 +66,11 @@ poto-tts = "poto_tts.cli:_entry"
 
 [tool.setuptools]
 packages = ["poto_tts", "poto_tts.backends"]
+
+[tool.setuptools.package-data]
+# The web page. Shipped in the wheel because `poto-tts serve` has to work from a
+# pip install, not only from a checkout.
+poto_tts = ["static/*.html"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

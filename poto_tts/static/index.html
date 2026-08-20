@@ -1,0 +1,190 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>poto-tts — Ghanaian English</title>
+<!--
+  One file, no build step, no CDN. A server that has to reach the internet to render
+  its own page is useless in the deployments this project cares about -- a newsroom
+  laptop, a Pi, a container with no egress.
+-->
+<style>
+  :root {
+    --ink: #16130f; --paper: #faf7f2; --line: #ddd5c8;
+    --accent: #8a2f1d; --muted: #6b6357; --ok: #2c5d34;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #f2ede4; --paper: #17150f; --line: #37322a;
+            --accent: #e0836b; --muted: #a09889; --ok: #7cb083; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink);
+         font: 16px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 46rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 .25rem; letter-spacing: -.01em; }
+  .sub { color: var(--muted); margin: 0 0 2rem; }
+  fieldset { border: 1px solid var(--line); border-radius: 10px; padding: 1.1rem 1.25rem 1.35rem;
+             margin: 0 0 1.5rem; }
+  legend { padding: 0 .4rem; font-weight: 600; font-size: .82rem; letter-spacing: .08em;
+           text-transform: uppercase; color: var(--muted); }
+  label { display: block; font-size: .85rem; color: var(--muted); margin-bottom: .3rem; }
+  textarea, select, input[type=file], input[type=number] {
+    width: 100%; padding: .6rem .7rem; font: inherit; color: var(--ink);
+    background: transparent; border: 1px solid var(--line); border-radius: 7px; }
+  textarea { min-height: 7.5rem; resize: vertical; }
+  .row { display: flex; gap: .9rem; flex-wrap: wrap; margin-top: .9rem; }
+  .row > div { flex: 1 1 9rem; }
+  button { font: inherit; font-weight: 600; padding: .6rem 1.15rem; border-radius: 7px;
+           border: 1px solid var(--accent); background: var(--accent); color: var(--paper);
+           cursor: pointer; margin-top: 1rem; }
+  button:disabled { opacity: .55; cursor: progress; }
+  button.secondary { background: transparent; color: var(--accent); }
+  audio { width: 100%; margin-top: 1rem; }
+  .note { font-size: .85rem; color: var(--muted); margin-top: .6rem; }
+  .status { margin-top: .9rem; font-size: .9rem; min-height: 1.4rem; }
+  .status.err { color: var(--accent); }
+  .status.ok { color: var(--ok); }
+  code { background: color-mix(in srgb, var(--ink) 8%, transparent); padding: .1rem .3rem;
+         border-radius: 4px; font-size: .88em; }
+  a { color: var(--accent); }
+</style>
+
+<main>
+  <h1>poto-tts</h1>
+  <p class="sub">Ghanaian English speech. Names, places and titles pronounced properly.</p>
+
+  <fieldset>
+    <legend>Voice</legend>
+    <div class="row">
+      <div><label for="backend">Engine</label><select id="backend"></select></div>
+      <div><label for="voice">Voice</label><select id="voice"></select></div>
+      <div><label for="speed">Speed</label>
+           <input id="speed" type="number" value="1.0" min="0.5" max="2.0" step="0.05"></div>
+    </div>
+    <p class="note" id="licence"></p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Text</legend>
+    <label for="text">Paste text</label>
+    <textarea id="text" placeholder="Kwabena went to Achimota and met the Okuapenhene."></textarea>
+    <button id="speak">Speak</button>
+    <button id="download" class="secondary" disabled>Download WAV</button>
+    <div class="status" id="status1"></div>
+    <audio id="player" controls hidden></audio>
+  </fieldset>
+
+  <fieldset>
+    <legend>Batch</legend>
+    <label for="csv">Upload a CSV</label>
+    <input id="csv" type="file" accept=".csv,text/csv">
+    <p class="note">
+      A <code>text</code> column, optionally <code>voice</code> and <code>filename</code>.
+      A single-column file with no header works too. You get a ZIP of WAVs plus a
+      manifest.
+    </p>
+    <button id="batch">Synthesise batch</button>
+    <div class="status" id="status2"></div>
+  </fieldset>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+let lastBlob = null;
+
+async function loadBackends() {
+  const r = await fetch("backends").then(r => r.json());
+  $("backend").innerHTML = r.backends
+    .map(b => `<option value="${b.name}"${b.name === r.default ? " selected" : ""}>${b.name}</option>`)
+    .join("");
+  await loadVoices();
+}
+
+async function loadVoices() {
+  const backend = $("backend").value;
+  $("voice").innerHTML = "<option>loading…</option>";
+  $("licence").textContent = "";
+  try {
+    const r = await fetch("voices?backend=" + encodeURIComponent(backend)).then(r => r.json());
+    const rec = new Set(r.recommended || []);
+    $("voice").innerHTML = r.voices
+      .map(v => `<option value="${v}"${v === r.default ? " selected" : ""}>${v}${rec.has(v) ? " ★" : ""}</option>`)
+      .join("");
+    const b = (await fetch("backends").then(r => r.json())).backends.find(x => x.name === backend);
+    if (b && b.licence) {
+      $("licence").textContent = `${b.licence}` +
+        (b.commercial_use === false ? " — not for commercial use" : "");
+    }
+  } catch (e) {
+    $("voice").innerHTML = "<option>unavailable</option>";
+    $("licence").textContent = "This engine has no voice installed yet.";
+  }
+}
+
+function say(el, message, kind) {
+  el.textContent = message;
+  el.className = "status" + (kind ? " " + kind : "");
+}
+
+$("backend").onchange = loadVoices;
+
+$("speak").onclick = async () => {
+  const text = $("text").value.trim();
+  if (!text) return say($("status1"), "Type or paste something first.", "err");
+  $("speak").disabled = true;
+  say($("status1"), "Synthesising…");
+  try {
+    const r = await fetch("speak", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({text, backend: $("backend").value,
+                            voice: $("voice").value, speed: parseFloat($("speed").value)}),
+    });
+    if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
+    lastBlob = await r.blob();
+    $("player").src = URL.createObjectURL(lastBlob);
+    $("player").hidden = false;
+    $("download").disabled = false;
+    say($("status1"), `${r.headers.get("X-Poto-Duration") || "?"} s · ${r.headers.get("X-Poto-Voice") || ""}`, "ok");
+  } catch (e) {
+    say($("status1"), String(e.message || e), "err");
+  } finally {
+    $("speak").disabled = false;
+  }
+};
+
+$("download").onclick = () => {
+  if (!lastBlob) return;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(lastBlob);
+  a.download = "speech.wav";
+  a.click();
+};
+
+$("batch").onclick = async () => {
+  const file = $("csv").files[0];
+  if (!file) return say($("status2"), "Choose a CSV first.", "err");
+  const form = new FormData();
+  form.append("file", file);
+  form.append("backend", $("backend").value);
+  form.append("voice", $("voice").value);
+  form.append("speed", $("speed").value);
+  $("batch").disabled = true;
+  say($("status2"), "Synthesising the batch — this can take a while.");
+  try {
+    const r = await fetch("batch", {method: "POST", body: form});
+    if (!r.ok) throw new Error((await r.json()).detail || r.statusText);
+    const blob = await r.blob();
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "poto-tts-batch.zip";
+    a.click();
+    say($("status2"), `Done — ${r.headers.get("X-Poto-Rows") || "?"} rows, ` +
+                      `${r.headers.get("X-Poto-Seconds") || "?"} s of audio.`, "ok");
+  } catch (e) {
+    say($("status2"), String(e.message || e), "err");
+  } finally {
+    $("batch").disabled = false;
+  }
+};
+
+loadBackends();
+</script>

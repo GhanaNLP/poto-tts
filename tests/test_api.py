@@ -103,3 +103,78 @@ def test_overlong_text_is_refused_not_truncated(client):
     r = client.post("/speak", json={"text": "a" * 5000})
     assert r.status_code == 413
     assert "split" in r.json()["detail"].lower()
+
+
+# -- web interface and batch ----------------------------------------------
+
+
+def test_index_is_self_contained(client):
+    """No CDN, no build step: the page has to render on a box with no egress."""
+    html = client.get("/").text
+    assert "poto-tts" in html
+    assert "http://" not in html and "https://" not in html
+
+
+def test_ui_can_be_disabled():
+    app = create_app(backends={"kokoro": StubBackend()}, preload=False, ui=False)
+    assert TestClient(app).get("/").status_code == 404
+
+
+def _zip_names(content):
+    import io
+    import zipfile
+
+    return sorted(zipfile.ZipFile(io.BytesIO(content)).namelist())
+
+
+def test_batch_with_a_text_column(client):
+    csv = "text,voice\nKwabena went to Achimota,bm_george\nAkwaaba,\n"
+    r = client.post("/batch", files={"file": ("in.csv", csv, "text/csv")})
+    assert r.status_code == 200
+    assert r.headers["X-Poto-Rows"] == "2"
+    assert _zip_names(r.content) == ["0001.wav", "0002.wav", "manifest.csv"]
+
+
+def test_batch_accepts_a_headerless_single_column(client):
+    """What a one-column spreadsheet export looks like; rejecting it is pedantry."""
+    r = client.post("/batch", files={"file": ("in.csv", "Akwaaba\nMedaase\n", "text/csv")})
+    assert r.status_code == 200
+    assert r.headers["X-Poto-Rows"] == "2"
+
+
+def test_batch_honours_a_filename_column(client):
+    csv = "text,filename\nAkwaaba,greeting\n"
+    r = client.post("/batch", files={"file": ("in.csv", csv, "text/csv")})
+    assert "greeting.wav" in _zip_names(r.content)
+
+
+def test_batch_flattens_paths_in_filenames(client):
+    """A filename column with a path would otherwise write outside the top level."""
+    csv = "text,filename\nAkwaaba,../../escape.wav\n"
+    r = client.post("/batch", files={"file": ("in.csv", csv, "text/csv")})
+    assert _zip_names(r.content) == ["escape.wav", "manifest.csv"]
+
+
+def test_batch_manifest_lists_every_row(client):
+    import io
+    import zipfile
+
+    csv = "text\nAkwaaba\nMedaase\n"
+    r = client.post("/batch", files={"file": ("in.csv", csv, "text/csv")})
+    manifest = zipfile.ZipFile(io.BytesIO(r.content)).read("manifest.csv").decode()
+    assert manifest.splitlines()[0] == "filename,voice,seconds,text"
+    assert len(manifest.strip().splitlines()) == 3
+
+
+def test_empty_csv_is_422(client):
+    r = client.post("/batch", files={"file": ("in.csv", "\n\n", "text/csv")})
+    assert r.status_code == 422
+
+
+def test_batch_row_cap_is_refused_not_trimmed(client):
+    from poto_tts import api
+
+    rows = "text\n" + "Akwaaba\n" * (api.MAX_BATCH_ROWS + 1)
+    r = client.post("/batch", files={"file": ("in.csv", rows, "text/csv")})
+    assert r.status_code == 413
+    assert "limit" in r.json()["detail"]

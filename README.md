@@ -87,12 +87,33 @@ Point your platform's sherpa-onnx TTS API at those files — Kotlin `OfflineTts`
 Swift `SherpaOnnxOfflineTts`, the WASM build, or `sherpa-onnx-offline-tts`.
 [Upstream docs](https://k2-fsa.github.io/sherpa/onnx/).
 
-## REST API
+## Web interface and REST API
 
 ```bash
 pip install 'poto-tts[api]'
-poto-tts serve --host 0.0.0.0 --port 8080
+poto-tts serve                    # then open http://localhost:8080
+```
+
+The page takes pasted text, or a CSV for batch work, and hands back a ZIP of WAVs
+with a manifest. One HTML file, no build step and no CDN — it renders on a laptop or
+a Pi with no internet.
+
+```csv
+text,voice,filename
+"Kwabena went to Achimota",bf_alice,kwabena
+"The Okuapenhene met Nana Bawumia",bm_george,durbar
+```
+
+A `text` column is the documented form; `voice` and `filename` are optional, and a
+single-column file with no header works too. Batches are capped at 500 rows
+(`POTO_TTS_MAX_BATCH_ROWS`) and refused rather than trimmed — fewer rows back than
+you sent, silently, is worse than an error. `--no-ui` leaves a JSON-only API.
+
+Same server, from the command line:
+
+```bash
 curl "localhost:8080/speak?text=Kwabena+went+to+Achimota" -o out.wav
+curl -X POST localhost:8080/batch -F file=@rows.csv -o batch.zip
 ```
 
 | endpoint | |
@@ -101,6 +122,8 @@ curl "localhost:8080/speak?text=Kwabena+went+to+Achimota" -o out.wav
 | `GET /backends` | engines, licences, commercial-use flags |
 | `GET /voices?backend=kokoro` | speaker names, recommended first |
 | `GET /platforms` | how to run the same voice off-server |
+| `GET /` | the web interface |
+| `POST /batch` | a CSV of rows → a ZIP of WAVs and a manifest |
 | `POST /speak` | `{"text", "backend", "voice", "speed"}` → WAV |
 | `GET /speak?text=…` | the same, for a browser or curl |
 
