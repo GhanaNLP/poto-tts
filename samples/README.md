@@ -182,3 +182,37 @@ Two words are wrong because the lexicon has them wrong, and are left that way
 deliberately: `have` is [h, a, v, ɛ] so it reads /hˈavɛ/, and `Kofi` is
 [k, k, o, f, i] so it reads /kkˈofi/ in every route, Python included. Both are fixes
 for `ghana-english-g2p`.
+
+## vowel_fix/ -- /a/ written as `a` rather than `A:`
+
+Three sentences, three ways each: `N.kokoro.wav` is ordinary Kokoro, `N.before.wav`
+is what the Space served before this fix, `N.after.wav` is with it.
+
+The bug was in the encoder, not in the lexicon or the dictionary. `mnemonics.py`
+wrote Ghanaian /a/ as the espeak mnemonic `A:`, decided when the target was espeak's
+*American* table where plain `a` is /æ/ and `A:` was the only context-stable way to
+get a back [a]. The voice later moved to the British table, where `a` **is** [a], and
+`A:` became wrong in two ways at once: it says a long back ɑː where the lexicon says
+[a], and ɑː before a vowel triggers British linking-r.
+
+    Otanka     kokoro ɑːtˈæŋkə     before otˈɑːŋkɑːɹ      after otˈaŋka
+    Okaija     kokoro ɑːkˈeɪdʒə    before ˌokɑːɹˈidʒɑːɹ   after ˌokaˈidʒa
+    Akraman    kokoro ˈækɹæmən     before ɑːkɹˈɑːmɑːn     after akɹˈaman
+
+`Okaija` is the clearest: an r inserted *inside* the name and another after it, in a
+word that has no r. It was found by listening -- the IPA looked different from stock
+Kokoro, so the entries were plainly being used, but the audio was barely
+distinguishable, which is what prompted a closer look.
+
+The same change fixed a second bug behind it. `verify()` and the build's readback
+check both defaulted to `en-us`, so entries were verified against the American
+inventory while production read them as British: `kwæbɪnæ` would have passed as a
+correct reading of `kwabIna`. They use `en` now, the voice the entries are actually
+read with.
+
+What this does not fix, and cannot: Kokoro's inventory is 113 tokens, and `kp` and
+`ɡb` are not among them. The labial-velars in `Nyankpani` and `Gbedemah` have no
+token to land on. Every sound available is an English sound, so what a lexicon entry
+changes is which English sounds are used and where the stress falls -- `Kwabena` from
+/kwˈeɪbnə/ to /kwabˈɪna/, two syllables to three -- not the inventory itself. Going
+past that needs a model trained on Ghanaian speech, which is what `tools/` is for.

@@ -41,7 +41,7 @@ class KokoroBackend(Backend):
     There is nothing to configure about the front-end, because there is no
     front-end here: the text is passed through untouched and the pronunciation
     comes from the voice's `espeak-ng-data` -- the Ghana lexicon compiled into
-    espeak's dictionary and read as British English. That is what makes the
+    espeak's dictionary, read by the `en-gh` accent voice. That is what makes the
     result identical on Android, iOS and WebAssembly, which cannot run Python.
 
     To change a pronunciation, change the lexicon or the voice file and rebuild the
@@ -50,6 +50,30 @@ class KokoroBackend(Backend):
 
     name = "kokoro"
 
+    # Two ways to read the same dictionary, and the difference is confined to the
+    # Ghanaian words -- English is ordinary English either way, because the lexicon
+    # no longer has entries for it.
+    #
+    #   gh  the `en-gh` voice file: Ghanaian /a/ read as /a/ rather than espeak's
+    #       /ɑː/, and /r/ as a tap. Closer to how the names are said.
+    #   en  British English with no voice file at all. The dictionary alone gets the
+    #       names right; they simply carry English vowel qualities.
+    MODES = {"gh": "en-gh", "en": "en"}
+
+    def __init__(self, *args, mode: Optional[str] = None, **kw):
+        """`mode` picks how the dictionary is read: 'gh' or 'en'. See MODES."""
+        if mode is not None:
+            if mode not in self.MODES:
+                raise ValueError(
+                    f"mode must be one of {sorted(self.MODES)}, not {mode!r}")
+            if kw.get("espeak_voice") and kw["espeak_voice"] != self.MODES[mode]:
+                raise ValueError(
+                    f"mode={mode!r} means espeak_voice={self.MODES[mode]!r}; "
+                    f"you also passed {kw['espeak_voice']!r}. Pass one or the other.")
+            kw["espeak_voice"] = self.MODES[mode]
+        super().__init__(*args, **kw)
+        self.mode = next((m for m, v in self.MODES.items()
+                          if v == self.espeak_voice), None)
 
     def annotate(self, text: str) -> List[tuple]:
         """`text` split into (word, from_lexicon) pairs.
@@ -59,8 +83,9 @@ class KokoroBackend(Backend):
         the audio until you know a name is wrong, and by then you cannot tell
         whether the entry is missing or the entry is bad.
 
-        Punctuation is kept as its own item with False, so the pieces rejoin into
-        the original string.
+        Reporting only -- `speak()` does not call it, so nothing about the audio
+        depends on it, and a port that wants the same information reads
+        data/ghanaian-words.txt and does one set lookup per word.
         """
         known = _dictionary_words()
         return [(part, part.lower() in known)

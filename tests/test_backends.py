@@ -105,7 +105,7 @@ def test_default_voice_is_a_recommended_one():
 def test_prepare_text_changes_nothing():
     """There is no front-end in this library any more. Pronunciation lives in the
     voice's espeak-ng-data -- the lexicon compiled into espeak's dictionary, read
-    and read as British English -- which is why Android and iOS get the same result.
+    by the en-gh accent voice -- which is why Android and iOS get the same result.
     A rewrite here would be a Python-only behaviour and a divergence."""
     text = "Kwabena went to Achimota"
     assert make().prepare_text(text) == text
@@ -139,8 +139,7 @@ def test_synthesis_duration():
 def test_annotate_marks_which_words_the_lexicon_supplied():
     """The audio cannot show it: a name from the lexicon and a name espeak guessed at
     sound equally confident, so a caller needs a way to ask."""
-    backend = make()
-    pairs = dict(backend.annotate("Yaw went to Kumasi by bus"))
+    pairs = dict(make().annotate("Yaw went to Kumasi by bus"))
     assert pairs["Yaw"] is True
     assert pairs["Kumasi"] is True
     assert pairs["bus"] is False

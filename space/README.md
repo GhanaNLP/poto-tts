@@ -11,9 +11,13 @@ license: apache-2.0
 
 # poto-tts
 
-English text-to-speech that pronounces Ghanaian words properly. Eight sentences,
-synthesised three ways — ordinary Kokoro, and poto-tts in each of its two modes.
-Same model, same speaker, same text; only the front-end differs.
+English text-to-speech that pronounces Ghanaian words properly. Thirty-two real
+sentences from a Ghanaian English news corpus, each synthesised three ways — ordinary
+Kokoro, and poto-tts in each of its two modes. Same model, same speaker, same text;
+only the front-end differs.
+
+Tabs switch voice. Each of the eight British speakers reads a different four
+sentences, so switching brings new material as well as a new voice.
 
 The voices are Kokoro's British speakers, so this is **not** a Ghanaian accent.
 What changes is what they say.

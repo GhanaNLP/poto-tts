@@ -99,7 +99,9 @@ PAGE = """<!doctype html>
   <p class="legend"><mark>Underlined</mark> words are in the Ghanaian lexicon, so
   poto-tts pronounces them from it. Everything else is left to espeak's English and is
   said exactly as any English TTS would. Each voice reads different sentences, drawn
-  from a Ghanaian English news corpus.</p>
+  from a Ghanaian English news corpus. <strong>gh</strong> reads the lexicon's words
+  with Ghanaian vowels and a tapped r; <strong>en</strong> reads them with English
+  vowels.</p>
 
 {items}
 
@@ -148,9 +150,14 @@ ITEM = """  <div class="item">
         <p class="ipa">{kokoro_ipa}</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts</h3>
-        <audio controls preload="none" src="audio/{poto_file}"></audio>
-        <p class="ipa">{poto_ipa}</p>
+        <h3>poto-tts &middot; gh</h3>
+        <audio controls preload="none" src="audio/{gh_file}"></audio>
+        <p class="ipa">{gh_ipa}</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts &middot; en</h3>
+        <audio controls preload="none" src="audio/{en_file}"></audio>
+        <p class="ipa">{en_ipa}</p>
       </div>
     </div>
   </div>
@@ -187,22 +194,24 @@ def main() -> int:
     for voice in voices:
         items = []
         for key in data["scripts"][voice]:
-            if (key, "poto") not in files or (key, "kokoro") not in files:
-                print(f"  skipping {key}: missing audio")
+            if any((key, r) not in files for r in ("gh", "en", "kokoro")):
+                print(f"  skipping {key}: needs all three routes")
                 continue
             ipa = data["phonemes"].get(key, {})
             items.append(ITEM.format(
                 text=marked(data.get("annotations", {}).get(key), data["texts"][key]),
                 kokoro_file=html.escape(files[(key, "kokoro")]),
-                poto_file=html.escape(files[(key, "poto")]),
+                gh_file=html.escape(files[(key, "gh")]),
+                en_file=html.escape(files[(key, "en")]),
                 kokoro_ipa=html.escape(ipa.get("kokoro", "")),
-                poto_ipa=html.escape(ipa.get("poto", "")),
+                gh_ipa=html.escape(ipa.get("gh", "")),
+                en_ipa=html.escape(ipa.get("en", "")),
             ))
         sections.append(SECTION.format(voice=html.escape(voice), items="".join(items)))
     (SPACE / "index.html").write_text(PAGE.format(
         items="".join(sections), voices=json.dumps(voices)))
     print(f"wrote {SPACE / 'index.html'}: {len(voices)} voices, "
-          f"{len(data['texts'])} sentences")
+          f"{len(data['texts'])} sentences, 3 routes")
     return 0
 
 

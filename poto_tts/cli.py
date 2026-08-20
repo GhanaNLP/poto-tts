@@ -54,9 +54,13 @@ def main(argv=None) -> int:
     p.add_argument("--phonemes", action="store_true",
                    help="show what the front-end sends to espeak, without loading "
                         "a model")
+    p.add_argument("--mode", choices=("gh", "en"), default=None,
+                   help="how to read the dictionary: 'gh' applies the Ghanaian "
+                        "accent voice to the names, 'en' reads them with English "
+                        "vowels. Ordinary English is unaffected either way.")
     p.add_argument("--espeak-voice", default=None,
                    help="the espeak voice to phonemise with. The voice's config "
-                        "names the right one (en); 'en-us' gives stock Kokoro, "
+                        "names the right one (en-gh); 'en-us' gives stock Kokoro, "
                         "for comparison.")
     p.add_argument("--debug", action="store_true", help="sherpa-onnx diagnostics")
     args = p.parse_args(argv)
@@ -79,7 +83,7 @@ def main(argv=None) -> int:
         if not data:
             p.error("no patched espeak-ng-data found; pass --espeak-data, or run "
                     "'poto-tts dict --out build/espeak-ng-data --ghanaian-stress'")
-        voice = args.espeak_voice or "en"
+        voice = args.espeak_voice or {"en": "en", "gh": "en-gh"}.get(args.mode, "en-gh")
         # espeak wants the directory *containing* espeak-ng-data, by that exact name.
         root = Path(data).resolve().parent
         try:
@@ -100,6 +104,8 @@ def main(argv=None) -> int:
     kwargs = dict(model_dir=args.model_dir, repo_id=args.repo_id,
                   espeak_data=args.espeak_data, num_threads=args.threads,
                   provider=args.provider, debug=args.debug, speed=args.speed)
+    if args.mode:
+        kwargs["mode"] = args.mode
     if args.espeak_voice:
         kwargs["espeak_voice"] = args.espeak_voice
     if args.voice:

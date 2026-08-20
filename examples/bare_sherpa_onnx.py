@@ -5,13 +5,15 @@ runtime -- Kotlin, Swift, C++, WebAssembly, Rust -- gets the same pronunciations
 no Python. This script is in Python only because that is what is installed here; it
 uses nothing from the library, just the four files on disk.
 
-    python examples/bare_sherpa_onnx.py <voice-dir> "Kwabena went to Achimota" en out.wav
+    python examples/bare_sherpa_onnx.py <voice-dir> "Kwabena went to Achimota" en-gh out.wav
 
 The voice directory is what `poto_tts.download.ensure_voice()` fetches, or a
 `huggingface-cli download ghananlpcommunity/poto-tts-kokoro-gh`, or any copy of those
 files shipped in an app bundle.
 
-`lang` is `en`: British English, reading the Ghanaian entries out of the dictionary.
+The mode is the `lang` argument and nothing else: `en-gh` reads the dictionary with
+the Ghanaian accent voice, `en` with British English and no voice file. Both give the
+Ghanaian words the same pronunciation.
 
 What still needs Python is *authoring* -- `poto-tts dict` compiles the lexicon into
 `espeak-ng-data`, and that needs the espeak-ng binary too. That is a build step, run
