@@ -54,8 +54,8 @@ class Backend:
         espeak_voice: Override the espeak voice the engine phonemises with. The
             voice's config names the right one and there is normally no reason to
             change it -- but the choice is what decides which dictionary applies,
-            so it is exposed for experiments (e.g. 'lfn', whose five-vowel
-            orthography reads Ghanaian spellings closer than English does).
+            so it is exposed for experiments (e.g. 'en-us', which is stock Kokoro
+            and shows what the dictionary is changing).
         speed: Rate multiplier.
         num_threads: onnxruntime intra-op threads.
         provider: 'cpu', 'cuda' or 'coreml'.
@@ -127,7 +127,7 @@ class Backend:
         if not path.is_file():
             raise FileNotFoundError(
                 f"{path} not found. A voice directory needs the config.json that "
-                f"describes it; tools/export_sherpa.py writes one.")
+                f"names its files, speakers and espeak voice.")
         return json.loads(path.read_text())
 
     def _path(self, key: str) -> str:

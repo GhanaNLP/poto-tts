@@ -19,8 +19,7 @@ tab brings new material as well as a new speaker.
 Three routes per sentence, all saying the same words:
 
     kokoro   stock espeak-ng English, no Ghanaian dictionary
-    gh       the dictionary, read with the en-gh accent voice
-    en       the dictionary, read as British English with no voice file
+    poto     the Ghanaian dictionary, read as British English
 
 Needs a built dictionary -- see docs/CUSTOMISING.md -- then:
 
@@ -82,8 +81,7 @@ SCRIPTS = {
  ]
 }
 
-ROUTES = {"gh":     dict(espeak_voice="en-gh", espeak_data="build/restore/espeak-ng-data"),
-          "en":     dict(espeak_voice="en",    espeak_data="build/restore/espeak-ng-data"),
+ROUTES = {"poto":   dict(espeak_voice="en",    espeak_data="build/direct/espeak-ng-data"),
           "kokoro": dict(espeak_voice="en-us", espeak_data="/usr/local/share/espeak-ng-data")}
 out = Path("space/audio"); out.mkdir(parents=True, exist_ok=True)
 rows, texts, annot, phon = [], {}, {}, {}
@@ -105,7 +103,7 @@ for v in VOICES:
             phon.setdefault(key, {})[route] = " ".join(subprocess.run(
                 ["espeak-ng", f"--path={root}", "-v", kw["espeak_voice"],
                  "--ipa=3", "-q", text], capture_output=True, text=True).stdout.split())
-            if route == "gh":
+            if route == "poto":
                 annot[key] = tts.annotate(text)
     print(f"  {v.name}", flush=True)
 

@@ -56,7 +56,7 @@ def main(argv=None) -> int:
                         "a model")
     p.add_argument("--espeak-voice", default=None,
                    help="the espeak voice to phonemise with. The voice's config "
-                        "names the right one (en-gh); 'en-us' gives stock Kokoro, "
+                        "names the right one (en); 'en-us' gives stock Kokoro, "
                         "for comparison.")
     p.add_argument("--debug", action="store_true", help="sherpa-onnx diagnostics")
     args = p.parse_args(argv)
@@ -79,7 +79,7 @@ def main(argv=None) -> int:
         if not data:
             p.error("no patched espeak-ng-data found; pass --espeak-data, or run "
                     "'poto-tts dict --out build/espeak-ng-data --ghanaian-stress'")
-        voice = args.espeak_voice or "en-gh"
+        voice = args.espeak_voice or "en"
         # espeak wants the directory *containing* espeak-ng-data, by that exact name.
         root = Path(data).resolve().parent
         try:

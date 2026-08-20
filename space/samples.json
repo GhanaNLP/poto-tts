@@ -36,837 +36,645 @@
  "rows": [
   {
    "key": "Grace-0",
-   "route": "gh",
+   "route": "poto",
    "voice": "Grace",
-   "file": "Grace-0.gh.wav",
-   "seconds": 6.62
+   "file": "Grace-0.poto.wav",
+   "seconds": 6.58,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Grace-1",
-   "route": "gh",
+   "route": "poto",
    "voice": "Grace",
-   "file": "Grace-1.gh.wav",
-   "seconds": 5.5
+   "file": "Grace-1.poto.wav",
+   "seconds": 5.47,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Grace-2",
-   "route": "gh",
+   "route": "poto",
    "voice": "Grace",
-   "file": "Grace-2.gh.wav",
-   "seconds": 4.9
+   "file": "Grace-2.poto.wav",
+   "seconds": 5.25,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Grace-3",
-   "route": "gh",
+   "route": "poto",
    "voice": "Grace",
-   "file": "Grace-3.gh.wav",
-   "seconds": 6.94
-  },
-  {
-   "key": "Grace-0",
-   "route": "en",
-   "voice": "Grace",
-   "file": "Grace-0.en.wav",
-   "seconds": 6.87
-  },
-  {
-   "key": "Grace-1",
-   "route": "en",
-   "voice": "Grace",
-   "file": "Grace-1.en.wav",
-   "seconds": 5.9
-  },
-  {
-   "key": "Grace-2",
-   "route": "en",
-   "voice": "Grace",
-   "file": "Grace-2.en.wav",
-   "seconds": 5.83
-  },
-  {
-   "key": "Grace-3",
-   "route": "en",
-   "voice": "Grace",
-   "file": "Grace-3.en.wav",
-   "seconds": 7.3
+   "file": "Grace-3.poto.wav",
+   "seconds": 6.92,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Grace-0",
    "route": "kokoro",
    "voice": "Grace",
    "file": "Grace-0.kokoro.wav",
-   "seconds": 7.06
+   "seconds": 7.33,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Grace-1",
    "route": "kokoro",
    "voice": "Grace",
    "file": "Grace-1.kokoro.wav",
-   "seconds": 5.87
+   "seconds": 6.67,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Grace-2",
    "route": "kokoro",
    "voice": "Grace",
    "file": "Grace-2.kokoro.wav",
-   "seconds": 5.52
+   "seconds": 5.88,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Grace-3",
    "route": "kokoro",
    "voice": "Grace",
    "file": "Grace-3.kokoro.wav",
-   "seconds": 7.22
+   "seconds": 7.55,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Comfort-0",
-   "route": "gh",
+   "route": "poto",
    "voice": "Comfort",
-   "file": "Comfort-0.gh.wav",
-   "seconds": 4.01
+   "file": "Comfort-0.poto.wav",
+   "seconds": 4.12,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Comfort-1",
-   "route": "gh",
+   "route": "poto",
    "voice": "Comfort",
-   "file": "Comfort-1.gh.wav",
-   "seconds": 4.66
+   "file": "Comfort-1.poto.wav",
+   "seconds": 4.67,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Comfort-2",
-   "route": "gh",
+   "route": "poto",
    "voice": "Comfort",
-   "file": "Comfort-2.gh.wav",
-   "seconds": 5.48
+   "file": "Comfort-2.poto.wav",
+   "seconds": 5.55,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Comfort-3",
-   "route": "gh",
+   "route": "poto",
    "voice": "Comfort",
-   "file": "Comfort-3.gh.wav",
-   "seconds": 5.58
-  },
-  {
-   "key": "Comfort-0",
-   "route": "en",
-   "voice": "Comfort",
-   "file": "Comfort-0.en.wav",
-   "seconds": 4.24
-  },
-  {
-   "key": "Comfort-1",
-   "route": "en",
-   "voice": "Comfort",
-   "file": "Comfort-1.en.wav",
-   "seconds": 4.93
-  },
-  {
-   "key": "Comfort-2",
-   "route": "en",
-   "voice": "Comfort",
-   "file": "Comfort-2.en.wav",
-   "seconds": 5.79
-  },
-  {
-   "key": "Comfort-3",
-   "route": "en",
-   "voice": "Comfort",
-   "file": "Comfort-3.en.wav",
-   "seconds": 5.77
+   "file": "Comfort-3.poto.wav",
+   "seconds": 5.64,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Comfort-0",
    "route": "kokoro",
    "voice": "Comfort",
    "file": "Comfort-0.kokoro.wav",
-   "seconds": 4.2
+   "seconds": 5.17,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Comfort-1",
    "route": "kokoro",
    "voice": "Comfort",
    "file": "Comfort-1.kokoro.wav",
-   "seconds": 4.83
+   "seconds": 5.85,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Comfort-2",
    "route": "kokoro",
    "voice": "Comfort",
    "file": "Comfort-2.kokoro.wav",
-   "seconds": 5.77
+   "seconds": 6.72,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Comfort-3",
    "route": "kokoro",
    "voice": "Comfort",
    "file": "Comfort-3.kokoro.wav",
-   "seconds": 5.77
+   "seconds": 6.7,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Mercy-0",
-   "route": "gh",
+   "route": "poto",
    "voice": "Mercy",
-   "file": "Mercy-0.gh.wav",
-   "seconds": 5.81
+   "file": "Mercy-0.poto.wav",
+   "seconds": 5.9,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Mercy-1",
-   "route": "gh",
+   "route": "poto",
    "voice": "Mercy",
-   "file": "Mercy-1.gh.wav",
-   "seconds": 6.34
+   "file": "Mercy-1.poto.wav",
+   "seconds": 6.41,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Mercy-2",
-   "route": "gh",
+   "route": "poto",
    "voice": "Mercy",
-   "file": "Mercy-2.gh.wav",
-   "seconds": 4.84
+   "file": "Mercy-2.poto.wav",
+   "seconds": 4.79,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Mercy-3",
-   "route": "gh",
+   "route": "poto",
    "voice": "Mercy",
-   "file": "Mercy-3.gh.wav",
-   "seconds": 5.65
-  },
-  {
-   "key": "Mercy-0",
-   "route": "en",
-   "voice": "Mercy",
-   "file": "Mercy-0.en.wav",
-   "seconds": 6.16
-  },
-  {
-   "key": "Mercy-1",
-   "route": "en",
-   "voice": "Mercy",
-   "file": "Mercy-1.en.wav",
-   "seconds": 6.71
-  },
-  {
-   "key": "Mercy-2",
-   "route": "en",
-   "voice": "Mercy",
-   "file": "Mercy-2.en.wav",
-   "seconds": 4.98
-  },
-  {
-   "key": "Mercy-3",
-   "route": "en",
-   "voice": "Mercy",
-   "file": "Mercy-3.en.wav",
-   "seconds": 5.62
+   "file": "Mercy-3.poto.wav",
+   "seconds": 5.49,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Mercy-0",
    "route": "kokoro",
    "voice": "Mercy",
    "file": "Mercy-0.kokoro.wav",
-   "seconds": 6.11
+   "seconds": 7.15,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Mercy-1",
    "route": "kokoro",
    "voice": "Mercy",
    "file": "Mercy-1.kokoro.wav",
-   "seconds": 6.7
+   "seconds": 8.0,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Mercy-2",
    "route": "kokoro",
    "voice": "Mercy",
    "file": "Mercy-2.kokoro.wav",
-   "seconds": 4.86
+   "seconds": 5.72,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Mercy-3",
    "route": "kokoro",
    "voice": "Mercy",
    "file": "Mercy-3.kokoro.wav",
-   "seconds": 5.53
+   "seconds": 6.85,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Patience-0",
-   "route": "gh",
+   "route": "poto",
    "voice": "Patience",
-   "file": "Patience-0.gh.wav",
-   "seconds": 5.04
+   "file": "Patience-0.poto.wav",
+   "seconds": 5.05,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Patience-1",
-   "route": "gh",
+   "route": "poto",
    "voice": "Patience",
-   "file": "Patience-1.gh.wav",
-   "seconds": 6.42
+   "file": "Patience-1.poto.wav",
+   "seconds": 6.41,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Patience-2",
-   "route": "gh",
+   "route": "poto",
    "voice": "Patience",
-   "file": "Patience-2.gh.wav",
-   "seconds": 7.04
+   "file": "Patience-2.poto.wav",
+   "seconds": 7.07,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Patience-3",
-   "route": "gh",
+   "route": "poto",
    "voice": "Patience",
-   "file": "Patience-3.gh.wav",
-   "seconds": 4.8
-  },
-  {
-   "key": "Patience-0",
-   "route": "en",
-   "voice": "Patience",
-   "file": "Patience-0.en.wav",
-   "seconds": 5.14
-  },
-  {
-   "key": "Patience-1",
-   "route": "en",
-   "voice": "Patience",
-   "file": "Patience-1.en.wav",
-   "seconds": 6.42
-  },
-  {
-   "key": "Patience-2",
-   "route": "en",
-   "voice": "Patience",
-   "file": "Patience-2.en.wav",
-   "seconds": 7.3
-  },
-  {
-   "key": "Patience-3",
-   "route": "en",
-   "voice": "Patience",
-   "file": "Patience-3.en.wav",
-   "seconds": 5.0
+   "file": "Patience-3.poto.wav",
+   "seconds": 4.93,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Patience-0",
    "route": "kokoro",
    "voice": "Patience",
    "file": "Patience-0.kokoro.wav",
-   "seconds": 5.18
+   "seconds": 5.75,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Patience-1",
    "route": "kokoro",
    "voice": "Patience",
    "file": "Patience-1.kokoro.wav",
-   "seconds": 6.45
+   "seconds": 7.08,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Patience-2",
    "route": "kokoro",
    "voice": "Patience",
    "file": "Patience-2.kokoro.wav",
-   "seconds": 7.43
+   "seconds": 7.67,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Patience-3",
    "route": "kokoro",
    "voice": "Patience",
    "file": "Patience-3.kokoro.wav",
-   "seconds": 4.94
+   "seconds": 5.55,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Emmanuel-0",
-   "route": "gh",
+   "route": "poto",
    "voice": "Emmanuel",
-   "file": "Emmanuel-0.gh.wav",
-   "seconds": 4.59
+   "file": "Emmanuel-0.poto.wav",
+   "seconds": 4.64,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Emmanuel-1",
-   "route": "gh",
+   "route": "poto",
    "voice": "Emmanuel",
-   "file": "Emmanuel-1.gh.wav",
-   "seconds": 5.35
+   "file": "Emmanuel-1.poto.wav",
+   "seconds": 5.27,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Emmanuel-2",
-   "route": "gh",
+   "route": "poto",
    "voice": "Emmanuel",
-   "file": "Emmanuel-2.gh.wav",
-   "seconds": 5.45
+   "file": "Emmanuel-2.poto.wav",
+   "seconds": 5.67,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Emmanuel-3",
-   "route": "gh",
+   "route": "poto",
    "voice": "Emmanuel",
-   "file": "Emmanuel-3.gh.wav",
-   "seconds": 6.25
-  },
-  {
-   "key": "Emmanuel-0",
-   "route": "en",
-   "voice": "Emmanuel",
-   "file": "Emmanuel-0.en.wav",
-   "seconds": 4.74
-  },
-  {
-   "key": "Emmanuel-1",
-   "route": "en",
-   "voice": "Emmanuel",
-   "file": "Emmanuel-1.en.wav",
-   "seconds": 5.78
-  },
-  {
-   "key": "Emmanuel-2",
-   "route": "en",
-   "voice": "Emmanuel",
-   "file": "Emmanuel-2.en.wav",
-   "seconds": 5.74
-  },
-  {
-   "key": "Emmanuel-3",
-   "route": "en",
-   "voice": "Emmanuel",
-   "file": "Emmanuel-3.en.wav",
-   "seconds": 6.43
+   "file": "Emmanuel-3.poto.wav",
+   "seconds": 6.23,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Emmanuel-0",
    "route": "kokoro",
    "voice": "Emmanuel",
    "file": "Emmanuel-0.kokoro.wav",
-   "seconds": 4.9
+   "seconds": 5.85,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Emmanuel-1",
    "route": "kokoro",
    "voice": "Emmanuel",
    "file": "Emmanuel-1.kokoro.wav",
-   "seconds": 5.68
+   "seconds": 6.6,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Emmanuel-2",
    "route": "kokoro",
    "voice": "Emmanuel",
    "file": "Emmanuel-2.kokoro.wav",
-   "seconds": 5.74
+   "seconds": 6.92,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Emmanuel-3",
    "route": "kokoro",
    "voice": "Emmanuel",
    "file": "Emmanuel-3.kokoro.wav",
-   "seconds": 6.47
+   "seconds": 7.72,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Isaac-0",
-   "route": "gh",
+   "route": "poto",
    "voice": "Isaac",
-   "file": "Isaac-0.gh.wav",
-   "seconds": 6.3
+   "file": "Isaac-0.poto.wav",
+   "seconds": 6.13,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Isaac-1",
-   "route": "gh",
+   "route": "poto",
    "voice": "Isaac",
-   "file": "Isaac-1.gh.wav",
-   "seconds": 6.51
+   "file": "Isaac-1.poto.wav",
+   "seconds": 6.58,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Isaac-2",
-   "route": "gh",
+   "route": "poto",
    "voice": "Isaac",
-   "file": "Isaac-2.gh.wav",
-   "seconds": 4.86
+   "file": "Isaac-2.poto.wav",
+   "seconds": 4.95,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Isaac-3",
-   "route": "gh",
+   "route": "poto",
    "voice": "Isaac",
-   "file": "Isaac-3.gh.wav",
-   "seconds": 5.66
-  },
-  {
-   "key": "Isaac-0",
-   "route": "en",
-   "voice": "Isaac",
-   "file": "Isaac-0.en.wav",
-   "seconds": 6.59
-  },
-  {
-   "key": "Isaac-1",
-   "route": "en",
-   "voice": "Isaac",
-   "file": "Isaac-1.en.wav",
-   "seconds": 6.68
-  },
-  {
-   "key": "Isaac-2",
-   "route": "en",
-   "voice": "Isaac",
-   "file": "Isaac-2.en.wav",
-   "seconds": 5.05
-  },
-  {
-   "key": "Isaac-3",
-   "route": "en",
-   "voice": "Isaac",
-   "file": "Isaac-3.en.wav",
-   "seconds": 5.89
+   "file": "Isaac-3.poto.wav",
+   "seconds": 5.71,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Isaac-0",
    "route": "kokoro",
    "voice": "Isaac",
    "file": "Isaac-0.kokoro.wav",
-   "seconds": 6.53
+   "seconds": 7.95,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Isaac-1",
    "route": "kokoro",
    "voice": "Isaac",
    "file": "Isaac-1.kokoro.wav",
-   "seconds": 6.68
+   "seconds": 8.1,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Isaac-2",
    "route": "kokoro",
    "voice": "Isaac",
    "file": "Isaac-2.kokoro.wav",
-   "seconds": 5.04
+   "seconds": 6.15,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Isaac-3",
    "route": "kokoro",
    "voice": "Isaac",
    "file": "Isaac-3.kokoro.wav",
-   "seconds": 5.82
+   "seconds": 7.15,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Ebenezer-0",
-   "route": "gh",
+   "route": "poto",
    "voice": "Ebenezer",
-   "file": "Ebenezer-0.gh.wav",
-   "seconds": 5.44
+   "file": "Ebenezer-0.poto.wav",
+   "seconds": 5.57,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Ebenezer-1",
-   "route": "gh",
+   "route": "poto",
    "voice": "Ebenezer",
-   "file": "Ebenezer-1.gh.wav",
-   "seconds": 6.29
+   "file": "Ebenezer-1.poto.wav",
+   "seconds": 6.15,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Ebenezer-2",
-   "route": "gh",
+   "route": "poto",
    "voice": "Ebenezer",
-   "file": "Ebenezer-2.gh.wav",
-   "seconds": 5.27
+   "file": "Ebenezer-2.poto.wav",
+   "seconds": 5.35,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Ebenezer-3",
-   "route": "gh",
+   "route": "poto",
    "voice": "Ebenezer",
-   "file": "Ebenezer-3.gh.wav",
-   "seconds": 4.9
-  },
-  {
-   "key": "Ebenezer-0",
-   "route": "en",
-   "voice": "Ebenezer",
-   "file": "Ebenezer-0.en.wav",
-   "seconds": 5.52
-  },
-  {
-   "key": "Ebenezer-1",
-   "route": "en",
-   "voice": "Ebenezer",
-   "file": "Ebenezer-1.en.wav",
-   "seconds": 6.16
-  },
-  {
-   "key": "Ebenezer-2",
-   "route": "en",
-   "voice": "Ebenezer",
-   "file": "Ebenezer-2.en.wav",
-   "seconds": 5.41
-  },
-  {
-   "key": "Ebenezer-3",
-   "route": "en",
-   "voice": "Ebenezer",
-   "file": "Ebenezer-3.en.wav",
-   "seconds": 5.08
+   "file": "Ebenezer-3.poto.wav",
+   "seconds": 4.9,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Ebenezer-0",
    "route": "kokoro",
    "voice": "Ebenezer",
    "file": "Ebenezer-0.kokoro.wav",
-   "seconds": 5.46
+   "seconds": 6.42,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Ebenezer-1",
    "route": "kokoro",
    "voice": "Ebenezer",
    "file": "Ebenezer-1.kokoro.wav",
-   "seconds": 6.0
+   "seconds": 7.17,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Ebenezer-2",
    "route": "kokoro",
    "voice": "Ebenezer",
    "file": "Ebenezer-2.kokoro.wav",
-   "seconds": 5.45
+   "seconds": 6.25,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Ebenezer-3",
    "route": "kokoro",
    "voice": "Ebenezer",
    "file": "Ebenezer-3.kokoro.wav",
-   "seconds": 5.05
+   "seconds": 5.55,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Bright-0",
-   "route": "gh",
+   "route": "poto",
    "voice": "Bright",
-   "file": "Bright-0.gh.wav",
-   "seconds": 7.25
+   "file": "Bright-0.poto.wav",
+   "seconds": 7.28,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Bright-1",
-   "route": "gh",
+   "route": "poto",
    "voice": "Bright",
-   "file": "Bright-1.gh.wav",
-   "seconds": 6.11
+   "file": "Bright-1.poto.wav",
+   "seconds": 6.16,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Bright-2",
-   "route": "gh",
+   "route": "poto",
    "voice": "Bright",
-   "file": "Bright-2.gh.wav",
-   "seconds": 6.62
+   "file": "Bright-2.poto.wav",
+   "seconds": 6.62,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Bright-3",
-   "route": "gh",
+   "route": "poto",
    "voice": "Bright",
-   "file": "Bright-3.gh.wav",
-   "seconds": 6.69
-  },
-  {
-   "key": "Bright-0",
-   "route": "en",
-   "voice": "Bright",
-   "file": "Bright-0.en.wav",
-   "seconds": 7.13
-  },
-  {
-   "key": "Bright-1",
-   "route": "en",
-   "voice": "Bright",
-   "file": "Bright-1.en.wav",
-   "seconds": 6.23
-  },
-  {
-   "key": "Bright-2",
-   "route": "en",
-   "voice": "Bright",
-   "file": "Bright-2.en.wav",
-   "seconds": 6.83
-  },
-  {
-   "key": "Bright-3",
-   "route": "en",
-   "voice": "Bright",
-   "file": "Bright-3.en.wav",
-   "seconds": 6.77
+   "file": "Bright-3.poto.wav",
+   "seconds": 6.65,
+   "engine": "sherpa-onnx"
   },
   {
    "key": "Bright-0",
    "route": "kokoro",
    "voice": "Bright",
    "file": "Bright-0.kokoro.wav",
-   "seconds": 7.02
+   "seconds": 7.92,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Bright-1",
    "route": "kokoro",
    "voice": "Bright",
    "file": "Bright-1.kokoro.wav",
-   "seconds": 6.34
+   "seconds": 6.38,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Bright-2",
    "route": "kokoro",
    "voice": "Bright",
    "file": "Bright-2.kokoro.wav",
-   "seconds": 6.99
+   "seconds": 7.58,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   },
   {
    "key": "Bright-3",
    "route": "kokoro",
    "voice": "Bright",
    "file": "Bright-3.kokoro.wav",
-   "seconds": 6.89
+   "seconds": 7.47,
+   "engine": "kokoro 0.9.4 + misaki (standard inference)"
   }
  ],
  "phonemes": {
   "Grace-0": {
-   "gh": "ˈakplɛ and adˈiːm ɑː tɾadˈɪʃənə‍l ɡanˈe‍ən dˈɪʃɪz pətˈɪkjʊləli pˈɒpjʊləɹ amˌʌŋ ða ˈɛvɛ pˈiːpə‍l ɒvða vˈɔlta ɾˈiːd‍ʒən",
-   "en": "ˈɑːkplɛ and ɐdˈiːm ɑː tɹɐdˈɪʃənə‍l ɡɑːnˈe‍ən dˈɪʃɪz pətˈɪkjʊləli pˈɒpjʊləɹ ɐmˌʌŋ ðɪʲ ˈɛvɛ pˈiːpə‍l ɒvðə vˈɔltɑː ɹˈiːd‍ʒən",
-   "kokoro": "ˈækpə‍l ænd ɐdˈiːm ɑː‍ɹ tɹɐdˈɪʃənə‍l ɡˈæne‍ɪən dˈɪʃᵻz pɚtˈɪkjʊlɚli pˈɑːpjʊlɚɹ ɐmˌʌŋ ðə jˈuː pˈiːpə‍l ʌvðə vˈo‍ʊltɚ ɹˈiːd‍ʒən"
+   "poto": "ˈakplɛ and ɐdˈiːm ɑː tɹɐdˈɪʃənə‍l ɡanˈean dˈɪʃɪz pətˈɪkjʊləli pˈɒpjʊləɹ ɐmˌʌŋ ðɪʲ ˈɛvɛ pˈiːpə‍l ɒvðə vˈɔlta ɹˈiːd‍ʒən",
+   "kokoro": "ˈakpᵊl and ədˈiːm ɑː tɹədˈɪʃənᵊl ɡɑːnˈAən dˈɪʃɪz, pətˈɪkjʊləli pˈɒpjʊlə əmˈʌŋ ðə jˈuː pˈiːpᵊl ɒv ðə vˈɒltə ɹˈiːʤᵊn."
   },
   "Grace-1": {
-   "gh": "ajˈiʃa mˈodi haz ˈɪʃuːd ɐ stˈɜːn wˈɔːnɪŋ tə pˈɒpjʊlə ɡanˈe‍ən fˈɛtɪʃ pɾˈiːstəs nˈana aɡɾˈada",
-   "en": "ɑːjˈiʃɑː mˈə‍ʊdi hɐz ˈɪʃuːd ɐ stˈɜːn wˈɔːnɪŋ tə pˈɒpjʊlə ɡɑːnˈe‍ən fˈɛtɪʃ pɹˈiːstɛs nˈɑːnɑːɹ ɑːɡɹˈɑːdɑː",
-   "kokoro": "a‍ɪˈiːʃə mˈo‍ʊdi hɐz ˈɪʃuːd ɐ stˈɜːn wˈɔː‍ɹnɪŋ tə pˈɑːpjʊlɚ ɡˈæne‍ɪən fˈɛɾɪʃ pɹˈiːstəs nˈɑːnə ˈæɡɹɐdˌɑː"
+   "poto": "ajˈiʃa mˈə‍ʊdi hɐz ˈɪʃuːd ɐ stˈɜːn wˈɔːnɪŋ tə pˈɒpjʊlə ɡanˈean fˈɛtɪʃ pɹˈiːstɛs nˈana aɡɹˈada",
+   "kokoro": "Iˈiːʃə mˈQdi haz ˈɪʃjuːd ɐ stˈɜːn wˈɔːnɪŋ tə pˈɒpjʊlə ɡɑːnˈAən fˈɛtɪʃ pɹiːstˈɛs, nˈɑːnə ˈaɡɹədˌɑː."
   },
   "Grace-2": {
-   "gh": "fˈɒloɪŋ hɪz ˌɪnstəlˈeʃən hiː haz asˈuːmd ða stˈuːl nˈem nˈiːʲ otˈaŋka ˌokaˈid‍ʒa akɾˈaman",
-   "en": "fˈɒlə‍ʊɪŋ hɪz ˌɪnstəlˈe‍ɪʃən hiː hɐz ɐsjˈuːmd ðə stˈuːl nˈe‍ɪm nˈiːʲ otˈɑːŋkɑːɹ ˌokɑːɹˈid‍ʒɑːɹ ɑːkɹˈɑːmɑːn",
-   "kokoro": "fˈɑːlo‍ʊɪŋ hɪz ˌɪnstəlˈe‍ɪʃən hiː hɐz ɐsˈuːmd ðə stˈuːl nˈe‍ɪm nˈɪʲa‍ɪʲ ɑːtˈæŋkə ɑːkˈe‍ɪd‍ʒə ˈækɹæmən"
+   "poto": "fˈɒlə‍ʊɪŋ hɪz ˌɪnstəlˈe‍ɪʃən hiː hɐz ɐsjˈuːmd ðə stˈuːl nˈe‍ɪm nˈiːʲ otˈaŋka ˌokaˈid‍ʒa akɹˈaman",
+   "kokoro": "fˈɒlQɪŋ hɪz ɪnstəlˈAʃᵊn, hiː haz əsjˈuːmd ðə stˈuːl nˈAm nˈɪI ɒtˈaŋkə ɒkˈAʤə ˈakɹamən."
   },
   "Grace-3": {
-   "gh": "tˈiːm ɡˈanə wɜː diskwˈɒlɪfˌa‍ɪd ˌon ɪnfɾˈɪnd‍ʒmənt ɪnða fˈa‍ɪnə‍l t‍ʃˈend‍ʒovə fɾʌm d‍ʒˈosəf odˈuɾo mˈanu and d‍ʒˈosəf amˈoa",
-   "en": "tˈiːm ɡˈɑːnə wɜː dɪskwˈɒlɪfˌa‍ɪd ˌɒn ɪnfɹˈɪnd‍ʒmənt ɪnðə fˈa‍ɪnə‍l t‍ʃˈe‍ɪnd‍ʒə‍ʊvə fɹɒm d‍ʒˈə‍ʊsəf odˈuɹo mˈɑːnu and d‍ʒˈə‍ʊsəf ɑːmˈoɑː",
-   "kokoro": "tˈiːm ɡˈɑːnə wɜː dɪskwˈɑːlᵻfˌa‍ɪd ˌɔn ɪnfɹˈɪnd‍ʒmənt ɪnðə fˈa‍ɪnə‍l t‍ʃˈe‍ɪnd‍ʒo‍ʊvɚ fɹʌm d‍ʒˈo‍ʊsəf o‍ʊd‍ʒˈuːɹo‍ʊ mˈɑːnjuː ænd d‍ʒˈo‍ʊsəf ˈæmo‍ʊ"
+   "poto": "tˈiːm ɡˈana wɜː dɪskwˈɒlɪfˌa‍ɪd ˌɒn ɪnfɹˈɪnd‍ʒmənt ɪnðə fˈa‍ɪnə‍l t‍ʃˈe‍ɪnd‍ʒə‍ʊvə fɹɒm d‍ʒˈə‍ʊsəf odˈuɹo mˈanu and d‍ʒˈə‍ʊsəf amˈoa",
+   "kokoro": "tˈiːm ɡˈɑːnə wɜː dɪskwˈɒlɪfId ˌɒn ɪnfɹˈɪnʤmᵊnt ɪn ðə fˈInᵊl ʧˈAnʤˌQvə fɹɒm ʤˈQzɪf QdjˈʊəɹQ mˈɑːnuː and ʤˈQzɪf ˈamQ."
   },
   "Comfort-0": {
-   "gh": "ðe ɑː skˈɪpə kɾˈɪst‍ʃən amˈoa wˈɪnɪfɾid ntˈumi and sˈandɾə mɛnsˈima owˈusu",
-   "en": "ðe‍ɪ ɑː skˈɪpə kɹˈɪst‍ʃən ɑːmˈoɑː wˈɪnɪfɹɪd ntˈumi and sˈandɹə mɛnsˈimɑːɹ owˈusu",
-   "kokoro": "ðe‍ɪ ɑː‍ɹ skˈɪpɚ kɹˈɪst‍ʃən ˈæmo‍ʊ wˈɪnɪfɹɪd ˈɛntˈuːmi ænd sˈændɹə mˈɛnsɪmə o‍ʊˈuːsuː"
+   "poto": "ðe‍ɪ ɑː skˈɪpə kɹˈɪst‍ʃən amˈoa wˈɪnɪfɹɪd ntˈumi and sˈandɹə mɛnsˈima owˈusu",
+   "kokoro": "ðˌA ɑː skˈɪpə kɹˈɪsʧᵊn ˈamQ, wˈɪnɪfɹɪd ˈɛntjˈuːmi and sˈandɹə mˈɛnsɪmə Qˈuːsuː."
   },
   "Comfort-1": {
-   "gh": "hiːʲ ɪz ða sˈʌn ɒvða lˈet ˈɛmə nˈa ˌamelˈei taɡˈɔe and hˈelz fɾʌmða adˈansi ɾˈɔ‍ɪə‍l lˈɪnɪʲid‍ʒ",
-   "en": "hiːʲ ɪz ðə sˈʌn ɒvðə lˈe‍ɪt ˈɛmə nˈɑːɹ ˌɑːmelˈei tɑːɡˈɔe and hˈe‍ɪlz fɹʌmðɪʲ ɑːdˈɑːnsi ɹˈɔ‍ɪə‍l lˈɪnɪʲɪd‍ʒ",
-   "kokoro": "hiːʲ ɪz ðə sˈʌn ʌvðə lˈe‍ɪt ˈɛmə nˈɑː ɐmˈiːli tˈæɡo‍ʊ ænd hˈe‍ɪlz fɹʌmðɪʲ ɐdˈæns ɹˈɔ‍ɪə‍l lˈɪnɪʲɪd‍ʒ"
+   "poto": "hiːʲ ɪz ðə sˈʌn ɒvðə lˈe‍ɪt ˈɛmə nˈa ˌamelˈei taɡˈɔe and hˈe‍ɪlz fɹʌmðɪʲ adˈansi ɹˈɔ‍ɪə‍l lˈɪnɪʲɪd‍ʒ",
+   "kokoro": "hˌiː ɪz ðə sˈʌn ɒv ðə lˈAt ˈɛmə nˈɑː əmˈiːli tˈaɡQ and hˈAlz fɹɒm ði ədˈans ɹˈYəl lˈɪniɪʤ."
   },
   "Comfort-2": {
-   "gh": "dˈɪdɪ bɪɡˈan hɪz jˈuːθ kəɾˈi‍ə wɪð bˈolɡa sˈɒkə mˈastəz at bˌolɡatˈaŋɡa ɪnða ˌʌpəɹ ˈiːst ɾˈiːd‍ʒən ɒv ɡˈanə",
-   "en": "dˈɪdɪ bɪɡˈan hɪz jˈuːθ kəɹˈi‍ə wɪð bˈolɡɑː sˈɒkə mˈastəz at bˌolɡɑːtˈɑːŋɡɑːɹ ɪnðɪʲ ˌʌpəɹ ˈiːst ɹˈiːd‍ʒən ɒv ɡˈɑːnə",
-   "kokoro": "dˈɪdi bɪɡˈæn hɪz jˈuːθ kɚɹˈɪ‍ɹ wɪð bˈɑːlɡə sˈɑːkɚ mˈæstɚz æt bˌɑːlɡɐtˈæŋɡə ɪnðɪʲ ˌʌpɚɹ ˈiːst ɹˈiːd‍ʒən ʌv ɡˈɑːnə"
+   "poto": "dˈɪdɪ bɪɡˈan hɪz jˈuːθ kəɹˈi‍ə wɪð bˈolɡa sˈɒkə mˈastəz at bˌolɡatˈaŋɡa ɪnðɪʲ ˌʌpəɹ ˈiːst ɹˈiːd‍ʒən ɒv ɡˈana",
+   "kokoro": "dˈiːdi bɪɡˈan hɪz jˈuːθ kəɹˈɪə wɪð bˈɒlɡə sˈɒkə mˈɑːstəz at bˌɒlɡətˈaŋɡə ɪn ði ˈʌpə ˈiːst ɹˈiːʤᵊn ɒv ɡˈɑːnə."
   },
   "Comfort-3": {
-   "gh": "ða aɾˈɛsts əkˈɜːd ɪn blɔːkˈɔfe and ˌawakpedˈome bˈoθ sˈʌbɜːbz ɒv ˌadidˈome ɪnða sˈɛntɾə‍l tˈɔŋɡu dˈɪstɾɪkt",
-   "en": "ðɪʲ ɐɹˈɛsts əkˈɜːd ɪn blɔːkˈɔfe and ˌɑːwɑːkpedˈome bˈə‍ʊθ sˈʌbɜːbz ɒv ˌɑːdidˈome ɪnðə sˈɛntɹə‍l tˈɔŋɡu dˈɪstɹɪkt",
-   "kokoro": "ðɪʲ ɚɹˈɛsts əkˈɜːd ɪn blˈɔː‍ɹkɔː‍ɹf ænd ɐwˈækpɪdˌo‍ʊm bˈo‍ʊθ sˈʌbɜːbz ʌv ˈædɪdˌo‍ʊm ɪnðə sˈɛntɹə‍l tˈʌŋɡuː dˈɪstɹɪkt"
+   "poto": "ðɪʲ ɐɹˈɛsts əkˈɜːd ɪn blɔːkˈɔfe and ˌawakpedˈome bˈə‍ʊθ sˈʌbɜːbz ɒv ˌadidˈome ɪnðə sˈɛntɹə‍l tˈɔŋɡu dˈɪstɹɪkt",
+   "kokoro": "ði əɹˈɛsts əkˈɜːd ɪn blˈɔːkɔːf and əwˈakpɪdˌQm, bˈQθ sˈʌbəːbz ɒv ˈadɪdˌQm ɪn ðə sˈɛntɹᵊl tˈʌŋɡuː dˈɪstɹɪkt."
   },
   "Mercy-0": {
-   "gh": "ðɪs ɾˈuːlɪŋ wʌz wˈa‍ɪdliʲ ɪntˈɜːpɾɪtɪd az ɐ vˌalɪdˈeʃən ɒv nˈiːʲ adˈama lˈatseɪz klˈem tə ða ɡˈa mˈantsɛ tˈa‍ɪtə‍l",
-   "en": "ðɪs ɹˈuːlɪŋ wɒz wˈa‍ɪdliʲ ɪntˈɜːpɹɪtɪd az ɐ vˌalɪdˈe‍ɪʃən ɒv nˈiːʲ ɑːdˈɑːmɑː lˈɑːtseɪz klˈe‍ɪm tə ðə ɡˈɑː mˈɑːntsɛ tˈa‍ɪtə‍l",
-   "kokoro": "ðɪs ɹˈuːlɪŋ wʌz wˈa‍ɪdliʲ ɪntˈɜːpɹɪɾᵻd æz ɐ vˌælɪdˈe‍ɪʃən ʌv nˈɪʲa‍ɪ ædˈɑːmə lˈætsiʲᵻz klˈe‍ɪm tə ðə ɡˈɑː mˈæntsi tˈa‍ɪɾə‍l"
+   "poto": "ðɪs ɹˈuːlɪŋ wɒz wˈa‍ɪdliʲ ɪntˈɜːpɹɪtɪd az ɐ vˌalɪdˈe‍ɪʃən ɒv nˈiːʲ adˈama lˈatseɪz klˈe‍ɪm tə ðə ɡˈa mˈantsɛ tˈa‍ɪtə‍l",
+   "kokoro": "ðˌɪs ɹˈuːlɪŋ wɒz wˈIdli ɪntˈɜːpɹɪtɪd az ɐ vˌalɪdˈAʃᵊn ɒv nˈɪI adˈɑːmə lˈatsiɪz klˈAm tə ðə ɡˈɑː mˈantsi tˈItᵊl."
   },
   "Mercy-1": {
-   "gh": "ˈadəmz ˌatidˈana ˈɒlɪvə wˈʌn ɡˈold wˌa‍ɪl ofˈoɾiʲ apˈiʲa d‍ʒˈol and sˈamjuːl owˈusu wˈʌn sˈɪlvə and bɾˈɒnz ɾɪspˈɛktɪvli",
-   "en": "ˈadəmz ˌɑːtidˈɑːnɑːɹ ˈɒlɪvə wˈʌn ɡˈə‍ʊld wˌa‍ɪl ofˈoɹiʲ ɑːpˈiʲɑː d‍ʒˈə‍ʊl and sˈamjuːl owˈusu wˈʌn sˈɪlvə and bɹˈɒnz ɹɪspˈɛktɪvli",
-   "kokoro": "ˈædəmz ˌæɾɪdˈɑːnə ˈɑːlɪvɚ wˈʌn ɡˈo‍ʊld wˌa‍ɪl ɑːfˈɔːɹiʲ ɐpˈa‍ɪ‍ə d‍ʒˈo‍ʊl ænd sˈæmjuːl o‍ʊˈuːsuː wˈʌn sˈɪlvɚ ænd bɹˈɑːnz ɹᵻspˈɛktɪvli"
+   "poto": "ˈadəmz ˌatidˈana ˈɒlɪvə wˈʌn ɡˈə‍ʊld wˌa‍ɪl ofˈoɹiʲ apˈiʲa d‍ʒˈə‍ʊl and sˈamjuːl owˈusu wˈʌn sˈɪlvə and bɹˈɒnz ɹɪspˈɛktɪvli",
+   "kokoro": "ˈadəmz ˌatɪdˈɑːnə ˈɒlɪvə wˈʌn ɡˈQld wˌIl ɒfˈɔːɹi əpˈIə ʤˈQəl and sˈamjʊəl Qˈuːsuː wˈʌn sˈɪlvə and bɹˈɒnz ɹɪspˈɛktɪvli."
   },
   "Mercy-2": {
-   "gh": "d‍ʒˌuabɛnhˈɛnɛ nˈana otˈuo sˌeɾebˈuo ɾˌomən tˈuː wʌz amˌʌŋ ða t‍ʃˈiːfs hˌuː plˈiːdɪd ˌon ðe‍ə bɪhˈaf",
-   "en": "d‍ʒˌuɑːbɛnhˈɛnɛ nˈɑːnɑːɹ otˈuo sˌeɹebˈuo ɹˌə‍ʊmən tˈuː wɒz ɐmˌʌŋ ðə t‍ʃˈiːfs hˌuː plˈiːdɪd ˌɒn ðe‍ə bɪhˈɑːf",
-   "kokoro": "d‍ʒjˈuːe‍ɪbənhˌiːn nˈɑːnə ˈɑːt‍ʃuːˌo‍ʊ səɹˈiːbo‍ʊ ɹˌo‍ʊmən tˈuː wʌz ɐmˌʌŋ ðə t‍ʃˈiːfs hˌuː plˈiːdᵻd ˌɔn ðɛ‍ɹ bᵻhˈæf"
+   "poto": "d‍ʒˌuabɛnhˈɛnɛ nˈana otˈuo sˌeɹebˈuo ɹˌə‍ʊmən tˈuː wɒz ɐmˌʌŋ ðə t‍ʃˈiːfs hˌuː plˈiːdɪd ˌɒn ðe‍ə bɪhˈɑːf",
+   "kokoro": "ʤjˈuːAbənhˌiːn nˈɑːnə ˈɒtjuːˌQ səɹˈiːbQ ˌIˈI wɒz əmˈʌŋ ðə ʧˈiːfs hˌuː plˈiːdɪd ˌɒn ðɛː bɪhˈɑːf."
   },
   "Mercy-3": {
-   "gh": "t‍ʃiɾˈano ɪz ɐ mˈa‍ɪnɪŋ kəmjˈuːnɪtiʲ ɪnða bibiʲˈaniʲ ahwˈesɔ bˈɛka‍ɪ mjuːnˈɪsɪpˈalɪtiʲ ɪnða wˈɛstən nˈɔːθ",
-   "en": "t‍ʃiɹˈɑːno ɪz ɐ mˈa‍ɪnɪŋ kəmjˈuːnɪtiʲ ɪnðə bibiʲˈɑːniʲ ɑːhwˈesɔ bˈɛka‍ɪ mjuːnˈɪsɪpˈalɪtiʲ ɪnðə wˈɛstən nˈɔːθ",
-   "kokoro": "ka‍ɪɹˈɑːno‍ʊ ɪz ɐ mˈa‍ɪnɪŋ kəmjˈuːnᵻɾiʲ ɪnðə ba‍ɪbɪʲˈɑːniʲ ɑːwˈiːso‍ʊ bᵻkˈa‍ɪ mjuːnˈɪsɪpˈælᵻɾiʲ ɪnðə wˈɛstɚn nˈɔː‍ɹθ"
+   "poto": "t‍ʃiɹˈano ɪz ɐ mˈa‍ɪnɪŋ kəmjˈuːnɪtiʲ ɪnðə bibiʲˈaniʲ ahwˈesɔ bˈɛka‍ɪ mjuːnˈɪsɪpˈalɪtiʲ ɪnðə wˈɛstən nˈɔːθ",
+   "kokoro": "kIɹˈɑːnQ ɪz ɐ mˈInɪŋ kəmjˈuːnɪti ɪn ðə bIbɪˈɑːni ɑːwˈiːsQ bɪkˈI mjʊnˌɪsɪpˈalɪti ɪn ðə wˈɛstᵊn nˈɔːθ."
   },
   "Patience-0": {
-   "gh": "ða kənsˈa‍ɪnmənt əɾˈɪd‍ʒɪnˌetɪd fɾʌm kwˈahu fodˈoa and wʌz ɒn ɾˈuːt tə tˈoːɡoː θɾuː aflˈaɔ",
-   "en": "ðə kənsˈa‍ɪnmənt əɹˈɪd‍ʒɪnˌe‍ɪtɪd fɹɒm kwˈɑːhu fodˈoɑː and wɒz ɒn ɹˈuːt tə tˈoːɡoː θɹuː ɑːflˈɑːɹɔ",
-   "kokoro": "ðə kənsˈa‍ɪnmənt ɚɹˈɪd‍ʒᵻnˌe‍ɪɾᵻd fɹʌm kwˈɑːhuː fədˈo‍ʊə ænd wʌz ɑːn ɹˈuːt tə tˈo‍ʊɡo‍ʊ θɹuː ɐflˈa‍ʊ"
+   "poto": "ðə kənsˈa‍ɪnmənt əɹˈɪd‍ʒɪnˌe‍ɪtɪd fɹɒm kwˈahu fodˈoa and wɒz ɒn ɹˈuːt tə tˈoːɡoː θɹuː aflˈaɔ",
+   "kokoro": "ðə kənsˈInmᵊnt əɹˈɪʤɪnAtɪd fɹɒm kwˈɑːhuː fədˈQə and wɒz ˈɛn ɹˈuːt tə tˈQɡQ θɹuː əflˈW."
   },
   "Patience-1": {
-   "gh": "fˈɒloɪŋ ða fˈa‍ɪt ɡanˈe‍ənz havbɪn ɾɪkˈɔːlɪŋ ða sˈɪmɪləɹ anˌa‍ɪəlˈeʃən bˈasti sˈami‍ə hˈandɪd tə bˈukɔm bˈaŋku",
-   "en": "fˈɒlə‍ʊɪŋ ðə fˈa‍ɪt ɡɑːnˈe‍ənz hɐvbɪn ɹɪkˈɔːlɪŋ ðə sˈɪmɪləɹ ɐnˌa‍ɪəlˈe‍ɪʃən bˈɑːsti sˈami‍ə hˈandɪd tə bˈukɔm bˈɑːŋku",
-   "kokoro": "fˈɑːlo‍ʊɪŋ ðə fˈa‍ɪt ɡˈæne‍ɪənz hɐvbɪn ɹᵻkˈɔːlɪŋ ðə sˈɪmɪlɚɹ ɐnˌa‍ɪəlˈe‍ɪʃən bˈæsti sˈæmɪ‍ɹ hˈændᵻd tə bjˈuːkəm bˈæŋkuː"
+   "poto": "fˈɒlə‍ʊɪŋ ðə fˈa‍ɪt ɡanˈeanz hɐvbɪn ɹɪkˈɔːlɪŋ ðə sˈɪmɪləɹ ɐnˌa‍ɪəlˈe‍ɪʃən bˈasti sˈami‍ə hˈandɪd tə bˈukɔm bˈaŋku",
+   "kokoro": "fˈɒlQɪŋ ðə fˈIt, ɡɑːnˈAənz hav biːn ɹɪkˈɔːlɪŋ ðə sˈɪmɪlə ənˌIəlˈAʃᵊn bˈasti sˈamɪə hˈandɪd tə bjˈuːkəm bˈaŋkuː."
   },
   "Patience-2": {
-   "gh": "ða ˌɛnpˌiːpˈiːz sˈɒlɒmən kwˈame ˌasumˈadu ɪz kəntˈɛstɪŋ ða ˌakwatˈiʲa sˈiːt aɡˈɛnst ða ˌɛndˌiːsˈiːz bɜːnˈɑːd bˌɪdiʲˈakɔ",
-   "en": "ðɪʲ ˌɛnpˌiːpˈiːz sˈɒlɒmən kwˈɑːme ˌɑːsumˈɑːdu ɪz kəntˈɛstɪŋ ðɪʲ ˌɑːkwɑːtˈiʲɑː sˈiːt ɐɡˈɛnst ðɪʲ ˌɛndˌiːsˈiːz bˈɜːnəd bˌɪdiʲˈɑːkɔ",
-   "kokoro": "ðɪʲ ˌɛnpˌiːpˈiːz sˈɑːlɑːmən kwˈe‍ɪm ɐsuːmˈɑːduː ɪz kəntˈɛstɪŋ ðɪʲ ækwˈe‍ɪʃə sˈiːt ɐɡˈɛnst ðɪʲ ˌɛndˌiːsˈiːz bɜːnˈɑː‍ɹd bᵻdɪʲˈɑːko‍ʊ"
+   "poto": "ðɪʲ ˌɛnpˌiːpˈiːz sˈɒlɒmən kwˈame ˌasumˈadu ɪz kəntˈɛstɪŋ ðɪʲ ˌakwatˈiʲa sˈiːt ɐɡˈɛnst ðɪʲ ˌɛndˌiːsˈiːz bˈɜːnəd bˌɪdiʲˈakɔ",
+   "kokoro": "ði ˌɛnpˌiːpˈiːz sˈɒləmən kwˈAm əsuːmˈɑːduː ɪz kəntˈɛstɪŋ ði akwˈAʃə sˈiːt əɡˈɛnst ði ˌɛndˌiːsˈiːz bˈɜːnəd bɪdɪˈɑːkQ."
   },
   "Patience-3": {
-   "gh": "ˈɛsa pˈeɪn ɡˈev bˈɜːθ tə bˌɪdiʲˈakɔ ntˈim hˌuː bɪkˌem ða səksˈɛsəɹ ɒv ˈopon pˈeɪn",
-   "en": "ˈɛsɑː pˈe‍ɪɪn ɡˈe‍ɪv bˈɜːθ tə bˌɪdiʲˈɑːkɔ ntˈim hˌuː bɪkˌe‍ɪm ðə səksˈɛsəɹ ɒv ˈopon pˈe‍ɪɪn",
-   "kokoro": "ˈɛsə pˈe‍ɪɪn ɡˈe‍ɪv bˈɜːθ tə bᵻdɪʲˈɑːko‍ʊ ˈɛntˈɪm hˌuː bɪkˌe‍ɪm ðə səksˈɛsɚɹ ʌv ˈɑːpɑːn pˈe‍ɪɪn"
+   "poto": "ˈɛsa pˈe‍ɪɪn ɡˈe‍ɪv bˈɜːθ tə bˌɪdiʲˈakɔ ntˈim hˌuː bɪkˌe‍ɪm ðə səksˈɛsəɹ ɒv ˈopon pˈe‍ɪɪn",
+   "kokoro": "ˈɛsə pˈAɪn ɡˈAv bˈɜːθ tə bɪdɪˈɑːkQ ˈɛntˈɪm, hˌuː bɪkˈAm ðə səksˈɛsə ɒv ˈɒpɒn pˈAɪn."
   },
   "Emmanuel-0": {
-   "gh": "volˈivo tə dˈɔɾfɔɾ ˌadidˈome bɾˈɪd‍ʒ əkɾˌɒs ða vˈɔlta ɾˈɪvə hˈazbiːn ɾɪvˈa‍ɪvd",
-   "en": "volˈivo tə dˈɔrfɔɹ ˌɑːdidˈome bɹˈɪd‍ʒ əkɹˌɒs ðə vˈɔltɑː ɹˈɪvə hˈazbiːn ɹɪvˈa‍ɪvd",
-   "kokoro": "vəlˈɪvo‍ʊ tə dˈɔː‍ɹfɚɹ ˈædɪdˌo‍ʊm bɹˈɪd‍ʒ əkɹˌɑːs ðə vˈo‍ʊltɚ ɹˈɪvɚ hˈæzbiːn ɹᵻvˈa‍ɪvd"
+   "poto": "volˈivo tə dˈɔrfɔɹ ˌadidˈome bɹˈɪd‍ʒ əkɹˌɒs ðə vˈɔlta ɹˈɪvə hˈazbiːn ɹɪvˈa‍ɪvd",
+   "kokoro": "vəlˈɪvQ tə dˈɔːfə ˈadɪdˌQm bɹˈɪʤ əkɹˈɒs ðə vˈɒltə ɹˈɪvə haz biːn ɹɪvˈIvd."
   },
   "Emmanuel-1": {
-   "gh": "ʃˈata bˈandə‍l wʌz bˈɔːn ˈidɾis fɪɾdˈaus a nˈɔːðənə fɾʌm ɐ smˈɔːl vˈɪlid‍ʒ kˈɔːld kaɾˈaɡa",
-   "en": "ʃˈɑːtɑː bˈandə‍l wɒz bˈɔːn ˈidɹis fɪrdˈɑːɹus ɐ nˈɔːðənə fɹɒm ɐ smˈɔːl vˈɪlɪd‍ʒ kˈɔːld kɑːɹˈɑːɡɑː",
-   "kokoro": "ʃˈæɾə bˈændə‍l wʌz bˈɔː‍ɹn ˈa‍ɪdɹɪs fˈɜːda‍ʊs ɐ nˈɔː‍ɹðɚnɚ fɹʌm ɐ smˈɔːl vˈɪlɪd‍ʒ kˈɔːld kæɹˈɑːɡə"
+   "poto": "ʃˈata bˈandə‍l wɒz bˈɔːn ˈidɹis fɪrdˈaus ɐ nˈɔːðənə fɹɒm ɐ smˈɔːl vˈɪlɪd‍ʒ kˈɔːld kaɹˈaɡa",
+   "kokoro": "ʃˈatə bˈandᵊl wɒz bˈɔːn ˈIdɹɪs fˈɜːdWs, ɐ nˈɔːðənə fɹɒm ɐ smˈɔːl vˈɪlɪʤ kˈɔːld kaɹˈɑːɡə."
   },
   "Emmanuel-2": {
-   "gh": "ða sˈevjə t‍ʃˈɜːt‍ʃ ɒv ɡˈanə haz nˈemd a skˈuːl at bonwˈiɾe ˈaftə hɜː nˈana kɔnˈadu sˈevjə skˈuːl",
-   "en": "ðə sˈe‍ɪvjə t‍ʃˈɜːt‍ʃ ɒv ɡˈɑːnə hɐz nˈe‍ɪmd ɐ skˈuːl at bonwˈiɹe ˈaftə hɜː nˈɑːnɑː kɔnˈɑːdu sˈe‍ɪvjə skˈuːl",
-   "kokoro": "ðə sˈe‍ɪvjɚ t‍ʃˈɜːt‍ʃ ʌv ɡˈɑːnə hɐz nˈe‍ɪmd ɐ skˈuːl æt bˈɑːnwa‍ɪ‍ɚɹ ˈæftɚ hɜː nˈɑːnə kənˈɑːduː sˈe‍ɪvjɚ skˈuːl"
+   "poto": "ðə sˈe‍ɪvjə t‍ʃˈɜːt‍ʃ ɒv ɡˈana hɐz nˈe‍ɪmd ɐ skˈuːl at bonwˈiɹe ˈaftə hɜː nˈana kɔnˈadu sˈe‍ɪvjə skˈuːl",
+   "kokoro": "ðə sˈAvjə ʧˈɜːʧ ɒv ɡˈɑːnə haz nˈAmd ɐ skˈuːl at bˈɒnwIə ˈɑːftə hˌɜː, nˈɑːnə kənˈɑːduː sˈAvjə skˈuːl."
   },
   "Emmanuel-3": {
-   "gh": "bˌɔfɔˈakwa tˈano hav sˈɛvəd tˈa‍ɪz wɪð kˈot‍ʃ fɾˈɪmpɔŋ mˈanso ˈaftə fˈɔː mˈʌnθs at ða hˈɛlm ða klˈʌb anˈa‍ʊnst",
-   "en": "bˌɔfɔˈɑːkwɑː tˈɑːno hav sˈɛvəd tˈa‍ɪz wɪð kˈə‍ʊt‍ʃ fɹˈɪmpɔŋ mˈɑːnso ˈaftə fˈɔː mˈʌnθs at ðə hˈɛlm ðə klˈʌb ɐnˈa‍ʊnst",
-   "kokoro": "bˈɑːfo‍ʊkwə tˈɑːno‍ʊ hæv sˈɛvɚd tˈa‍ɪz wɪð kˈo‍ʊt‍ʃ fɹˈɪmpɑːŋ mˈænso‍ʊ ˈæftɚ fˈɔː‍ɹ mˈʌnθs æt ðə hˈɛlm ðə klˈʌb ɐnˈa‍ʊnst"
+   "poto": "bˌɔfɔˈakwa tˈano hav sˈɛvəd tˈa‍ɪz wɪð kˈə‍ʊt‍ʃ fɹˈɪmpɔŋ mˈanso ˈaftə fˈɔː mˈʌnθs at ðə hˈɛlm ðə klˈʌb ɐnˈa‍ʊnst",
+   "kokoro": "bˈɒfQkwə tˈɑːnQ hav sˈɛvəd tˈIz wɪð kˈQʧ fɹˈɪmpɒŋ mˈansQ ˈɑːftə fˈɔː mˈʌnθs at ðə hˈɛlm, ðə klˈʌb ənˈWnst."
   },
   "Isaac-0": {
-   "gh": "mˈɛmbəɹ ɒv pˈɑːləmənt fɔː bˈɔku sˈɛntɾə‍l mahˈama ˌajaɾˈiɡa haz ɾɪpˈɔːtɪd ðat θɾˈiː mˈɔː pˈiːpə‍l wɜː kˈɪld ɪn bˈɔku",
-   "en": "mˈɛmbəɹ ɒv pˈɑːləmənt fɔː bˈɔku sˈɛntɹə‍l mɑːhˈɑːmɑːɹ ˌɑːjɑːɹˈiɡɑː hɐz ɹɪpˈɔːtɪd ðat θɹˈiː mˈɔː pˈiːpə‍l wɜː kˈɪld ɪn bˈɔku",
-   "kokoro": "mˈɛmbɚɹ ʌv pˈɑː‍ɹləmənt fɔː‍ɹ bˈɔːkuː sˈɛntɹə‍l mæhˈɑːmə ˈa‍ɪʲɑː‍ɹɹˌɪɡə hɐz ɹᵻpˈɔː‍ɹɾᵻd ðæt θɹˈiː mˈɔː‍ɹ pˈiːpə‍l wɜː kˈɪld ɪn bˈɔːkuː"
+   "poto": "mˈɛmbəɹ ɒv pˈɑːləmənt fɔː bˈɔku sˈɛntɹə‍l mahˈama ˌajaɹˈiɡa hɐz ɹɪpˈɔːtɪd ðat θɹˈiː mˈɔː pˈiːpə‍l wɜː kˈɪld ɪn bˈɔku",
+   "kokoro": "mˈɛmbə ɒv pˈɑːlɪmᵊnt fɔː bˈɔːkuː sˈɛntɹᵊl, mahˈɑːmə ˈIɑːɹˌɪɡə haz ɹɪpˈɔːtɪd ðat θɹˈiː mˈɔː pˈiːpᵊl wɜː kˈɪld ɪn bˈɔːkuː."
   },
   "Isaac-1": {
-   "gh": "ɡanˈe‍ən mjuːzˈɪʃən stˈoːnbwɔ‍ɪ haz tˈekən lˈiːɡə‍l ˈakʃən aɡˈɛnst pˌɒlɪtˈɪʃən and ˌɛntətˈenmənt kɾˈɪtɪk bˈaba sˈadik",
-   "en": "ɡɑːnˈe‍ən mjuːzˈɪʃən stˈoːnbwɔ‍ɪ hɐz tˈe‍ɪkən lˈiːɡə‍l ˈakʃən ɐɡˈɛnst pˌɒlɪtˈɪʃən and ˌɛntətˈe‍ɪnmənt kɹˈɪtɪk bˈɑːbɑː sˈɑːdik",
-   "kokoro": "ɡˈæne‍ɪən mjuːzˈɪʃən stˈo‍ʊnbwɔ‍ɪ hɐz tˈe‍ɪkən lˈiːɡə‍l ˈækʃən ɐɡˈɛnst pˌɑːlɪtˈɪʃən ænd ˌɛntɚtˈe‍ɪnmənt kɹˈɪɾɪk bˈɑːbə sˈædɪk"
+   "poto": "ɡanˈean mjuːzˈɪʃən stˈoːnbwɔ‍ɪ hɐz tˈe‍ɪkən lˈiːɡə‍l ˈakʃən ɐɡˈɛnst pˌɒlɪtˈɪʃən and ˌɛntətˈe‍ɪnmənt kɹˈɪtɪk bˈaba sˈadik",
+   "kokoro": "ɡɑːnˈAən mjuːzˈɪʃᵊn stˈQnbwY haz tˈAkᵊn lˈiːɡᵊl ˈakʃᵊn əɡˈɛnst pˌɒlɪtˈɪʃᵊn and ˌɛntətˈAnmᵊnt kɹˈɪtɪk, bˈɑːbɑː sˈadɪk."
   },
   "Isaac-2": {
-   "gh": "ɡˈanə lˈɛd‍ʒənd and fˈɔːməɹ asˈant kotˈoko stˈɑːɹ opˈoku ˌafɾijˈiʲe haz pˈast awˈe",
-   "en": "ɡˈɑːnə lˈɛd‍ʒənd and fˈɔːməɹ ɐsˈant kotˈoko stˈɑːɹ opˈoku ˌɑːfɹijˈiʲe hɐz pˈast ɐwˈe‍ɪ",
-   "kokoro": "ɡˈɑːnə lˈɛd‍ʒənd ænd fˈɔː‍ɹmɚɹ ɐsˈænt kətˈo‍ʊko‍ʊ stˈɑːɹ ˈɑːpo‍ʊkˌuː ˈæfɹɪji hɐz pˈæst ɐwˈe‍ɪ"
+   "poto": "ɡˈana lˈɛd‍ʒənd and fˈɔːməɹ ɐsˈant kotˈoko stˈɑːɹ opˈoku ˌafɹijˈiʲe hɐz pˈast ɐwˈe‍ɪ",
+   "kokoro": "ɡˈɑːnə lˈɛʤᵊnd and fˈɔːmə əsˈant kətˈQkQ stˈɑː ˈɒpQkˌuː ˈafɹɪji haz pˈɑːst əwˈA."
   },
   "Isaac-3": {
-   "gh": "ɡanˈe‍ənz ˌon sˈoʃə‍l mˈiːdiːʲəɹ ɑː jˈuːləd‍ʒˌa‍ɪzɪŋ vˈɛtəɾən hˈa‍ɪla‍ɪf mjuːzˈɪʃən nˈana kwˈame ampˈadu",
-   "en": "ɡɑːnˈe‍ənz ˌɒn sˈə‍ʊʃə‍l mˈiːdiːʲəɹ ɑː jˈuːləd‍ʒˌa‍ɪzɪŋ vˈɛtəɹən hˈa‍ɪla‍ɪf mjuːzˈɪʃən nˈɑːnɑː kwˈɑːme ɑːmpˈɑːdu",
-   "kokoro": "ɡˈæne‍ɪənz ˌɔn sˈo‍ʊʃə‍l mˈiːdiːʲə ɑː‍ɹ jˈuːləd‍ʒˌa‍ɪzɪŋ vˈɛɾɚɹən hˈa‍ɪla‍ɪf mjuːzˈɪʃən nˈɑːnə kwˈe‍ɪm æmpˈɑːduː"
+   "poto": "ɡanˈeanz ˌɒn sˈə‍ʊʃə‍l mˈiːdiːʲəɹ ɑː jˈuːləd‍ʒˌa‍ɪzɪŋ vˈɛtəɹən hˈa‍ɪla‍ɪf mjuːzˈɪʃən nˈana kwˈame ampˈadu",
+   "kokoro": "ɡɑːnˈAənz ˌɒn sˈQʃl mˈiːdɪə ɑː jˈuːləʤˌIzɪŋ vˈɛtəɹən hˈIlIf mjuːzˈɪʃᵊn, nˈɑːnə kwˈAm ampˈɑːduː."
   },
   "Ebenezer-0": {
-   "gh": "ða ˌɪnfəmˈeʃən mˈɪnɪstə kˈɔd‍ʒɔ ˈɔpɔŋ ŋkɾˈuma sˈɛz ɡˈʌvənmənt ɪz wˈɜːkɪŋ tə stˈebəlˌa‍ɪz ða sˈiːdi",
-   "en": "ðɪʲ ˌɪnfəmˈe‍ɪʃən mˈɪnɪstə kˈɔd‍ʒɔ ˈɔpɔŋ ŋkɹˈumɑː sˈɛz ɡˈʌvənmənt ɪz wˈɜːkɪŋ tə stˈe‍ɪbəlˌa‍ɪz ðə sˈiːdi",
-   "kokoro": "ðɪʲ ˌɪnfɚmˈe‍ɪʃən mˈɪnɪstɚ kˈo‍ʊd‍ʒo‍ʊ ˈɑːpɑːŋ ˈɛŋkɹˈuːmə sˈɛz ɡˈʌvɚnmənt ɪz wˈɜːkɪŋ tə stˈe‍ɪbəlˌa‍ɪz ðə sˈɛdi"
+   "poto": "ðɪʲ ˌɪnfəmˈe‍ɪʃən mˈɪnɪstə kˈɔd‍ʒɔ ˈɔpɔŋ ŋkɹˈuma sˈɛz ɡˈʌvənmənt ɪz wˈɜːkɪŋ tə stˈe‍ɪbəlˌa‍ɪz ðə sˈiːdi",
+   "kokoro": "ði ˌɪnfəmˈAʃᵊn mˈɪnɪstə, kˈQʤQ ˈɒpɒŋ ˈɛŋkɹˈuːmə sˈɛz ɡˈʌvnmᵊnt ɪz wˈɜːkɪŋ tə stˈAbəlIz ðə sˈiːdi."
   },
   "Ebenezer-1": {
-   "gh": "ða ˈədɔm tˌiːvˈiː fufˈuo pˈɑːtiʲ ɪz ˌʌndəwˈe at ða fˈɔːkɔːt ɒvða mˌʌltɪmˈiːdiːʲə ɡɾˈuːp at kˌɔkɔmlˈɛmlɛ ɪn ˈəkɾa",
-   "en": "ðɪʲ ˈədɔm tˌiːvˈiː fufˈuo pˈɑːtiʲ ɪz ˌʌndəwˈe‍ɪ at ðə fˈɔːkɔːt ɒvðə mˌʌltɪmˈiːdiːʲə ɡɹˈuːp at kˌɔkɔmlˈɛmlɛ ɪn ˈəkɹɑː",
-   "kokoro": "ðɪʲ ɐdˈɑːm tˌiːvˈiː fjˈuːfjuːˌo‍ʊ pˈɑː‍ɹɾiʲ ɪz ˌʌndɚwˈe‍ɪ æt ðə fˈɔː‍ɹkɔː‍ɹt ʌvðə mˌʌltɪmˈiːdiːʲə ɡɹˈuːp æt kˈɑːkəmlˌɛmə‍l ɪn ˈækɹɐ"
+   "poto": "ðɪʲ ˈadɔm tˌiːvˈiː fufˈuo pˈɑːtiʲ ɪz ˌʌndəwˈe‍ɪ at ðə fˈɔːkɔːt ɒvðə mˌʌltɪmˈiːdiːʲə ɡɹˈuːp at kˌɔkɔmlˈɛmlɛ ɪn ˈakɹa",
+   "kokoro": "ði ədˈɒm tˌiːvˈiː fjˈuːfjuːˌQ pˈɑːti ɪz ˌʌndəwˈA at ðə fˈɔːkɔːt ɒv ðə mˌʌltɪmˈiːdɪə ɡɹˈuːp at kˈɒkəmlˌɛmᵊl ɪn əkɹˈɑː."
   },
   "Ebenezer-2": {
-   "gh": "a kˈɔːt haz ˈɔːdəd mawˈakɔ fˈast fˈuːd ɪn ˈəkɾa tə pˈe ˌovəɹ ɐ mˈɪli‍ən ɡˈanə sˈiːdiz ɪn dˈamid‍ʒɪz",
-   "en": "ɐ kˈɔːt hɐz ˈɔːdəd mɑːwˈɑːkɔ fˈast fˈuːd ɪn ˈəkɹɑː tə pˈe‍ɪ ˌə‍ʊvəɹ ɐ mˈɪli‍ən ɡˈɑːnə sˈiːdiz ɪn dˈamɪd‍ʒɪz",
-   "kokoro": "ɐ kˈɔː‍ɹt hɐz ˈɔː‍ɹdɚd mɑː‍ɹwˈɑːko‍ʊ fˈæst fˈuːd ɪn ˈækɹɐ tə pˈe‍ɪ ˌo‍ʊvɚɹ ɐ mˈɪli‍ən ɡˈɑːnə sˈɛdiz ɪn dˈæmɪd‍ʒᵻz"
+   "poto": "ɐ kˈɔːt hɐz ˈɔːdəd mawˈakɔ fˈast fˈuːd ɪn ˈakɹa tə pˈe‍ɪ ˌə‍ʊvəɹ ɐ mˈɪli‍ən ɡˈana sˈiːdiz ɪn dˈamɪd‍ʒɪz",
+   "kokoro": "ɐ kˈɔːt haz ˈɔːdəd mɑːwˈɑːkQ fˈɑːst fˈuːd ɪn əkɹˈɑː tə pˈA ˈQvə ɐ mˈɪljən ɡˈɑːnə sˈiːdiz ɪn dˈamɪʤɪz."
   },
   "Ebenezer-3": {
-   "gh": "sˌakodˈiʲe ʃˈata wˈale and stˈoːnbwɔ‍ɪ ɑːɹ ʌndˈa‍ʊtɪdli θɾˈiːʲ ɒv ɡˈanəz bˈɪɡist mjuːzˈɪʃənz",
-   "en": "sˌɑːkodˈiʲe ʃˈɑːtɑː wˈɑːle and stˈoːnbwɔ‍ɪ ɑːɹ ʌndˈa‍ʊtɪdli θɹˈiːʲ ɒv ɡˈɑːnəz bˈɪɡɪst mjuːzˈɪʃənz",
-   "kokoro": "sˈɑː‍ɹko‍ʊdi ʃˈæɾə wˈe‍ɪl ænd stˈo‍ʊnbwɔ‍ɪ ɑːɹ ʌndˈa‍ʊɾᵻdli θɹˈiːʲ ʌv ɡˈɑːnəz bˈɪɡɪst mjuːzˈɪʃənz"
+   "poto": "sˌakodˈiʲe ʃˈata wˈale and stˈoːnbwɔ‍ɪ ɑːɹ ʌndˈa‍ʊtɪdli θɹˈiːʲ ɒv ɡˈanaz bˈɪɡɪst mjuːzˈɪʃənz",
+   "kokoro": "sˈɑːkQdi, ʃˈatə wˈAl and stˈQnbwY ɑː ʌndˈWtɪdli θɹˈiː ɒv ɡˈɑːnəz bˈɪɡɪst mjuːzˈɪʃᵊnz."
   },
   "Bright-0": {
-   "gh": "ˌododˌodiʲodˈiʲo ˌɛmpˈiːʲ ˈɛdwɪn nˈiː lˈante vˌandəpˈuːje wɪl nˌɒt ɾɪtˈɜːn tə pˈɑːləmənt ˈaftə ða ɛkspəɾˈeʃən ɒv hɪz kˈɜːɹənt tˈɜːm",
-   "en": "ˌododˌodiʲodˈiʲo ˌɛmpˈiːʲ ˈɛdwɪn nˈiː lˈɑːnte vˌɑːndəpˈuːje wɪl nˌɒt ɹɪtˈɜːn tə pˈɑːləmənt ˈaftə ðɪʲ ɛkspəɹˈe‍ɪʃən ɒv hɪz kˈʌɹənt tˈɜːm",
-   "kokoro": "ˌo‍ʊdədˌo‍ʊdɪʲˈo‍ʊdɪʲˌo‍ʊ ˌɛmpˈiːʲ ˈɛdwɪn nˈɪʲa‍ɪ lˈænt vˌændɚpˈuːj wɪl nˌɑːt ɹᵻtˈɜːn tə pˈɑː‍ɹləmənt ˈæftɚ ðɪʲ ɛkspɚɹˈe‍ɪʃən ʌv hɪz kˈɜːɹənt tˈɜːm"
+   "poto": "ˌododˌodiʲodˈiʲo ˌɛmpˈiːʲ ˈɛdwɪn nˈiː lˈante vˌandapˈuːje wɪl nˌɒt ɹɪtˈɜːn tə pˈɑːləmənt ˈaftə ðɪʲ ɛkspəɹˈe‍ɪʃən ɒv hɪz kˈʌɹənt tˈɜːm",
+   "kokoro": "ˌQdədˌQdɪˈQdɪˌQ ˌɛmpˈiː ˈɛdwɪn nˈɪI lˈant vˌandəpˈuːj, wɪl nˌɒt ɹɪtˈɜːn tə pˈɑːlɪmᵊnt ˈɑːftə ði ˌɛkspɪɹˈAʃᵊn ɒv hɪz kˈʌɹənt tˈɜːm."
   },
   "Bright-1": {
-   "gh": "ɡanˈe‍ən sˈɪŋə kkˈofi mˈantɛ haz aknˈɒlɪd‍ʒd bˈisa kˈedˈez ˈɪnfluːəns onða hˈa‍ɪla‍ɪf mjˈuːzɪk ʒˈɒnɾə",
-   "en": "ɡɑːnˈe‍ən sˈɪŋə kkˈofi mˈɑːntɛ hɐz ɐknˈɒlɪd‍ʒd bˈisɑː kˈe‍ɪdˈe‍ɪz ˈɪnfluːəns ɒnðə hˈa‍ɪla‍ɪf mjˈuːzɪk ʒˈɒnɹə",
-   "kokoro": "ɡˈæne‍ɪən sˈɪŋɚ kˈo‍ʊfi mˈænt hɐz ɐknˈɑːlɪd‍ʒd bˈiːsə kˈe‍ɪdˈe‍ɪz ˈɪnfluːəns ɔnðə hˈa‍ɪla‍ɪf mjˈuːzɪk ʒˈɑːnɹə"
+   "poto": "ɡanˈean sˈɪŋə kˈofi mˈantɛ hɐz ɐknˈɒlɪd‍ʒd bˈisa kˈe‍ɪdˈe‍ɪz ˈɪnfluːəns ɒnðə hˈa‍ɪla‍ɪf mjˈuːzɪk ʒˈɒnɹə",
+   "kokoro": "ɡɑːnˈAən sˈɪŋə kˈQfi mˈant haz əknˈɒlɪʤd bˈiːsə kˈAdˈAz ˈɪnflʊəns ˌɒn ðə hˈIlIf mjˈuːzɪk ʒˈɒnɹə."
   },
   "Bright-2": {
-   "gh": "fˈɔːmə pɾˈɛzɪdənt d‍ʒˈɒn dɾamˈani mahˈama haz kəndˈɛmd ða kˈɪlɪŋ ɒv ˈal d‍ʒazˈi‍əɹə d‍ʒˈɜːnəlˌɪst ʃˈa‍ɪ‍əɹiːn ˈabu ˈaklɛ",
-   "en": "fˈɔːmə pɹˈɛzɪdənt d‍ʒˈɒn dɹɑːmˈɑːni mɑːhˈɑːmɑː hɐz kəndˈɛmd ðə kˈɪlɪŋ ɒv ˈal d‍ʒazˈi‍əɹə d‍ʒˈɜːnəlˌɪst ʃˈa‍ɪ‍əɹiːn ˈɑːbu ˈɑːklɛ",
-   "kokoro": "fˈɔː‍ɹmɚ pɹˈɛzɪdənt d‍ʒˈɑːn dɹæmˈɑːni mæhˈɑːmə hɐz kəndˈɛmd ðə kˈɪlɪŋ ʌv ˈæl d‍ʒæzˈɪɹə d‍ʒˈɜːnəlˌɪst ʃˈa‍ɪ‍ɚɹiːn ˈæbuː ˈækle‍ɪ"
+   "poto": "fˈɔːmə pɹˈɛzɪdənt d‍ʒˈɒn dɹamˈani mahˈama hɐz kəndˈɛmd ðə kˈɪlɪŋ ɒv ˈal d‍ʒazˈi‍əɹə d‍ʒˈɜːnəlˌɪst ʃˈa‍ɪ‍əɹiːn ˈabu ˈaklɛ",
+   "kokoro": "fˈɔːmə pɹˈɛzɪdᵊnt, ʤˈɒn dɹamˈɑːni mahˈɑːmə haz kəndˈɛmd ðə kˈɪlɪŋ ɒv ˈal ʤazˈiəɹə ʤˈɜːnəlɪst ʃˈIəɹiːn ˈabuː ˈaklA."
   },
   "Bright-3": {
-   "gh": "ɡanˈe‍ən lˈiːɡə‍l lˈuːmɪnˌe‍əɾi tsˈatsu tsikˈata haz pɾəpˈozd a səlˈuːʃən tə ɡˈanəz ɾɪkˈɜːɹɪŋ sˈiːdi dɪpɾˌiːʃɪʲˈeʃən",
-   "en": "ɡɑːnˈe‍ən lˈiːɡə‍l lˈuːmɪnəɹi tsˈɑːtsu tsikˈɑːtɑː hɐz pɹəpˈə‍ʊzd ɐ səlˈuːʃən tə ɡˈɑːnəz ɹɪkˈɜːɹɪŋ sˈiːdi dɪpɹˌiːʃɪʲˈe‍ɪʃən",
-   "kokoro": "ɡˈæne‍ɪən lˈiːɡə‍l lˈuːmɪnˌɛɹi tsˈætsuː tsɪkˈɑːɾə hɐz pɹəpˈo‍ʊzd ɐ səlˈuːʃən tə ɡˈɑːnəz ɹᵻkˈɜːɹɪŋ sˈɛdi dᵻpɹˌiːʃɪʲˈe‍ɪʃən"
+   "poto": "ɡanˈean lˈiːɡə‍l lˈuːmɪnəɹi tsˈatsu tsikˈata hɐz pɹəpˈə‍ʊzd ɐ səlˈuːʃən tə ɡˈanaz ɹɪkˈɜːɹɪŋ sˈiːdi dɪpɹˌiːʃɪʲˈe‍ɪʃən",
+   "kokoro": "ɡɑːnˈAən lˈiːɡᵊl lˈuːmɪnəɹi tsˈatsuː tsɪkˈɑːtə haz pɹəpˈQzd ɐ səlˈuːʃᵊn tə ɡˈɑːnəz ɹɪkˈɜːɹɪŋ sˈiːdi dɪpɹˌiːʃɪˈAʃᵊn."
   }
  },
  "voices": [
@@ -3142,5 +2950,9 @@
     false
    ]
   ]
+ },
+ "notes": {
+  "kokoro": "Standard Kokoro: the official package, its PyTorch weights and misaki for grapheme-to-phoneme, lang_code 'b'. Not sherpa-onnx -- comparing our espeak path against another espeak path would not be the claim.",
+  "poto": "sherpa-onnx, with the Ghanaian dictionary in espeak-ng-data."
  }
 }

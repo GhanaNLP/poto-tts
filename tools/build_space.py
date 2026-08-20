@@ -98,8 +98,10 @@ PAGE = """<!doctype html>
   <div class="tabs" role="tablist" id="tabs"></div>
   <p class="legend"><mark>Underlined</mark> words are in the Ghanaian lexicon, so
   poto-tts pronounces them from it. Everything else is left to espeak's English and is
-  said exactly as any English TTS would. Each voice reads different sentences, drawn
-  from a Ghanaian English news corpus.</p>
+  said exactly as British English would say it. Each voice reads different sentences,
+  drawn from a Ghanaian English news corpus. The Kokoro column is standard Kokoro --
+  its own package, weights and misaki grapheme-to-phoneme -- not this pipeline with the
+  dictionary removed.</p>
 
 {items}
 
@@ -127,7 +129,7 @@ PAGE = """<!doctype html>
   <footer>
     Kokoro v1.0 via sherpa-onnx, speaker Grace (bf_alice). Pronunciation from a
     104,623-word lexicon compiled into espeak's dictionary and read by the
-    <code>en-gh</code> accent voice &mdash; data, not code, so Android, iOS and
+    espeak dictionary &mdash; data, not code, so Android, iOS and
     WebAssembly get the same result.
     <br>
     <a href="https://github.com/GhanaNLP/poto-tts">GhanaNLP/poto-tts</a> &middot;
@@ -187,16 +189,16 @@ def main() -> int:
     for voice in voices:
         items = []
         for key in data["scripts"][voice]:
-            if any((key, r) not in files for r in ("gh", "kokoro")):
+            if any((key, r) not in files for r in ("poto", "kokoro")):
                 print(f"  skipping {key}: needs both routes")
                 continue
             ipa = data["phonemes"].get(key, {})
             items.append(ITEM.format(
                 text=marked(data.get("annotations", {}).get(key), data["texts"][key]),
                 kokoro_file=html.escape(files[(key, "kokoro")]),
-                gh_file=html.escape(files[(key, "gh")]),
+                gh_file=html.escape(files[(key, "poto")]),
                 kokoro_ipa=html.escape(ipa.get("kokoro", "")),
-                gh_ipa=html.escape(ipa.get("gh", "")),
+                gh_ipa=html.escape(ipa.get("poto", "")),
             ))
         sections.append(SECTION.format(voice=html.escape(voice), items="".join(items)))
     (SPACE / "index.html").write_text(PAGE.format(

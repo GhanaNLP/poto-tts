@@ -3,7 +3,7 @@
 For deployments that cannot run this library: Android, iOS, WebAssembly, C++. They
 load `espeak-ng-data` and send plain text, so a patched dictionary is the only place
 Ghanaian pronunciations can live for them. Python callers do not need it -- their path
-is the lfn respelling in respell.py, which reaches every word rather than only the
+is the dictionary itself: entries for the Ghanaian words, and espeak's British
 ones with entries.
 
 
@@ -78,23 +78,21 @@ from typing import Optional
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-from .inject import stress_index
-from .inject import FUNCTION_WORDS
+from .stress import stress_index
+from .stress import FUNCTION_WORDS
 from .mnemonics import MnemonicError, injection
 
 DICTSOURCE = "https://raw.githubusercontent.com/espeak-ng/espeak-ng/{version}/dictsource/{name}"
 # A general English word list, used to decide what *not* to touch. espeak already
 # pronounces English correctly, including its stress; the Ghanaian realisation of
 # an English word is the acoustic model's job.
-VOICE_FILE = "en-gh"
-
 # The lexicon covers the whole language: `bus`, `passed` and `way` all have entries,
 # each recording the Ghanaian accent of an English word rather than a pronunciation
 # that cannot be derived. That is right for a G2P library and wrong here, because an
 # entry for every word means every word of every sentence is pronounced from the
 # lexicon -- so `from` became /frɔm/ and `on` became /an/ when the job was to fix
 # `Kwabena`. This list is the subset a Ghanaian speaker pronounces by local rules;
-# everything else is left to espeak's English. Regenerate with
+# everything else is left to espeak's British English. Regenerate with
 # tools/classify_lexicon.py.
 GHANAIAN_WORDS = "ghanaian-words.txt"
 
@@ -105,6 +103,7 @@ def ghanaian_words() -> set:
     if not path.is_file():
         return set()
     return {w.strip().lower() for w in path.read_text().split() if w.strip()}
+
 
 ENGLISH_WORDS = "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
 # en_extra is ours to write. The others are espeak's own sources and have to be
@@ -124,7 +123,7 @@ computer parliament epidemiologist January Wednesday twenty fifteen
 """.split()
 
 
-def espeak_ipa(words, path: Path | None = None, voice: str = "en-us") -> str:
+def espeak_ipa(words, path: Path | None = None, voice: str = "en") -> str:
     """Phonemise with the espeak-ng *binary*, so `--path` is honoured.
 
     Never use the in-process library for this: espeak initialises once per
@@ -143,7 +142,7 @@ def espeak_ipa(words, path: Path | None = None, voice: str = "en-us") -> str:
 WORKERS = min(16, (os.cpu_count() or 4))
 
 
-def espeak_many(items, path: Path | None = None, voice: str = "en-us",
+def espeak_many(items, path: Path | None = None, voice: str = "en",
                 chunk: int = 2000, progress=None) -> list[str]:
     """`espeak_each` across several subprocesses, preserving order."""
     batches = [items[i:i + chunk] for i in range(0, len(items), chunk)]
@@ -156,7 +155,7 @@ def espeak_many(items, path: Path | None = None, voice: str = "en-us",
     return results
 
 
-def espeak_each(items, path: Path | None = None, voice: str = "en-us") -> list[str]:
+def espeak_each(items, path: Path | None = None, voice: str = "en") -> list[str]:
     """Phonemise many items, one per line, and get one answer per item.
 
     Batching by joining words with spaces returns a single line that has to be
@@ -253,7 +252,7 @@ def english_vocabulary(cache: Path) -> set:
 
 
 def build_entries(quiet: bool = False, english: Optional[set] = None,
-                  uniform_stress: bool = False):
+                  uniform_stress: bool = False, whole_lexicon: bool = False):
     """Lexicon -> {word: mnemonics} for every word, before selection.
 
     Two ways to place stress, and they encode different claims about what the
@@ -270,7 +269,7 @@ def build_entries(quiet: bool = False, english: Optional[set] = None,
     which is the point, since the alternative is two classes of entry that behave
     differently for reasons a reader of the dictionary cannot see.
     """
-    from .inject import _require_lexicon
+    from .stress import _require_lexicon
 
     _require_lexicon()
     from ghana_english_g2p.core import _load_lexicon
@@ -282,7 +281,7 @@ def build_entries(quiet: bool = False, english: Optional[set] = None,
     # espeak's own reading of every candidate, in batches -- one subprocess call
     # per word would take hours for 104k words.
     words = [w for w in lexicon if w.isalpha() and len(w) > 1]
-    ghanaian = ghanaian_words()
+    ghanaian = set() if whole_lexicon else ghanaian_words()
     if ghanaian:
         before = len(words)
         words = [w for w in words if w.lower() in ghanaian]
@@ -439,6 +438,10 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="poto-tts dict",
                                  description=__doc__.splitlines()[0])
     ap.add_argument("--out", required=True, help="directory to write espeak-ng-data into")
+    ap.add_argument("--whole-lexicon", action="store_true",
+                    help="compile every lexicon word, not just the Ghanaian subset. "
+                         "Ordinary English then comes from the lexicon too, which "
+                         "makes every word of every sentence Ghanaian.")
     ap.add_argument("--ghanaian-stress", action="store_true",
                     help="stress every entry by the Ghanaian penultimate rule, "
                          "including words English also has (implies --all-words)")
@@ -491,7 +494,8 @@ def main(argv=None) -> int:
 
     print("building entries from the Ghana lexicon", file=sys.stderr)
     entries, unmappable, stock = build_entries(
-        english=english, uniform_stress=args.ghanaian_stress)
+        english=english, uniform_stress=args.ghanaian_stress,
+        whole_lexicon=args.whole_lexicon)
 
     if args.all_words or args.ghanaian_stress:
         # Every lexicon word gets an entry, so ordinary English is spoken with
@@ -551,25 +555,6 @@ def main(argv=None) -> int:
             cwd=work, capture_output=True, text=True,
         )
         print(compiled.stdout.strip() or compiled.stderr.strip(), file=sys.stderr)
-
-    # The voice file goes in beside the dictionary, because the two are one
-    # deliverable: the entries decide pronunciation and the voice decides how
-    # espeak reads them back. Shipping the dictionary without the voice leaves a
-    # data directory that works and mispronounces everything slightly, which is
-    # the failure mode this project exists to avoid.
-    # Inside the package first, so a pip install has it; the repo copy second, so a
-    # checkout picks up an edit to espeak/en-gh without reinstalling.
-    voice_src = Path(__file__).resolve().parent / "data" / VOICE_FILE
-    if not voice_src.is_file():
-        voice_src = Path(__file__).resolve().parent.parent / "espeak" / VOICE_FILE
-    if voice_src.is_file():
-        voice_dst = staging / "lang" / "gmw" / VOICE_FILE
-        voice_dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(voice_src, voice_dst)
-        print(f"installed voice {VOICE_FILE} -> lang/gmw/{VOICE_FILE}", file=sys.stderr)
-    else:
-        print(f"WARNING: no voice file at {voice_src}; the dictionary alone will be "
-              f"read with espeak's own English vowels", file=sys.stderr)
 
     print(f"\nentries written: {len(differing)}", file=sys.stderr)
     if unmappable:

@@ -103,10 +103,10 @@ def test_default_voice_is_a_recommended_one():
 
 
 def test_prepare_text_changes_nothing():
-    """There is no front-end in this library any more. Pronunciation lives in the
-    voice's espeak-ng-data -- the lexicon compiled into espeak's dictionary, read
-    by the en-gh accent voice -- which is why Android and iOS get the same result.
-    A rewrite here would be a Python-only behaviour and a divergence."""
+    """The text reaches the model as written. Pronunciation lives in the voice's
+    espeak-ng-data -- the lexicon compiled into espeak's dictionary -- which is why a
+    runtime without Python gets the same result. A rewrite here would be a
+    Python-only behaviour and a divergence."""
     text = "Kwabena went to Achimota"
     assert make().prepare_text(text) == text
 

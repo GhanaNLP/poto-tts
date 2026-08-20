@@ -1,54 +1,18 @@
-"""Ghanaian IPA -> espeak-ng mnemonics, for building the espeak dictionary.
+"""Ghana IPA -> espeak-en phoneme mnemonics, for the dictionary entries.
 
-Not the path a Python caller takes -- that is respell.py, which writes lfn and
-reaches every word. This table exists for `poto-tts dict`, which compiles Ghanaian
-pronunciations into espeak's own English dictionary so that **deployments with no
-Python** still get the names right: an Android or iOS app, a WASM build, a C++
-service. Those runtimes load `espeak-ng-data` and send plain text, so the only place
-a correction can live is inside that data.
+This is how a pronunciation reaches the model. Each lexicon entry is compiled into
+espeak's own English dictionary as a mnemonic string -- `kwabena` as `kwab'Ina` -- and
+espeak reads it back as the phonemes Kokoro receives. A word with an entry is spoken
+the Ghanaian way, and a word without one is spoken as British English.
 
-The two routes differ in reach and fidelity. The dictionary corrects words espeak
-mis-parses, keeps all seven Akan vowels, and leaves ordinary English alone. The lfn
-respelling reaches every word, at the cost of five vowels. Python callers get the
-second; everyone else gets the first.
+The entries carry the lexicon's IPA, so all seven Akan vowels survive: ɛ and ɔ stay
+distinct from e and o, which matters because Kokoro's inventory has them. An earlier
+design rewrote every word in Lingua Franca Nova orthography instead, because
+sherpa-onnx accepts text and not phonemes -- and a dictionary entry *is* phonemes, so
+that detour cost five vowels for nothing and is gone.
 
-
-espeak-ng reads `[[...]]` in its input as phonemes rather than letters, in the
-mnemonics of whichever voice is active. That is the hook this module uses: a word
-the Ghana lexicon knows becomes `[[kwab'ina]]`, everything else stays plain text
-for espeak to phonemise as English, and sherpa-onnx's Piper frontend needs no
-lexicon file and never drops a word it has not seen.
-
-Why this beats the two alternatives:
-
-  Against MeloTTS's lexicon (`MeloTtsLexicon`), which really does take a
-  word-to-phones table: it has no espeak fallback, so a word missing from the
-  table is dropped silently. Here the lexicon covers Ghanaian words and espeak
-  covers the rest of the language.
-
-  Against respelling in Lingua Franca Nova (see respell.py, the Kokoro route):
-  lfn has five vowels, and Akan has seven. espeak-en's *rules* never produce
-  [e] or [o] either -- but its phoneme table defines them, and an inline phoneme
-  bypasses the rules. `[[b'et]]` is /bet/ and `[[b'ot]]` is /bot/. So ɛ/e and
-  ɔ/o stay distinct, and `kp`, `gb` and `nj` are all available as well.
-
-Two things to know before trusting an injection:
-
-  **An invalid mnemonic truncates the rest of the string, silently.** `[[ny'ani]]`
-  is not an error -- espeak returns "n" and discards the rest. Nothing warns you.
-  So `injection` is always checked by `verify`, which phonemises the result and
-  compares it against the target, and the caller falls back to plain text when it
-  does not match.
-
-  **espeak still applies its allophonic rules.** An intervocalic /t/ flaps:
-  `[[atSim'ota]]` comes back /ætʃimˈoɾæ/. This is not corrected, because training
-  and inference share this module: the model is trained on whatever espeak really
-  produces, so a consistent flap is a label the model learns, not an error it
-  inherits.
-
-The vowel choices are the substance of the file; each mapping is a judgement
-about which English vowel a Ghanaian one should share a token with, and the
-comments give the reasoning.
+What the model cannot do is not worth encoding: Kokoro's inventory is 113 tokens with
+no kp or ɡb, so labial-velars land on their nearest neighbours whatever we write.
 """
 
 from __future__ import annotations
@@ -76,30 +40,36 @@ class MnemonicError(ValueError):
 # -- vowels ----------------------------------------------------------------
 #
 # The interesting decision is /a/, the lexicon's commonest phone by far (67,795
-# occurrences). espeak-en offers three candidates and none of them is [a]:
+# occurrences). It is written `a`, espeak's British [a], and getting there took two
+# goes, so the discarded reasoning is worth keeping.
 #
-#   'a'   -> æ. Front but too raised, and it collides with English /æ/ in 'bat',
-#          forcing the model to average Ghanaian [a] against it.
-#   '0'   -> ɑː, but *not stably*: before /r/ espeak realises it as ɔː, so
-#          'sarakofe' comes back /sɔːɹɑːkofe/. That both mispronounces the word
-#          and collides with genuine /ɔ/, which is a contrast Akan needs.
-#   'A:'  -> ɑː in every context tested -- before /r/, between vowels, word-final.
+# The first version targeted espeak's *American* table, where all three candidates
+# were wrong: `a` is æ there, too raised and colliding with English /æ/ in `bat`; `0`
+# is ɑː but not stably, becoming ɔː before /r/ so `sarakofe` came back /sɔːɹɑːkofe/;
+# `A:` is ɑː in every context. `A:` won on context-stability and shipped.
 #
-# So 'A:' it is. The merger it implies is the one Ghanaian English already makes:
-# 'bart' and 'Kwabena' both have [a] locally, so sharing a token with ɑː is free.
-# Context-stability is the deciding property: a phone whose realisation shifts
-# with its neighbours splits one lexicon phone across two model tokens.
+# Then the voice moved to the British table, where `a` *is* [a], and `A:` became wrong
+# twice over: it says a long back ɑː where the lexicon says [a], and ɑː before a vowel
+# triggers British linking-r, so `Okaija` came back /okɑːɹidʒɑːɹ/ -- an r inserted
+# inside the name and another after it.
 #
-# ɛ and ɔ map to 'E' and 'O', e and o to 'e' and 'o'. English rules never emit
-# the latter two, so those tokens end up meaning 'the Ghanaian close-mid vowel'
-# almost exclusively -- which is what we want them to mean.
+# `a` was re-checked in the contexts that disqualified `0`: before /r/ (/sˈaɹakofe/),
+# between vowels (/ˈaidʒa/), word-final (/ˈama/), before a stop (/bˈat/), before a
+# nasal cluster (/otˈaŋka/). Stable in all of them, and no linking-r anywhere.
+#
+# Length is not kept for /a/: `a:` reads as two vowels rather than one long one, and
+# vowel length is not doing contrastive work in these entries.
+#
+# ɛ and ɔ map to `E` and `O`, e and o to `e` and `o`. English rules never emit the
+# latter two, so those tokens come to mean "the Ghanaian close-mid vowel" almost
+# exclusively -- which is what we want them to mean.
 VOWELS: Dict[str, str] = {
     # æ joins /a/ rather than keeping espeak's 'a'. Two reasons, and they agree:
     # Ghanaian English merges TRAP into [a] ('bat' is [bat]), and the lexicon
     # itself transcribes Ghanaian words with æ where [a] is meant -- 'Asantewaa'
     # is stored as 'æ s æ n t ɪ w æ', which read literally gives /æsæntɪwæ/.
     # Merging makes both come out right and costs an inventory slot nothing needs.
-    "a": "A:", "ɑ": "A:", "ɒ": "A:", "æ": "A:", "ʌ": "V",
+    "a": "a", "ɑ": "a", "æ": "a", "ɒ": "O", "ʌ": "V",
     "ə": "@", "ɐ": "@", "ɜ": "3:", "ɚ": "3",
     "e": "e", "ɛ": "E",
     "i": "i", "ɪ": "I", "ɨ": "I", "ᵻ": "I", "y": "i",
@@ -113,10 +83,10 @@ VOWELS: Dict[str, str] = {
 # 'A::' is meaningless, and 'a:' is read as two vowels (ææ) rather than one long
 # one. Every entry below was checked against espeak individually.
 LONG_VOWELS: Dict[str, str] = {
-    "aː": "A:", "ɑː": "A:", "ɒː": "A:",
+    "aː": "a", "ɑː": "a", "ɒː": "O",
     "iː": "i:", "uː": "u:", "oː": "o:", "eː": "e:",
     "ɛː": "E:", "ɔː": "O:", "ɜː": "3:",
-    "æː": "A:",
+    "æː": "a",
     "əː": "@",
 }
 
@@ -235,7 +205,11 @@ def injection(
 
 
 @functools.lru_cache(maxsize=200_000)
-def phonemise(text: str, voice: str = "en-us") -> str:
+def phonemise(text: str, voice: str = "en") -> str:
+    # British, because that is the voice the entries are read with in production. The
+    # two tables disagree about the mnemonic this lexicon uses most: `a` is [a] under
+    # `en` and æ under `en-us`, so verifying against the wrong one checks a
+    # pronunciation nothing will produce -- it would pass `kwæbɪnæ` as correct.
     """What espeak-ng really says for *text*, as IPA. Needs the espeak-ng binary.
 
     Used to check injections, not at synthesis time -- sherpa-onnx calls its own
@@ -258,7 +232,7 @@ def _bare(ipa: str) -> str:
     return "".join(c for c in ipa.replace(_TIE, "") if c not in _MARKS and not c.isspace())
 
 
-def verify(phones: Sequence[str], mnemonics: str, voice: str = "en-us") -> bool:
+def verify(phones: Sequence[str], mnemonics: str, voice: str = "en") -> bool:
     """Did espeak read the injection as the phones we meant?
 
     This is not belt-and-braces. An invalid mnemonic makes espeak discard the
@@ -279,7 +253,9 @@ def verify(phones: Sequence[str], mnemonics: str, voice: str = "en-us") -> bool:
 
 # What each mnemonic comes back as, so `verify` compares like with like.
 _MNEMONIC_IPA = {
-    "A:": "ɑː", "0": "ɑː", "a": "æ", "V": "ʌ", "@": "ə", "3:": "ɜː", "3": "ɚ",
+    # British values: `a` is [a], not the æ of the American table. Verifying against
+    # the wrong table made verify() reject correct entries as /kwæbɪnæ/.
+    "A:": "ɑː", "0": "ɑː", "a": "a", "V": "ʌ", "@": "ə", "3:": "ɜː", "3": "ɚ",
     "e": "e", "e:": "eː", "E": "ɛ", "E:": "ɛː",
     "i": "i", "i:": "iː", "I": "ɪ",
     "o": "o", "o:": "oː", "O": "ɔ", "O:": "ɔː",

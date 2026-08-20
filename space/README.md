@@ -29,3 +29,6 @@ would say.
 
 Regenerate this page with `python tools/build_space.py` in
 [GhanaNLP/poto-tts](https://github.com/GhanaNLP/poto-tts).
+
+Runs on Android, iOS and C++ too, with the same pronunciations:
+[docs/MOBILE.md](https://github.com/GhanaNLP/poto-tts/blob/main/docs/MOBILE.md).

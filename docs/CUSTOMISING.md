@@ -1,25 +1,19 @@
 # Changing how poto-tts pronounces a word
 
-Every pronunciation decision happens in one of three places. Finding the right one
-first saves undoing work later, because a fix in the wrong layer looks correct on
-the word you tested and quietly breaks others.
+Every pronunciation decision happens in one of two places.
 
 ```
   your text
      |
- [1] espeak dictionary  <- 44,321 Ghanaian words from the lexicon.
+ [1] espeak dictionary  <- 44,321 Ghanaian words, carrying the lexicon's IPA.
      |                     If the word is here, this decides its pronunciation.
      |
- [2] espeak's letter-to-sound rules  <- only for words step 1 does not have.
+ [2] espeak's British English rules  <- every word step 1 does not have.
      |
- [3] the voice file, espeak/en-gh  <- accent rules, applied to whatever
-     |                                steps 1 and 2 produced.
   phonemes -> Kokoro -> audio
 ```
 
-The order matters: **the dictionary wins over the rules, and the voice file is
-applied on top of both.** So a voice rule affects every word, including ones the
-dictionary got right.
+The dictionary wins: a word with an entry never reaches the letter-to-sound rules.
 
 ## Which layer is your problem in?
 
@@ -29,129 +23,99 @@ Ask what espeak is being sent, before touching anything:
 poto-tts --phonemes "Nana Addo met Kwame Nkrumah"
 ```
 
-| symptom | layer | what to edit |
-|---|---|---|
-| one word is wrong, others fine | 1 | the lexicon |
-| a word poto-tts has never heard of is wrong | 2 | add it to the lexicon |
-| the same sound is wrong in *every* word | 3 | the voice file |
-| it is right in Python but wrong on Android | — | rebuild the dictionary |
-
-That third row is the one to be careful about, and the test suite enforces it —
-see "The rule that constrains rules" below.
+| symptom | where it belongs |
+|---|---|
+| one Ghanaian word is wrong | the lexicon |
+| a Ghanaian word poto-tts has never heard of | add it to the lexicon |
+| a Ghanaian word is read as if it were English | it is missing from `poto_tts/data/ghanaian-words.txt` |
+| an English word is said the Ghanaian way | it should not be in that list |
+| an English word is wrong | espeak's British English; not ours to correct one word at a time |
 
 ## 1. The lexicon: one word's pronunciation
 
-This is where almost every fix belongs. The lexicon is
-[ghana-english-g2p](https://github.com/GhanaNLP/ghana-english-g2p), a separate
-package, so that pronunciations have one home rather than one per project.
+Almost every fix belongs here. The lexicon is
+[ghana-english-g2p](https://github.com/GhanaNLP/ghana-english-g2p), a separate package,
+so that pronunciations have one home rather than one per project — a word fixed there
+reaches ASR and alignment too, not only this.
 
-There is deliberately no Python-only way to do this. A `lexicon=` argument used to
-exist and was removed: it changed pronunciation for Python callers and for nobody
-else, so the same code gave two different answers depending on the platform. The
-pronunciation is data, and changing it means changing the data.
-
-Put your words in a TSV — Ghana IPA, space-separated — and rebuild:
+Put your words in a TSV, Ghana IPA, space-separated:
 
 ```tsv
 Owusu	o w u s u
-Kufuor	=kufu'or
+Kufuor	k u f u ɔ r
 ```
 
 ```bash
-pip install 'poto-tts[lexicon]'
-poto-tts dict --out my-espeak-data --ghanaian-stress --extra my_words.tsv
+pip install 'poto-tts[lexicon]'                   # needs the espeak-ng binary
+poto-tts dict --out build/espeak-ng-data --ghanaian-stress --extra my_words.tsv
+poto-tts --espeak-data build/espeak-ng-data "Owusu and Kufuor arrived" -o out.wav
 ```
 
-`--extra` entries override the packaged lexicon, so the file corrects as well as
-adds. A leading `=` passes raw espeak mnemonics straight through; those are
-validated, because an invalid mnemonic makes espeak silently discard the rest of
-the entry and ship half a word.
+`--extra` entries override the packaged lexicon, so the file corrects as well as adds.
 
-If the word is one other people will need too, fix it upstream in
-`ghana-english-g2p` instead and everything downstream inherits it.
+A change made this way applies everywhere the voice is used — Python, the REST API,
+Android, iOS — because pronunciation is data rather than code.
+
+**Judge it by ear, not by IPA.** An entry that reads correctly and sounds wrong is
+worse than a missing one, because a missing word is obviously missing and a wrong one
+is confidently wrong.
+
+### Writing the pronunciation
+
+Multi-character phones are single tokens: `kp`, `ɡb`, `tʃ`, `dʒ`, `ɲ`, `ŋm`.
+
+```
+vowels       a e i o u ɛ ɔ ɪ ʊ ʌ ə æ ɑ ɜ ɐ ɨ y ø œ ɯ ᵻ
+long         aː eː iː oː uː ɑː ɔː ɛː
+consonants   b d f g h j k l m n p r s t v w z
+             kp ɡb ɲ ŋ ŋm tʃ dʒ ts dz ʃ ʒ θ ð ɾ ɹ ɣ x ç ɬ ʔ
+```
+
+A phone outside that set cannot be compiled and the entry is dropped, silently, so stay
+inside it.
+
+All seven Akan vowels reach the model: ɛ and ɔ stay distinct from e and o.
+
+What the model cannot do is not worth encoding. Kokoro's inventory is 113 tokens with
+no `kp` or `ɡb`, so labial-velars land on their nearest neighbours whatever you write,
+and tone is not carried at all.
 
 ## 2. Words the lexicon does not have
 
-There is nothing to edit here — this layer is espeak's own English letter-to-sound
-rules, and it is the fallback. `inflationary` and `drove` are not in the lexicon;
-they are pronounced by rule, then given a Ghanaian accent by layer 3.
+Nothing to edit: this is espeak's own British English, and it is the fallback. If a
+word matters, add it to the lexicon rather than leaning on the rules.
 
-If a word matters, the fix is to add it to the lexicon, not to lean on the rules.
-
-## 3. The voice file: how a sound is realised everywhere
-
-`espeak/en-gh` is the accent. It is a plain espeak voice file, and its `replace`
-lines rewrite phonemes after everything else has run:
-
-```
-replace 00 t# t   // undo espeak's intervocalic flap
-replace 00 r  *   // /r/ as a tap, not an approximant
-replace 00 oU o   // GOAT monophthong, for words the lexicon lacks
-```
-
-Edit this only for something true of the accent as a whole — every /oʊ/, not one
-word's /oʊ/. After editing, reinstall it:
-
-```bash
-cp espeak/en-gh path/to/espeak-ng-data/lang/gmw/en-gh
-```
-
-No recompilation: voice files are read as text at load time. Only the dictionary
-is compiled.
-
-### The rule that constrains rules
-
-**A `replace` rule may not contradict the lexicon.** Rules run on every word after
-the dictionary is consulted, so a rule whose source phoneme our own entries can
-emit does not fill a gap — it overwrites what the lexicon said, on every word the
-lexicon knows, with nothing in the output to show it happened.
-
-This was learned from a real bug. The voice file used to collapse `E` to `e` and
-`@` to `a`, so `Okuapɛnhɛnɛ` was flattened to /okwapenhene/ and `the` came out
-/da/, though the lexicon plainly records `[ð, ə]`. Both looked like lexicon errors
-and were not.
-
-`tests/test_espeak_voice.py` fails if such a rule appears. Three exemptions exist
-and each states its reason in the voice file: `t# -> t` undoes an allophone espeak
-adds *after* lookup, `r -> *` picks a realisation of the lexicon's own `/r/`, and
-`A: -> a` reconciles two espeak phoneme tables. If you add an exemption, write down
-why it is a reconciliation rather than an override.
-
-Two limits of the mechanism, both because espeak substitutes before it applies its
-own allophony:
-
-- `replace` has no positional condition, so "ŋ word-finally, n elsewhere" cannot be
-  expressed. `Nyankpani` keeps its ŋ.
-- espeak silently ignores a rule whose source is `0`, the LOT vowel.
+British and not American, deliberately: Ghanaian English is much closer to it. British
+also flaps no /t/ between vowels and has no r-coloured vowels, both of which would
+otherwise turn up in words the lexicon does not cover.
 
 ## Rebuilding
 
 ```bash
-pip install 'poto-tts[lexicon]'                     # needs the espeak-ng binary
+pip install 'poto-tts[lexicon]'
 poto-tts dict --out build/espeak-ng-data --ghanaian-stress
 ```
 
-Takes a few minutes: it phonemises the whole lexicon twice, once to write entries
-and once to read them back and check none was truncated. It also installs
-`espeak/en-gh` into the result, because the dictionary and the voice are one
-deliverable — the dictionary alone gives you a working voice that mispronounces
-everything slightly.
+A few minutes: it phonemises the lexicon twice, once to write the entries and once to
+read them back and check none was truncated.
 
-What `--ghanaian-stress` means: every one of the 104,623 lexicon words is treated as
-a Ghanaian word, entered in the dictionary and stressed by the Ghanaian penultimate
-rule, whether or not English spells it the same way. Without it, words English also
-has are left to espeak — which is why `Yaw` was once read as the nautical term
-/jɔː/ although the lexicon holds `[j, a, w]`.
+Two things it does that are easy to miss:
+
+**It uses only the Ghanaian subset.** `poto_tts/data/ghanaian-words.txt` lists the
+44,321 entries a Ghanaian speaker pronounces by local rules, out of the upstream
+lexicon's 104,623. The rest — `bus`, `passed`, `way`, `yesterday` — record the Ghanaian
+*accent* of an English word, which is right for a general G2P library but would make
+every word of every sentence Ghanaian here. Regenerate that list with
+`tools/classify_lexicon.py`, or edit it by hand; `--whole-lexicon` compiles everything
+if you want to hear the difference.
+
+**`--ghanaian-stress` treats every entry as a Ghanaian word**, stressing it by the
+penultimate rule rather than borrowing espeak's. Without the flag, words English also
+spells are handed back to espeak, so `Yaw` is read as the nautical term /jɔː/.
 
 Function words (`the`, `to`, `of`, `and`) are entered but left unstressed, so their
-weight still depends on the sentence. Marked, every one takes a beat and a sentence
-reads like a list.
-
-Point a run at the result to hear it:
-
-```python
-tts = load(espeak_data="build/espeak-ng-data", espeak_voice="en-gh")
-```
+weight still depends on the sentence. Marked, every one takes a beat and a line reads
+like a list.
 
 Then check that ordinary English did not move:
 
@@ -159,30 +123,27 @@ Then check that ordinary English did not move:
 poto-tts --phonemes "yesterday January Wednesday government"
 ```
 
-Stress should stay where English puts it inside the word; the vowels should be
-Ghanaian. The build prints this comparison itself, under
-`checking espeak's own English is unchanged`.
+Nothing should change: those words have no entries. The build prints its own version of
+this check as `checking espeak's own English is unchanged`, and with the Ghanaian
+subset it should report `unchanged`. If it lists altered words, the word list has
+English in it.
 
 ## Using it without Python
 
-The dictionary and voice file are the whole front-end, so any sherpa-onnx runtime —
-Android, iOS, WebAssembly, C++, Kotlin, Swift, Rust — gets the same pronunciations
-with no Python involved. Ship four things and send plain text with `lang=en-gh`:
+The dictionary is the whole front-end, so any sherpa-onnx runtime — Android, iOS,
+WebAssembly, C++, Kotlin, Swift, Rust — gets the same pronunciations. Ship four files
+and send plain text with `lang=en`:
 
 ```
-onnx/model.onnx                  the model
-voices.bin                       speaker embeddings
-tokens.txt                       phoneme -> id
-espeak-ng-data/                  the dictionary and the voice -- the Ghanaian part
+onnx/model.onnx      voices.bin      tokens.txt      espeak-ng-data/
 ```
 
-Swap in a stock `espeak-ng-data` and you still get a working voice that
-mispronounces every Ghanaian name, silently. That directory is the deliverable.
+`examples/bare_sherpa_onnx.py` does exactly that with no `poto_tts` import, so the
+claim stays testable. [MOBILE.md](MOBILE.md) has the Kotlin, Swift and C++ snippets.
 
 ## What is not customisable here
 
-- **Kokoro's phoneme inventory.** Pronunciations are approximated into the token set
-  the model was trained on, so Akan phones that English lacks land on their nearest
-  English neighbour. No amount of lexicon editing changes that.
-- **The voices' accent.** These are Kokoro's British and American speakers. poto-tts
-  changes what they say, not who they sound like.
+- **Kokoro's phoneme inventory.** 113 tokens. Akan phones English lacks land on their
+  nearest neighbour, and no amount of lexicon editing changes that.
+- **The voices' accent.** These are Kokoro's British speakers. poto-tts changes what
+  they say, not who they sound like.

@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" width="900" height="250"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 240" width="880" height="240"
      font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
      fill="currentColor" role="img">
   <title>How poto-tts decides a pronunciation</title>
   <style>
-    .box  { fill: none; stroke: currentColor; stroke-width: 1.5; opacity: .5; }
-    .grp  { fill: none; stroke: currentColor; stroke-width: 1.5; opacity: .25;
-            stroke-dasharray: 5 4; }
-    .lbl  { font-size: 14.5px; font-weight: 600; }
-    .sub  { font-size: 11.5px; opacity: .62; }
-    .tag  { font-size: 10px; opacity: .45; letter-spacing: .1em; }
-    .fl   { stroke: currentColor; stroke-width: 1.5; opacity: .45; fill: none; }
+    .box { fill: none; stroke: currentColor; stroke-width: 1.5; opacity: .5; }
+    .grp { fill: none; stroke: currentColor; stroke-width: 1.5; opacity: .25;
+           stroke-dasharray: 5 4; }
+    .lbl { font-size: 14.5px; font-weight: 600; }
+    .sub { font-size: 11.5px; opacity: .62; }
+    .tag { font-size: 10px; opacity: .45; letter-spacing: .1em; }
+    .fl  { stroke: currentColor; stroke-width: 1.5; opacity: .45; fill: none; }
   </style>
   <defs>
     <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
@@ -18,27 +18,27 @@
     </marker>
   </defs>
 
-  <text class="lbl" x="14" y="126">your text</text>
-  <text class="sub" x="14" y="144">unchanged</text>
-  <line class="fl" x1="98" y1="121" x2="140" y2="121" marker-end="url(#ar)"/>
+  <text class="lbl" x="14" y="120">your text</text>
+  <text class="sub" x="14" y="138">unchanged</text>
+  <line class="fl" x1="98" y1="115" x2="140" y2="115" marker-end="url(#ar)"/>
 
-  <rect class="grp" x="142" y="26" width="404" height="190" rx="10"/>
-  <text class="tag" x="158" y="48">ESPEAK-NG</text>
+  <rect class="grp" x="142" y="24" width="392" height="182" rx="10"/>
+  <text class="tag" x="158" y="46">ESPEAK-NG</text>
 
-  <rect class="box" x="168" y="64" width="230" height="56" rx="7"/>
-  <text class="lbl" x="184" y="88">Ghanaian lexicon</text>
-  <text class="sub" x="184" y="106">44,321 words it knows</text>
+  <rect class="box" x="168" y="62" width="222" height="54" rx="7"/>
+  <text class="lbl" x="184" y="85">Ghanaian lexicon</text>
+  <text class="sub" x="184" y="103">44,321 words, with their IPA</text>
 
-  <rect class="box" x="168" y="146" width="230" height="52" rx="7"/>
-  <text class="lbl" x="184" y="170">English rules</text>
-  <text class="sub" x="184" y="188">every other word</text>
+  <rect class="box" x="168" y="140" width="222" height="50" rx="7"/>
+  <text class="lbl" x="184" y="163">British English</text>
+  <text class="sub" x="184" y="181">every other word</text>
 
-  <path class="fl" d="M398,92 H452 V118" marker-end="url(#ar)"/>
-  <path class="fl" d="M398,172 H452 V128" marker-end="url(#ar)"/>
+  <path class="fl" d="M390,89 H440 V112" marker-end="url(#ar)"/>
+  <path class="fl" d="M390,165 H440 V122" marker-end="url(#ar)"/>
 
-  <line class="fl" x1="546" y1="121" x2="592" y2="121" marker-end="url(#ar)"/>
-  <text class="lbl" x="598" y="117">phonemes</text>
-  <line class="fl" x1="690" y1="121" x2="736" y2="121" marker-end="url(#ar)"/>
-  <text class="lbl" x="742" y="117">Kokoro</text>
-  <text class="sub" x="742" y="135">speaks it</text>
+  <line class="fl" x1="534" y1="115" x2="578" y2="115" marker-end="url(#ar)"/>
+  <text class="lbl" x="584" y="111">phonemes</text>
+  <line class="fl" x1="676" y1="115" x2="720" y2="115" marker-end="url(#ar)"/>
+  <text class="lbl" x="726" y="111">Kokoro</text>
+  <text class="sub" x="726" y="129">speaks it</text>
 </svg>

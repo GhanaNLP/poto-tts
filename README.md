@@ -34,42 +34,47 @@ tts.save("The Okuapenhene met Nana Bawumia", "out.wav")
 ## How it works
 
 Pronunciation comes from a Ghanaian lexicon compiled into espeak's own dictionary.
-Your text is sent to the model unchanged:
+Your text reaches the model unchanged:
 
 <img src="docs/pipeline.svg" width="100%" alt="your text, unchanged, goes into
-espeak-ng: the Ghanaian lexicon supplies the words it knows and espeak's
-letter-to-sound rules cover the rest; the phonemes go to Kokoro, which speaks it">
+espeak-ng: the Ghanaian lexicon supplies the words it knows and espeak's British
+English rules cover the rest; the phonemes go to Kokoro, which speaks it">
 
 The dictionary holds **44,321 Ghanaian words** -- names, places, titles, Twi and Ga
-loans, food, money, everyday coinage. Every other word is left to espeak's ordinary
-English. So `Kwabena`, `Achimota` and `Okuapenhene` come from the lexicon, while
-`bus`, `passed` and `through` are pronounced as any English TTS would.
+loans, food, money, everyday coinage -- each carrying the lexicon's own IPA. Every
+other word is left to espeak's British English. So `Kwabena`, `Achimota` and
+`Okuapenhene` come from the lexicon, while `bus`, `passed` and `through` are
+pronounced as any British English voice would.
 
-That division is deliberate and was arrived at the hard way. The upstream lexicon
-covers the whole language -- `bus` and `way` have entries too, recording the Ghanaian
-*accent* of an English word rather than a pronunciation that cannot be derived. Using
-all of it made every word of every sentence Ghanaian: `from` as /frɔm/, `on` as /an/.
-That is a different product from an English voice that says Ghanaian names properly.
-`poto_tts/data/ghanaian-words.txt` is the subset used, and
-`tools/classify_lexicon.py` regenerates it.
+All seven Akan vowels reach the model: `Okuapɛnhɛnɛ` is /ˌokwapɛnhˈɛnɛ/, with ɛ
+distinct from e. British English for the rest, because Ghanaian English is closer to it
+than to American.
+
+On a sample of 400 Ghanaian words, checked against the lexicon: stock Kokoro says 2.8%
+of them correctly, poto-tts 98.5% (`tools/measure_coverage.py`). The honest summary is
+simpler though -- the names work.
+
+Two things are doing the work, and they compose.
+
+**The phonemiser.** Standard Kokoro converts text to phonemes with
+[misaki](https://github.com/hexgrad/misaki), whose English lexicon has no Ghanaian
+words in it — ask it for `Kwabena`, `Achimota`, `Okuapenhene` or `Akple` and it returns
+a placeholder, then falls back. sherpa-onnx phonemises with espeak-ng instead, which at
+least reads Ghanaian spelling as spelling: `Ewe` comes out as a word rather than as the
+English "you". That difference is free, before any lexicon is involved.
+
+**The lexicon.** espeak still guesses, and its guesses are English ones. The dictionary
+is where a guess gets replaced by the recorded pronunciation, one word at a time —
+which is also the part you can extend for a name it has never seen.
+
+**Nothing in this library rewrites your text.** Pronunciation is data, so an Android or
+C++ app gets exactly the same result.
 
 To see what will be sent to espeak, without loading a model:
 
 ```bash
 poto-tts --phonemes "Nana Addo met Kwame Nkrumah"
 ```
-
-One more layer sits after those two: `espeak/en-gh`, a voice file whose rules give the
-Ghanaian words their vowel qualities and a tapped r. It is applied to whatever the
-dictionary and the rules produced, so it reaches ordinary English too -- `late` comes
-out /let/. It also does one job that is easy to miss: it maps `A:` to `a`, which
-suppresses espeak's British linking-r. Without it `Okaija` reads as /okɑːɹidʒɑːɹ/, with
-an r inserted inside a name that has none.
-
-A rule in that file may not contradict the lexicon. Rules run on every word after
-lookup, so a rule whose source phoneme our own entries can emit overwrites what the
-lexicon said, invisibly -- `the` once came out /da/ though the lexicon records
-[ð, ə]. `tests/test_espeak_voice.py` fails if such a rule appears.
 
 Changing any of it is [docs/CUSTOMISING.md](docs/CUSTOMISING.md).
 
@@ -109,42 +114,40 @@ tts.annotate("Yaw went to Kumasi by bus")
 tts.coverage("Yaw went to Kumasi by bus")      # 0.33
 ```
 
-Worth having because the audio cannot show it: a name the lexicon supplied and a name
-espeak guessed at sound equally confident, so when one is wrong there is no way to
-tell whether the entry is missing or the entry is bad.
+Useful because the audio cannot show it: a name from the lexicon and a name espeak
+guessed at sound equally confident, so when one is wrong you cannot tell whether the
+entry is missing or the entry is wrong.
 
-Reporting only -- `speak()` never calls either, so nothing about the audio depends on
-them, and a port that wants the same information reads
+Neither method affects synthesis. A port that wants the same information reads
 `poto_tts/data/ghanaian-words.txt` and does one set lookup per word.
 
 ## Cross-platform
 
-sherpa-onnx runs on **Android, iOS, WebAssembly, C++, C, Go, C#, Java, Kotlin, Rust,
-Dart and Swift**, and they all get the same pronunciations as Python, because the
-front-end is data rather than code. There is no Python-only path to fall back from:
-the dictionary and the voice file *are* the front-end.
-
-Ship four things and send plain text with `lang=en-gh`:
+sherpa-onnx runs on **Android, iOS, Flutter, Kotlin, Swift, Java, C, C++, C#, Go, Rust,
+Dart and WebAssembly**, and every one of them gets the same pronunciations as Python,
+because there is no front-end code to port. Ship four files and send plain text with
+`lang=en`:
 
 ```
 onnx/model.onnx      the model
 voices.bin           speaker embeddings
 tokens.txt           phoneme -> id
-espeak-ng-data/      the dictionary and the voice -- the Ghanaian part
+espeak-ng-data/      the dictionary -- the Ghanaian part
 ```
 
-> Swap in a stock `espeak-ng-data` and you get a working voice that mispronounces
-> every Ghanaian name, with no error. That directory is the deliverable.
+> Swap in a stock `espeak-ng-data` and you get a working voice that mispronounces every
+> Ghanaian name, with no error. That directory is the deliverable.
 
-`examples/bare_sherpa_onnx.py` does exactly that with no `poto_tts` import at all --
-it is there to keep this claim testable rather than merely stated.
+**[docs/MOBILE.md](docs/MOBILE.md)** has the integration guide: Kotlin, Swift and C++
+snippets, the speaker ids, how to trim `espeak-ng-data` from 28 MB to 2.3 MB, the two
+settings that fail silently, and the licensing to check before an app-store submission.
 
-What does need Python is *authoring* a pronunciation: `poto-tts dict` compiles the
-lexicon into `espeak-ng-data` and wants the `espeak-ng` binary as well. That is a
-build step you run once; nothing on the device does it.
+`examples/bare_sherpa_onnx.py` is a working example with no `poto_tts` import at all.
+This library is not needed on the device.
 
-[sherpa-onnx docs](https://k2-fsa.github.io/sherpa/onnx/) ·
-[the voice on the Hub](https://huggingface.co/ghananlpcommunity/poto-tts-kokoro-gh)
+Adding or changing a pronunciation does need Python and the `espeak-ng` binary --
+`poto-tts dict` compiles the lexicon into `espeak-ng-data`. That is a build step, run
+once; nothing on the device does it.
 
 ## Web interface and REST API
 
@@ -191,7 +194,7 @@ missing one, because the missing word is obviously missing.
 
 ## Changing how a word is said
 
-The lexicon will still miss your grandmother's name. Put it in a TSV -- Ghana IPA,
+The lexicon will always be missing somebody's name. Put it in a TSV -- Ghana IPA,
 space-separated -- and rebuild the dictionary:
 
 ```tsv
@@ -202,11 +205,13 @@ Tetteh	t ɛ t ɛ
 ```bash
 pip install 'poto-tts[lexicon]'
 poto-tts dict --out build/espeak-ng-data --ghanaian-stress --extra my_words.tsv
+poto-tts --espeak-data build/espeak-ng-data "Owusu and Tetteh arrived" -o out.wav
 ```
 
-Where each kind of change belongs -- a single word, a sound across the whole accent,
-or the lexicon upstream -- and why a rule must never overrule the lexicon:
-[docs/CUSTOMISING.md](docs/CUSTOMISING.md).
+Pronunciation is data, so a change made this way applies everywhere the voice is used
+-- Python, the REST API, Android, iOS -- rather than only where this library runs.
+
+More detail: [docs/CUSTOMISING.md](docs/CUSTOMISING.md).
 
 ## Models
 
@@ -220,18 +225,6 @@ tts = load(repo_id="your-org/your-voice")
 ```
 
 `POTO_TTS_CACHE` moves model files off `~/.cache`.
-
-## Training a voice
-
-`tools/` holds a full Piper training pipeline — dataset fetch, filtering, speaker
-clustering, forced alignment, punctuation from measured pauses, training, export. It was
-used to train a Ghanaian voice on 85 hours of broadcast speech, and that voice is **not**
-shipped: at 45,000 steps it sounded worse than Kokoro with a good front-end, and its
-corpus is broadcast recordings whose speakers never consented to being modelled. The
-pipeline is kept because it works on any dataset you hold rights to.
-
-Thresholds in it are measured rather than chosen, and the comments record the
-distributions they came from — including the ones that were wrong first.
 
 ## Credits
 

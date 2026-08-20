@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "poto-tts"
-version = "0.6.1"
+version = "0.7.0"
 description = "Ghanaian English speech synthesis on sherpa-onnx: several engines, one Ghanaian espeak-ng dictionary, cross-platform voice files"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -74,7 +74,7 @@ packages = ["poto_tts", "poto_tts.backends"]
 # voice file is half the front-end. Without them in the wheel, `poto-tts dict` from a
 # pip install would quietly build the whole lexicon and no accent -- working, and
 # wrong.
-poto_tts = ["static/*.html", "data/ghanaian-words.txt", "data/en-gh"]
+poto_tts = ["static/*.html", "data/ghanaian-words.txt"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

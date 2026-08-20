@@ -1,23 +1,20 @@
 """Synthesis with sherpa-onnx alone. No poto_tts anywhere in this file.
 
-The claim this exists to keep honest: the front-end is data, so any sherpa-onnx
-runtime -- Kotlin, Swift, C++, WebAssembly, Rust -- gets the same pronunciations with
-no Python. This script is in Python only because that is what is installed here; it
-uses nothing from the library, just the four files on disk.
+There is no front-end code, so any sherpa-onnx runtime -- Kotlin, Swift, C++,
+WebAssembly, Rust -- gets the same pronunciations. This script is in Python only
+because that is what is installed here; it uses nothing from the library, just the four
+files on disk.
 
-    python examples/bare_sherpa_onnx.py <voice-dir> "Kwabena went to Achimota" en-gh out.wav
+    python examples/bare_sherpa_onnx.py <voice-dir> "Kwabena went to Achimota" en out.wav
 
 The voice directory is what `poto_tts.download.ensure_voice()` fetches, or a
 `huggingface-cli download ghananlpcommunity/poto-tts-kokoro-gh`, or any copy of those
-files shipped in an app bundle.
+files in an app bundle. `lang` is `en`: British English, reading the Ghanaian entries
+out of espeak's dictionary. There is nothing else to configure.
 
-The mode is the `lang` argument and nothing else: `en-gh` reads the dictionary with
-the Ghanaian accent voice, `en` with British English and no voice file. Both give the
-Ghanaian words the same pronunciation.
-
-What still needs Python is *authoring* -- `poto-tts dict` compiles the lexicon into
-`espeak-ng-data`, and that needs the espeak-ng binary too. That is a build step, run
-once, not something a device does.
+What still needs Python -- and the espeak-ng binary -- is *authoring*: `poto-tts dict`
+compiles the lexicon into espeak-ng-data. That is a build step, run once, not something
+a device does.
 """
 import sys, wave
 import numpy as np, sherpa_onnx

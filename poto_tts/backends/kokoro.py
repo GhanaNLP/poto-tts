@@ -1,34 +1,20 @@
-"""Kokoro: Apache-2.0 weights, Ghanaian pronunciation, no training.
+"""Kokoro on sherpa-onnx, with the Ghanaian pronunciations in espeak's dictionary.
 
-Every utterance is respelled before it reaches the model. Each word's pronunciation
-comes from the Ghanaian lexicon (or espeak-en for words the lexicon lacks), is
-written in Lingua Franca Nova orthography, and espeak's `lfn` voice reads it back
-into the phonemes Kokoro receives. See respell.py for why lfn, and frontend.py for
-the per-word rules.
+The text reaches the model unchanged. Pronunciation comes from the voice's
+`espeak-ng-data`: 44,321 Ghanaian words compiled into espeak's own English dictionary,
+carrying the lexicon's IPA, read as British English. A word with an entry is spoken
+the Ghanaian way; every other word is spoken as British English would say it.
 
-    text          Kwabena went to Achimota and met the Okuapenhene
-    respelled     kwabina went tu atximota and met da okwapenhene
-    Kokoro gets   kwabˈina wˈent tu ˌatʃimˈota ˈand mˈet dˈa ˌokwapenhˈene
-
-Against stock Kokoro, which reads the same sentence /kwˈeɪbnə ... ˈoʊkjuːˌeɪpənhˌiːn/.
-
-Two wrinkles that look like configuration options and are not. Kokoro v1.0 ships
-`lexicon-us-en.txt`, and sherpa-onnx has a lexicon frontend that would consult it --
-but that branch is unreachable for English: it runs only when `lang` is empty, `lang`
-falls back to the model's `voice` metadata, and the metadata reader substitutes
-'en-us' when that value is blank. And inline `[[phonemes]]`, which works on
-sherpa-onnx's Piper frontend, is corrupted on this one: the Kokoro frontend rewrites
-`:` to `,` in its input, which destroys length marks. Respelling is what is left, and
-it turns out to be the better route anyway -- it reaches every word in the sentence
-rather than only the ones a dictionary has entries for.
+Nothing in this library rewrites the text, which is why an Android or C++ runtime
+gets the identical result -- see examples/bare_sherpa_onnx.py.
 """
 
 from __future__ import annotations
 
 import re
-from typing import List, Optional, Union
+from typing import List, Union
 
-from ..dictionary import ghanaian_words as _dictionary_words
+from ..dictionary import ghanaian_words as _ghanaian_words
 from .. import voices as _voices
 from .base import Backend
 
@@ -41,7 +27,7 @@ class KokoroBackend(Backend):
     There is nothing to configure about the front-end, because there is no
     front-end here: the text is passed through untouched and the pronunciation
     comes from the voice's `espeak-ng-data` -- the Ghana lexicon compiled into
-    espeak's dictionary, read by the `en-gh` accent voice. That is what makes the
+    espeak's dictionary and read as British English. That is what makes the
     result identical on Android, iOS and WebAssembly, which cannot run Python.
 
     To change a pronunciation, change the lexicon or the voice file and rebuild the
@@ -50,35 +36,39 @@ class KokoroBackend(Backend):
 
     name = "kokoro"
 
-
     def annotate(self, text: str) -> List[tuple]:
-        """`text` split into (word, from_lexicon) pairs.
+        """`text` split into (word, is_ghanaian) pairs.
 
-        Which words the Ghanaian lexicon supplied, and which fell through to
-        espeak's English. Worth being able to see: the two are indistinguishable in
-        the audio until you know a name is wrong, and by then you cannot tell
-        whether the entry is missing or the entry is bad.
+        Which words are Ghanaian vocabulary -- names, places, titles, Twi and Ga
+        loans, food, money -- and which are ordinary English. Useful for showing a
+        reader what the front-end is actually for.
+
+        Note what this does *not* report. Asking "did the lexicon supply this word?"
+        would mark almost every word true: the lexicon covers the whole language,
+        including the Ghanaian accent of English words, so almost every word would
+        answer true. That is accurate and tells nobody anything. The classification here is
+        `data/ghanaian-words.txt`, built by tools/classify_lexicon.py.
 
         Reporting only -- `speak()` does not call it, so nothing about the audio
-        depends on it, and a port that wants the same information reads
-        data/ghanaian-words.txt and does one set lookup per word.
+        depends on it.
         """
-        known = _dictionary_words()
+        known = _ghanaian_words()
         return [(part, part.lower() in known)
                 for part in re.findall(r"[\w\u0300-\u036f']+|[^\w\s]+|\s+", text)
                 if part.strip()]
 
     def coverage(self, text: str) -> float:
-        """Share of the words in *text* that came from the Ghanaian lexicon."""
+        """Share of the words in *text* that are Ghanaian vocabulary."""
         words = [(w, hit) for w, hit in self.annotate(text) if any(c.isalpha() for c in w)]
         return sum(hit for _, hit in words) / len(words) if words else 0.0
 
     def prepare_text(self, text: str) -> str:
         """What will actually be sent to sherpa-onnx.
 
-        The text itself, unchanged. Kept because callers and the REST API use it to
-        show what the engine receives, and because it used to rewrite every word --
-        a reader who remembers that should see plainly that it no longer does.
+        The text itself: this library does not rewrite it. Kept because the REST API
+        and the CLI use it to show what the engine receives, and because for most of
+        this project's life it did rewrite every word -- a reader who remembers the
+        respeller should see plainly that it is gone.
         """
         return text
 
