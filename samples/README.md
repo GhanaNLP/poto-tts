@@ -17,6 +17,7 @@ What each file says, so you can listen without opening a manifest.
 | `kokoro/` | Kokoro + the Ghanaian dictionary, espeak `en-us`. The shipped route. |
 | `kokoro_lfn_plain/` | Kokoro with espeak `lfn` and plain English text |
 | `kokoro_lfn_respelled/` | Kokoro with espeak `lfn`, every word respelled from the Ghana lexicon |
+| `kokoro_lfn_english/` | Kokoro with espeak `lfn`, every word respelled from **espeak-EN** IPA — no lexicon at all |
 | `piper_e06/` | the trained Piper voice at epoch 6 (~11k steps, val_mos 2.245) |
 | `piper_e21/` | the same at epoch 21 (~38k steps, val_mos 2.306) |
 
@@ -80,10 +81,24 @@ spellings closer than English does, which is why it was the first approach tried
 What each route does to the same sentence:
 
 ```
-en-us + our dictionary   kwɑːbˈɪnɑː wɛnt tʊ ˌɑːtʃimˈoɾɑː ... ˌokwɑːpɛnhˈɛnɛ æt njɑːŋkpˈɑːni
-lfn + plain text         kwabˈena  wˈent tˈo ˌakhimˈota  ... ˌokuˌapenhˈene ˈat njankpˈani
-lfn + respelling         kwabˈina  wˈent tu  ˌatʃimˈota  ... ˌokwapenhˈene  ˈat njaŋɡkpˈani
+1 en-us + dictionary   kwɑːbˈɪnɑː wɛnt tʊ ˌɑːtʃimˈoɾɑː ... ˌokwɑːpɛnhˈɛnɛ  æt njɑːŋkpˈɑːni
+2 lfn + plain text     kwabˈena   wˈent tˈo ˌakhimˈota  ... ˌokuˌapenhˈene ˈat njankpˈani
+3 lfn + lexicon        kwabˈina   wˈent tu  ˌatʃimˈota  ... ˌokwapenhˈene  ˈat njaŋɡkpˈani
+4 lfn, no lexicon      kweˈibna   wˈent tu  ˌatʃimˈoɾa  ... ˌokiwˌeipanhˈin ˈat nˌaɪaŋɡkpˈani
 ```
+
+Route 4 is the codec with nothing behind it: every word's IPA from espeak-EN, respelled
+into lfn, read back. It shows what the alphabet alone contributes, and what it cannot
+do. The English words come out plausibly Ghanaian -- `the` as /dˈa/, `yesterday` as
+`iesterdei`, `policy` as `palisi` -- because collapsing to five vowels removes schwa,
+length and r-colouring, which is much of what makes a vowel sound American. The names
+do not: `Kwabena` becomes /kweˈibna/ and `Okuapenhene` /okiwˌeipanhˈin/, since espeak-EN
+was guessing from spelling and the codec faithfully carries the guess.
+
+It also inherits American *allophones*. espeak-EN flaps intervocalic /t/, and lfn has no
+flap, so the flap is written `r` and comes back as a real /r/: `citing` becomes `sairing`,
+`meeting` `miring`, `Achimota` `atximoura`. So the lexicon is not only protecting the
+names -- it is keeping American articulation out of the ordinary words too.
 
 Reading across: lfn gets Ghanaian names close on the first try, and mangles ordinary
 English -- `to` becomes /tˈo/, `the` becomes /thˈe/, and every function word takes a
