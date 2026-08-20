@@ -56,7 +56,9 @@ poto-tts --espeak-data build/espeak-ng-data "Owusu and Kufuor arrived" -o out.wa
 A change made this way applies everywhere the voice is used — Python, the REST API,
 Android, iOS — because pronunciation is data rather than code.
 
-**Judge it by ear, not by IPA.** An entry that reads correctly and sounds wrong is
+**Judge it by ear, not by IPA.** The
+[demo](https://huggingface.co/spaces/ghananlpcommunity/poto-tts) is a useful reference
+for what "right" sounds like. An entry that reads correctly and sounds wrong is
 worse than a missing one, because a missing word is obviously missing and a wrong one
 is confidently wrong.
 

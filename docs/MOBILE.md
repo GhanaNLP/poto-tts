@@ -1,5 +1,8 @@
 # poto-tts on mobile and other platforms
 
+[Hear what it sounds like](https://huggingface.co/spaces/ghananlpcommunity/poto-tts)
+before wiring it up.
+
 The speech works anywhere [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) runs —
 **Android, iOS, Flutter, Kotlin, Swift, Java, C, C++, C#, Go, Rust, Dart, WebAssembly**
 — and gets the same pronunciations as Python. There is no front-end to port: the

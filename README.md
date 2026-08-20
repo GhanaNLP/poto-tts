@@ -4,20 +4,26 @@
 the Okuapenhene, Nyankpani, Gyasi — names, places and titles that every general TTS
 mangles.
 
+**[Hear it against standard Kokoro →](https://huggingface.co/spaces/ghananlpcommunity/poto-tts)**
+Thirty-two real sentences from a Ghanaian news corpus, eight voices, side by side.
+
 To be clear about what this is not: **the voices do not have a Ghanaian accent.** They
-are Kokoro's speakers — British and American — and this library changes what they say,
-not who they sound like. A Ghanaian-sounding *voice* needs a model trained on Ghanaian
-speech, which is a different problem. What you get here is an English voice that no
-longer stumbles over Ghanaian words.
+are Kokoro's British speakers, and this library changes what they say, not who they
+sound like. A Ghanaian-sounding *voice* needs a model trained on Ghanaian speech, which
+is a different problem. What you get here is an English voice that no longer stumbles
+over Ghanaian words.
 
 ```
-                 general TTS                    poto-tts
-Kwabena          kwˈeɪbnə                       kwabˈina
-Achimota         ɐtʃɪmˈoʊɾə                     atʃimˈota
-Okuapenhene      ˈoʊkjuːˌeɪpənhˌiːn             okwapenhˈene
-Nyankpani        nˌaɪɐŋkpˈɑːni                  njankpˈani
-Gyasi            dʒaɪʲˈɑːsi                     dʒˈasi
+                 standard Kokoro          poto-tts
+Kwabena          kwˈAbnə                  kwabˈɪna
+Achimota         əʧɪmˈQtə                 ˌatʃimˈota
+Okuapenhene      ˈQkjuːˌApənhˌiːn         ˌokwapɛnhˈɛnɛ
+Nyankpani        nˌIəŋkpˈɑːni             njaŋkpˈani
+Gyasi            ʤIˈɑːsi                  dʒˈasi
+Ewe              jˈuː                     ˈɛvɛ
 ```
+
+`Ewe` is the one to notice: standard Kokoro reads it as the English word *you*.
 
 ```bash
 pip install poto-tts
