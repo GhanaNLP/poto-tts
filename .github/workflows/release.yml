@@ -1,0 +1,93 @@
+# Publish to PyPI on a version tag, with no token anywhere.
+#
+# PyPI trusts this workflow directly through OIDC: GitHub signs a short-lived
+# identity assertion naming the repository, the workflow file and the environment,
+# and PyPI checks it against what was configured. There is no secret to store on a
+# laptop, none in repository secrets, and nothing to rotate -- which is the point,
+# because a long-lived upload token is the one credential in this project that can
+# be used to ship code to other people's machines.
+#
+# Configure once, on PyPI -> poto-tts -> Publishing -> Add a new publisher:
+#
+#     Owner:            GhanaNLP
+#     Repository name:  poto-tts
+#     Workflow name:    release.yml
+#     Environment name: pypi
+#
+# Those four values must match this file exactly; a rename here is a config change
+# there. Then release with:
+#
+#     git tag v0.6.0 && git push origin v0.6.0
+
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:          # so a failed publish can be retried without a new tag
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip build
+          python -m pip install -e '.[api]' pytest
+
+      # Tests before build, not after: publishing is the one step that cannot be
+      # undone. A release on PyPI can be yanked but never replaced.
+      - name: Test
+        run: python -m pytest -q
+
+      - name: Check the version matches the tag
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg="$(python -c 'import poto_tts; print(poto_tts.__version__)')"
+          if [ "$tag" != "$pkg" ]; then
+            echo "tag $tag but poto_tts.__version__ is $pkg" >&2
+            exit 1
+          fi
+          echo "version $pkg"
+
+      - name: Build
+        run: python -m build
+
+      # The data files decide what the dictionary is built from and are easy to
+      # leave out of package-data; both have been missing from a wheel before.
+      - name: Check the wheel carries its data
+        run: |
+          python - <<'PY'
+          import glob, zipfile
+          names = zipfile.ZipFile(glob.glob("dist/*.whl")[0]).namelist()
+          for want in ("poto_tts/data/ghanaian-words.txt",
+                       "poto_tts/static/index.html"):
+              assert want in names, f"missing from the wheel: {want}"
+          print(f"{len(names)} files, data present")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi          # must match the publisher configured on PyPI
+    permissions:
+      id-token: write          # this is what lets OIDC work; without it, no token
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
