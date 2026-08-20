@@ -1,0 +1,7 @@
+blank_issues_enabled: true
+contact_links:
+  - name: A Ghanaian word is missing or pronounced wrongly
+    url: https://github.com/GhanaNLP/ghana-english-g2p/issues/new/choose
+    about: >
+      Pronunciations live in the lexicon, so that ASR, TTS and alignment all share
+      one recorded answer. Report or add it there and it reaches everything.

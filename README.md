@@ -147,6 +147,21 @@ Batches are capped at 500 rows and refused rather than trimmed.
 | `GET /voices` · `GET /backends` · `GET /health` | |
 | `GET /platforms` | how to run the same voice off-server |
 
+## Contributing a pronunciation
+
+The lexicon will always be missing somebody's name, and the fastest way to fix that is
+for the person who knows the name to say so.
+
+- **a Ghanaian word missing or wrong** -> [ghana-english-g2p](https://github.com/GhanaNLP/ghana-english-g2p),
+  where pronunciations live so ASR and TTS share one answer. An issue is enough; you
+  do not need IPA to report that a name is wrong.
+- **a Ghanaian word read as if it were English**, or an English word said the Ghanaian
+  way -> here: it is in or out of `poto_tts/data/ghanaian-words.txt` when it should not be.
+
+Please listen to an entry before opening a PR -- [CONTRIBUTING.md](CONTRIBUTING.md)
+has the commands. An entry that reads correctly and sounds wrong is worse than a
+missing one, because the missing word is obviously missing.
+
 ## Changing how a word is said
 
 The lexicon will still miss your grandmother's name. Put it in a TSV -- Ghana IPA,
