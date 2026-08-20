@@ -39,9 +39,13 @@ jobs:
           python-version: "3.11"
 
       - name: Install
+        # `lexicon` as well as `api`: the inject and mnemonics tests read the real
+        # Ghanaian lexicon rather than a fixture, so without the extra they do not
+        # skip, they fail. Speaking needs neither extra -- the dictionary ships
+        # compiled inside the voice -- but testing the build path needs the lexicon.
         run: |
           python -m pip install --upgrade pip build
-          python -m pip install -e '.[api]' pytest
+          python -m pip install -e '.[api,lexicon]' pytest
 
       # Tests before build, not after: publishing is the one step that cannot be
       # undone. A release on PyPI can be yanked but never replaced.
