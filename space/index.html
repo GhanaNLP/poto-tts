@@ -68,7 +68,14 @@
 <div class="wrap">
   <h1>poto-tts</h1>
   <p class="lede">English text-to-speech that pronounces Ghanaian words properly.
-  Same model, same speaker, same text &mdash; the only difference is the front-end.</p>
+  Same model, same voice, same text &mdash; the only difference is the front-end.</p>
+
+  <p class="links">
+    <a href="https://github.com/GhanaNLP/poto-tts">GitHub</a> &middot;
+    <a href="https://pypi.org/project/poto-tts/"><code>pip install poto-tts</code></a> &middot;
+    <a href="https://huggingface.co/ghananlpcommunity/poto-tts-kokoro-gh">the voice</a> &middot;
+    <a href="https://github.com/GhanaNLP/poto-tts/blob/main/docs/MOBILE.md">Android &amp; iOS</a>
+  </p>
 
 
   <div class="tabs" role="tablist" id="tabs"></div>
@@ -599,14 +606,16 @@
   </script>
 
   <footer>
-    Kokoro v1.0 via sherpa-onnx, speaker Grace (bf_alice). Pronunciation from a
-    104,623-word lexicon compiled into espeak's dictionary and read by the
-    espeak dictionary &mdash; data, not code, so Android, iOS and
-    WebAssembly get the same result.
-    <br>
+    Kokoro v1.0 through sherpa-onnx, eight British speakers. Pronunciation comes from
+    44,321 Ghanaian words compiled into espeak's own dictionary &mdash; data rather than
+    code, so Android, iOS and WebAssembly give the same result. The Kokoro column is
+    standard Kokoro: its own package, weights and misaki grapheme-to-phoneme.
+    <br><br>
     <a href="https://github.com/GhanaNLP/poto-tts">GhanaNLP/poto-tts</a> &middot;
     <a href="https://huggingface.co/ghananlpcommunity/poto-tts-kokoro-gh">the voice on the Hub</a>
-    &middot; <code>pip install poto-tts</code>
+    &middot;
+    <a href="https://github.com/GhanaNLP/ghana-english-g2p">the lexicon</a> &middot;
+    <code>pip install poto-tts</code>
   </footer>
 </div>
 </body>

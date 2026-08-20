@@ -9,26 +9,24 @@ pinned: false
 license: apache-2.0
 ---
 
-# poto-tts
+# poto-tts — samples
 
-English text-to-speech that pronounces Ghanaian words properly. Thirty-two real
-sentences from a Ghanaian English news corpus, each synthesised twice — Kokoro, and
-poto-tts. Same model, same speaker, same text; only the front-end differs.
+English text-to-speech that pronounces Ghanaian words properly.
 
-Tabs switch voice. Each of the eight British speakers reads a different four
-sentences, so switching brings new material as well as a new voice.
+**[GhanaNLP/poto-tts on GitHub](https://github.com/GhanaNLP/poto-tts)** ·
+`pip install poto-tts` ·
+[the voice](https://huggingface.co/ghananlpcommunity/poto-tts-kokoro-gh) ·
+[Android & iOS guide](https://github.com/GhanaNLP/poto-tts/blob/main/docs/MOBILE.md)
 
-The voices are Kokoro's British speakers, so this is **not** a Ghanaian accent.
-What changes is what they say.
+Thirty-two real sentences from a Ghanaian English news corpus, each synthesised twice —
+standard Kokoro and poto-tts — across all eight voices. Tabs switch voice; each reads a
+different four sentences. Underlined words are in the Ghanaian lexicon.
 
-Both modes get the Ghanaian words right. `gh` says them with Ghanaian vowel
-qualities and a tapped r; because its rules run on every word, ordinary English picks
-up a little of the same accent (`late` as /let/). `en` uses no voice file, so the
-names carry English vowels and every other word is exactly what any English TTS
-would say.
+The Kokoro column is standard Kokoro: its own package, its PyTorch weights and misaki
+for grapheme-to-phoneme. Not this pipeline with the dictionary removed.
 
-Regenerate this page with `python tools/build_space.py` in
-[GhanaNLP/poto-tts](https://github.com/GhanaNLP/poto-tts).
+The voices are Kokoro's British speakers, so this is **not** a Ghanaian accent — what
+changes is what they say.
 
-Runs on Android, iOS and C++ too, with the same pronunciations:
-[docs/MOBILE.md](https://github.com/GhanaNLP/poto-tts/blob/main/docs/MOBILE.md).
+Regenerate with `python tools/build_space_audio.py && python tools/build_space.py` in
+the repo.
