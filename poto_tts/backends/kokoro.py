@@ -50,30 +50,6 @@ class KokoroBackend(Backend):
 
     name = "kokoro"
 
-    # Two ways to read the same dictionary, and the difference is confined to the
-    # Ghanaian words -- English is ordinary English either way, because the lexicon
-    # no longer has entries for it.
-    #
-    #   gh  the `en-gh` voice file: Ghanaian /a/ read as /a/ rather than espeak's
-    #       /ɑː/, and /r/ as a tap. Closer to how the names are said.
-    #   en  British English with no voice file at all. The dictionary alone gets the
-    #       names right; they simply carry English vowel qualities.
-    MODES = {"gh": "en-gh", "en": "en"}
-
-    def __init__(self, *args, mode: Optional[str] = None, **kw):
-        """`mode` picks how the dictionary is read: 'gh' or 'en'. See MODES."""
-        if mode is not None:
-            if mode not in self.MODES:
-                raise ValueError(
-                    f"mode must be one of {sorted(self.MODES)}, not {mode!r}")
-            if kw.get("espeak_voice") and kw["espeak_voice"] != self.MODES[mode]:
-                raise ValueError(
-                    f"mode={mode!r} means espeak_voice={self.MODES[mode]!r}; "
-                    f"you also passed {kw['espeak_voice']!r}. Pass one or the other.")
-            kw["espeak_voice"] = self.MODES[mode]
-        super().__init__(*args, **kw)
-        self.mode = next((m for m, v in self.MODES.items()
-                          if v == self.espeak_voice), None)
 
     def annotate(self, text: str) -> List[tuple]:
         """`text` split into (word, from_lexicon) pairs.

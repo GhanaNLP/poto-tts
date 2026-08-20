@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "poto-tts"
-version = "0.6.0"
+version = "0.6.1"
 description = "Ghanaian English speech synthesis on sherpa-onnx: several engines, one Ghanaian espeak-ng dictionary, cross-platform voice files"
 readme = "README.md"
 requires-python = ">=3.9"

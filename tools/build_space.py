@@ -55,8 +55,8 @@ PAGE = """<!doctype html>
   .item {{ border: 1px solid var(--line); background: var(--card);
            border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }}
   .txt {{ font-size: 1.03rem; margin: 0 0 14px; }}
-  .grid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }}
-  @media (max-width: 860px) {{ .grid {{ grid-template-columns: 1fr; }} }}
+  .grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }}
+  @media (max-width: 620px) {{ .grid {{ grid-template-columns: 1fr; }} }}
   .side h3 {{
     font-size: .72rem; text-transform: uppercase; letter-spacing: .09em;
     margin: 0 0 .5em; color: var(--muted); font-weight: 600;
@@ -99,9 +99,7 @@ PAGE = """<!doctype html>
   <p class="legend"><mark>Underlined</mark> words are in the Ghanaian lexicon, so
   poto-tts pronounces them from it. Everything else is left to espeak's English and is
   said exactly as any English TTS would. Each voice reads different sentences, drawn
-  from a Ghanaian English news corpus. <strong>gh</strong> reads the lexicon's words
-  with Ghanaian vowels and a tapped r; <strong>en</strong> reads them with English
-  vowels.</p>
+  from a Ghanaian English news corpus.</p>
 
 {items}
 
@@ -145,19 +143,14 @@ ITEM = """  <div class="item">
     <p class="txt">{text}</p>
     <div class="grid">
       <div class="side">
-        <h3>Ordinary Kokoro</h3>
+        <h3>Kokoro</h3>
         <audio controls preload="none" src="audio/{kokoro_file}"></audio>
         <p class="ipa">{kokoro_ipa}</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh</h3>
+        <h3>poto-tts</h3>
         <audio controls preload="none" src="audio/{gh_file}"></audio>
         <p class="ipa">{gh_ipa}</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en</h3>
-        <audio controls preload="none" src="audio/{en_file}"></audio>
-        <p class="ipa">{en_ipa}</p>
       </div>
     </div>
   </div>
@@ -194,24 +187,22 @@ def main() -> int:
     for voice in voices:
         items = []
         for key in data["scripts"][voice]:
-            if any((key, r) not in files for r in ("gh", "en", "kokoro")):
-                print(f"  skipping {key}: needs all three routes")
+            if any((key, r) not in files for r in ("gh", "kokoro")):
+                print(f"  skipping {key}: needs both routes")
                 continue
             ipa = data["phonemes"].get(key, {})
             items.append(ITEM.format(
                 text=marked(data.get("annotations", {}).get(key), data["texts"][key]),
                 kokoro_file=html.escape(files[(key, "kokoro")]),
                 gh_file=html.escape(files[(key, "gh")]),
-                en_file=html.escape(files[(key, "en")]),
                 kokoro_ipa=html.escape(ipa.get("kokoro", "")),
                 gh_ipa=html.escape(ipa.get("gh", "")),
-                en_ipa=html.escape(ipa.get("en", "")),
             ))
         sections.append(SECTION.format(voice=html.escape(voice), items="".join(items)))
     (SPACE / "index.html").write_text(PAGE.format(
         items="".join(sections), voices=json.dumps(voices)))
     print(f"wrote {SPACE / 'index.html'}: {len(voices)} voices, "
-          f"{len(data['texts'])} sentences, 3 routes")
+          f"{len(data['texts'])} sentences")
     return 0
 
 

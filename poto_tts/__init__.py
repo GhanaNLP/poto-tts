@@ -19,7 +19,7 @@ see docs/CUSTOMISING.md.
 from .backends import BACKENDS, DEFAULT_BACKEND, Backend, KokoroBackend, Synthesis, load
 from .voices import VOICES, Voice, by_name, grouped
 
-__version__ = "0.6.0"
+__version__ = "0.6.1"
 __all__ = [
     "load",
     "KokoroBackend",

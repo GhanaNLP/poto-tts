@@ -59,6 +59,18 @@ To see what will be sent to espeak, without loading a model:
 poto-tts --phonemes "Nana Addo met Kwame Nkrumah"
 ```
 
+One more layer sits after those two: `espeak/en-gh`, a voice file whose rules give the
+Ghanaian words their vowel qualities and a tapped r. It is applied to whatever the
+dictionary and the rules produced, so it reaches ordinary English too -- `late` comes
+out /let/. It also does one job that is easy to miss: it maps `A:` to `a`, which
+suppresses espeak's British linking-r. Without it `Okaija` reads as /okɑːɹidʒɑːɹ/, with
+an r inserted inside a name that has none.
+
+A rule in that file may not contradict the lexicon. Rules run on every word after
+lookup, so a rule whose source phoneme our own entries can emit overwrites what the
+lexicon said, invisibly -- `the` once came out /da/ though the lexicon records
+[ð, ə]. `tests/test_espeak_voice.py` fails if such a rule appears.
+
 Changing any of it is [docs/CUSTOMISING.md](docs/CUSTOMISING.md).
 
 ## Voices
@@ -105,30 +117,6 @@ Reporting only -- `speak()` never calls either, so nothing about the audio depen
 them, and a port that wants the same information reads
 `poto_tts/data/ghanaian-words.txt` and does one set lookup per word.
 
-## Two modes
-
-Both read the same dictionary, so the Ghanaian words are right either way. What
-differs is the accent they are said in -- and, in `gh`, the accent leaks a little
-into the English too:
-
-```python
-tts = load(mode="gh")      # Kwabena /kwabˈɪna/,   Accra /ˈəkɾa/
-tts = load(mode="en")      # Kwabena /kwɑːbˈɪnɑː/, Accra /ˈəkɹɑː/
-```
-
-`gh` adds the `en-gh` voice file, whose rules cannot tell a lexicon word from an
-English one -- they run on everything after lookup. So the names get Ghanaian vowel
-qualities and a tapped r, and ordinary English picks up the FACE monophthong and
-schwa-as-/a/ with them: `late` becomes /let/ and `the` /ða/.
-
-`en` is British English with no voice file at all. The dictionary alone gets the names
-right; they simply carry English vowels, and every other word is untouched --
-identical to what any English TTS would say.
-
-Neither is more correct. `gh` sounds more local throughout, `en` keeps the Ghanaian
-part strictly to the Ghanaian words.
-Hear them side by side: [the Space](https://huggingface.co/spaces/ghananlpcommunity/poto-tts).
-
 ## Cross-platform
 
 sherpa-onnx runs on **Android, iOS, WebAssembly, C++, C, Go, C#, Java, Kotlin, Rust,
@@ -148,9 +136,8 @@ espeak-ng-data/      the dictionary and the voice -- the Ghanaian part
 > Swap in a stock `espeak-ng-data` and you get a working voice that mispronounces
 > every Ghanaian name, with no error. That directory is the deliverable.
 
-The mode is the `lang` string and nothing more: `en-gh` or `en`. `examples/bare_sherpa_onnx.py`
-synthesises both with no `poto_tts` import at all -- it is there to keep this claim
-testable rather than merely stated.
+`examples/bare_sherpa_onnx.py` does exactly that with no `poto_tts` import at all --
+it is there to keep this claim testable rather than merely stated.
 
 What does need Python is *authoring* a pronunciation: `poto-tts dict` compiles the
 lexicon into `espeak-ng-data` and wants the `espeak-ng` binary as well. That is a

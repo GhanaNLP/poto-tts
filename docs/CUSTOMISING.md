@@ -7,7 +7,7 @@ the word you tested and quietly breaks others.
 ```
   your text
      |
- [1] espeak dictionary  <- built from the Ghana lexicon: 104,623 words.
+ [1] espeak dictionary  <- 44,321 Ghanaian words from the lexicon.
      |                     If the word is here, this decides its pronunciation.
      |
  [2] espeak's letter-to-sound rules  <- only for words step 1 does not have.
