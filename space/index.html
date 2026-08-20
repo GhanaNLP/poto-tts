@@ -7,17 +7,17 @@
 <style>
   :root {
     --bg: #fbfaf8; --fg: #1a1a1a; --muted: #5c5c5c; --line: #e3e0da;
-    --card: #ffffff; --accent: #1a6b4f; --accent-soft: #eaf3ef;
+    --card: #ffffff; --accent: #1a6b4f;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #16181a; --fg: #eceae6; --muted: #9c9a95; --line: #2b2e31;
-      --card: #1d2022; --accent: #6cc4a1; --accent-soft: #1d2b26;
+      --card: #1d2022; --accent: #6cc4a1;
     }
   }
   :root[data-theme="dark"] {
     --bg: #16181a; --fg: #eceae6; --muted: #9c9a95; --line: #2b2e31;
-    --card: #1d2022; --accent: #6cc4a1; --accent-soft: #1d2b26;
+    --card: #1d2022; --accent: #6cc4a1;
   }
   * { box-sizing: border-box; }
   body {
@@ -28,11 +28,6 @@
   .wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
   h1 { font-size: 1.7rem; margin: 0 0 .3em; letter-spacing: -.01em; }
   .lede { color: var(--muted); max-width: 62ch; margin: 0 0 1.6em; }
-  .note {
-    background: var(--accent-soft); border-left: 3px solid var(--accent);
-    padding: .85em 1.1em; margin: 0 0 2.2em; font-size: .93rem; max-width: 70ch;
-  }
-  .note strong { color: var(--accent); }
   .item { border: 1px solid var(--line); background: var(--card);
            border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }
   .txt { font-size: 1.03rem; margin: 0 0 14px; }
@@ -49,6 +44,21 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }
   .side.poto .ipa { color: var(--fg); }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 22px; }
+  .tabs button {
+    font: inherit; font-size: .88rem; padding: .42em .9em; cursor: pointer;
+    background: var(--card); color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px;
+  }
+  .tabs button[aria-selected="true"] {
+    background: var(--accent); border-color: var(--accent); color: var(--bg);
+    font-weight: 600;
+  }
+  mark {
+    background: none; color: var(--accent); font-weight: 600;
+    border-bottom: 2px solid var(--accent); padding-bottom: 1px;
+  }
+  .legend { font-size: .84rem; color: var(--muted); margin: 0 0 26px; }
   footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line);
             color: var(--muted); font-size: .88rem; }
   a { color: var(--accent); }
@@ -60,182 +70,531 @@
   <p class="lede">English text-to-speech that pronounces Ghanaian words properly.
   Same model, same speaker, same text &mdash; the only difference is the front-end.</p>
 
-  <div class="note"><strong>Not Ghanaian-accented voices.</strong> All three columns
-  are Kokoro's British speaker &ldquo;Grace&rdquo;: what changes is what she says, not
-  who she sounds like. Both poto-tts modes pronounce the Ghanaian words correctly and
-  differ only in the accent &mdash; <strong>gh</strong> gives them Ghanaian vowels and
-  a tapped r, and lets a little of that reach the English too; <strong>en</strong>
-  gives them English vowels and leaves every other word exactly as an English TTS
-  would say it.</div>
 
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <p class="legend"><mark>Underlined</mark> words are in the Ghanaian lexicon, so
+  poto-tts pronounces them from it. Everything else is left to espeak's English and is
+  said exactly as any English TTS would. Each voice reads different sentences, drawn
+  from a Ghanaian English news corpus.</p>
+
+  <section data-voice="Grace" hidden>
   <div class="item">
-    <p class="txt">Kwabena went to Achimota and met the Okuapenhene at Nyankpani.</p>
+    <p class="txt"><mark>Akple</mark> and Ademe are traditional <mark>Ghanaian</mark> dishes, particularly popular among the <mark>Ewe</mark> people of the <mark>Volta</mark> Region.</p>
     <div class="grid">
       <div class="side">
         <h3>Ordinary Kokoro</h3>
-        <audio controls preload="none" src="audio/names.kokoro.wav"></audio>
-        <p class="ipa">kwˈe‍ɪbnə wɛnt tʊ ɐt‍ʃɪmˈo‍ʊɾə ænd mˈɛt ðɪʲ ˈo‍ʊkjuːˌe‍ɪpənhˌiːn æt nˌa‍ɪɐŋkpˈɑːni</p>
+        <audio controls preload="none" src="audio/Grace-0.kokoro.wav"></audio>
+        <p class="ipa">ˈækpə‍l ænd ɐdˈiːm ɑː‍ɹ tɹɐdˈɪʃənə‍l ɡˈæne‍ɪən dˈɪʃᵻz pɚtˈɪkjʊlɚli pˈɑːpjʊlɚɹ ɐmˌʌŋ ðə jˈuː pˈiːpə‍l ʌvðə vˈo‍ʊltɚ ɹˈiːd‍ʒən</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/names.gh.wav"></audio>
-        <p class="ipa">kwabˈɪna wɛnt tʊ ˌat‍ʃimˈota and mˈɛt ða ˌokwapɛnhˈɛnɛ at njaŋkpˈani</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/names.en.wav"></audio>
-        <p class="ipa">kwɑːbˈɪnɑː wɛnt tʊ ˌɑːt‍ʃimˈotɑː and mˈɛt ðɪʲ ˌokwɑːpɛnhˈɛnɛ at njɑːŋkpˈɑːni</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Grace-0.poto.wav"></audio>
+        <p class="ipa">ˈɑːkplɛ and ɐdˈiːm ɑː tɹɐdˈɪʃənə‍l ɡɑːnˈe‍ən dˈɪʃɪz pətˈɪkjʊləli pˈɒpjʊləɹ ɐmˌʌŋ ðɪʲ ˈɛvɛ pˈiːpə‍l ɒvðə vˈɔltɑː ɹˈiːd‍ʒən</p>
       </div>
     </div>
   </div>
-
   <div class="item">
-    <p class="txt">The Bank of Ghana raised the policy rate, citing pressure on the cedi.</p>
+    <p class="txt"><mark>Ayisha</mark> Modi has issued a stern warning to popular <mark>Ghanaian</mark> fetish priestess, <mark>Nana</mark> <mark>Agradaa</mark>.</p>
     <div class="grid">
       <div class="side">
         <h3>Ordinary Kokoro</h3>
-        <audio controls preload="none" src="audio/news.kokoro.wav"></audio>
-        <p class="ipa">ðə bˈæŋk ʌv ɡˈɑːnɚ ɹˈe‍ɪzd ðə pˈɑːlɪsi ɹˈe‍ɪt sˈa‍ɪɾɪŋ pɹˈɛʃɚɹ ɔnðə sˈɛdi</p>
+        <audio controls preload="none" src="audio/Grace-1.kokoro.wav"></audio>
+        <p class="ipa">a‍ɪˈiːʃə mˈo‍ʊdi hɐz ˈɪʃuːd ɐ stˈɜːn wˈɔː‍ɹnɪŋ tə pˈɑːpjʊlɚ ɡˈæne‍ɪən fˈɛɾɪʃ pɹˈiːstəs nˈɑːnə ˈæɡɹɐdˌɑː</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/news.gh.wav"></audio>
-        <p class="ipa">ða bˈaŋk ɒv ɡˈanə ɾˈezd ða pˈɒlɪsi ɾˈet sˈa‍ɪtɪŋ pɾˈɛʃəɹ onða sˈiːdi</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/news.en.wav"></audio>
-        <p class="ipa">ðə bˈaŋk ɒv ɡˈɑːnə ɹˈe‍ɪzd ðə pˈɒlɪsi ɹˈe‍ɪt sˈa‍ɪtɪŋ pɹˈɛʃəɹ ɒnðə sˈiːdi</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Grace-1.poto.wav"></audio>
+        <p class="ipa">ɑːjˈiʃɑː mˈə‍ʊdi hɐz ˈɪʃuːd ɐ stˈɜːn wˈɔːnɪŋ tə pˈɒpjʊlə ɡɑːnˈe‍ən fˈɛtɪʃ pɹˈiːstɛs nˈɑːnɑːɹ ɑːɡɹˈɑːdɑː</p>
       </div>
     </div>
   </div>
-
   <div class="item">
-    <p class="txt">The bus from Adenta passed through Madina on the way to Kotoka.</p>
+    <p class="txt">Following his installation, he has assumed the stool name <mark>Nii</mark> <mark>Otanka</mark> <mark>Okaija</mark> <mark>Akraman</mark>.</p>
     <div class="grid">
       <div class="side">
         <h3>Ordinary Kokoro</h3>
-        <audio controls preload="none" src="audio/places.kokoro.wav"></audio>
-        <p class="ipa">ðə bˈʌs fɹʌm ædˈɛntə pˈæst θɹuː mˈædɪnə ɔnðə wˈe‍ɪ tə kətˈo‍ʊkə</p>
+        <audio controls preload="none" src="audio/Grace-2.kokoro.wav"></audio>
+        <p class="ipa">fˈɑːlo‍ʊɪŋ hɪz ˌɪnstəlˈe‍ɪʃən hiː hɐz ɐsˈuːmd ðə stˈuːl nˈe‍ɪm nˈɪʲa‍ɪʲ ɑːtˈæŋkə ɑːkˈe‍ɪd‍ʒə ˈækɹæmən</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/places.gh.wav"></audio>
-        <p class="ipa">ða bˈʌs fɾʌm adˈɛnta pˈast θɾuː madˈina onða wˈe tə kotˈoka</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/places.en.wav"></audio>
-        <p class="ipa">ðə bˈʌs fɹɒm ɑːdˈɛntɑː pˈast θɹuː mɑːdˈinɑːɹ ɒnðə wˈe‍ɪ tə kotˈokɑː</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Grace-2.poto.wav"></audio>
+        <p class="ipa">fˈɒlə‍ʊɪŋ hɪz ˌɪnstəlˈe‍ɪʃən hiː hɐz ɐsjˈuːmd ðə stˈuːl nˈe‍ɪm nˈiːʲ otˈɑːŋkɑːɹ ˌokɑːɹˈid‍ʒɑːɹ ɑːkɹˈɑːmɑːn</p>
       </div>
     </div>
   </div>
-
   <div class="item">
-    <p class="txt">Yaw Mensah and Akosua Boateng arrived with Nana Addo.</p>
+    <p class="txt">Team <mark>Ghana</mark> were disqualified on infringement in the final changeover from Joseph <mark>Oduro</mark> <mark>Manu</mark> and Joseph <mark>Amoah</mark>.</p>
     <div class="grid">
       <div class="side">
         <h3>Ordinary Kokoro</h3>
-        <audio controls preload="none" src="audio/people.kokoro.wav"></audio>
-        <p class="ipa">jˈɔː mˈɛnsə ænd ˈækəsˌuːə bo‍ʊtˈɛŋ ɚɹˈa‍ɪvd wɪð nˈɑːnə ˈædo‍ʊ</p>
+        <audio controls preload="none" src="audio/Grace-3.kokoro.wav"></audio>
+        <p class="ipa">tˈiːm ɡˈɑːnə wɜː dɪskwˈɑːlᵻfˌa‍ɪd ˌɔn ɪnfɹˈɪnd‍ʒmənt ɪnðə fˈa‍ɪnə‍l t‍ʃˈe‍ɪnd‍ʒo‍ʊvɚ fɹʌm d‍ʒˈo‍ʊsəf o‍ʊd‍ʒˈuːɹo‍ʊ mˈɑːnjuː ænd d‍ʒˈo‍ʊsəf ˈæmo‍ʊ</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/people.gh.wav"></audio>
-        <p class="ipa">jˈaw mˈensa and ˌakosˈua buˈateŋ aɾˈa‍ɪvd wɪð nˈana ˈado</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/people.en.wav"></audio>
-        <p class="ipa">jˈɑːw mˈensɑː and ˌɑːkosˈuɑː buˈɑːteŋ ɐɹˈa‍ɪvd wɪð nˈɑːnɑːɹ ˈɑːdo</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Grace-3.poto.wav"></audio>
+        <p class="ipa">tˈiːm ɡˈɑːnə wɜː dɪskwˈɒlɪfˌa‍ɪd ˌɒn ɪnfɹˈɪnd‍ʒmənt ɪnðə fˈa‍ɪnə‍l t‍ʃˈe‍ɪnd‍ʒə‍ʊvə fɹɒm d‍ʒˈə‍ʊsəf odˈuɹo mˈɑːnu and d‍ʒˈə‍ʊsəf ɑːmˈoɑː</p>
       </div>
     </div>
   </div>
-
+  </section>
+  <section data-voice="Comfort" hidden>
   <div class="item">
-    <p class="txt">They served banku with tilapia, kenkey, and waakye by the roadside.</p>
+    <p class="txt">They are skipper Christian <mark>Amoah</mark>, Winifred <mark>Ntumi</mark> and Sandra <mark>Mensimah</mark> <mark>Owusu</mark>.</p>
     <div class="grid">
       <div class="side">
         <h3>Ordinary Kokoro</h3>
-        <audio controls preload="none" src="audio/food.kokoro.wav"></audio>
-        <p class="ipa">ðe‍ɪ sˈɜːvd bˈæŋkuː wɪð tɪlˈe‍ɪpi‍ə kˈɛŋki ænd wˈɑːka‍ɪ ba‍ɪ ðə ɹˈo‍ʊdsa‍ɪd</p>
+        <audio controls preload="none" src="audio/Comfort-0.kokoro.wav"></audio>
+        <p class="ipa">ðe‍ɪ ɑː‍ɹ skˈɪpɚ kɹˈɪst‍ʃən ˈæmo‍ʊ wˈɪnɪfɹɪd ˈɛntˈuːmi ænd sˈændɹə mˈɛnsɪmə o‍ʊˈuːsuː</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/food.gh.wav"></audio>
-        <p class="ipa">ðe sˈɜːvd bˈaŋku wɪð tɪlˈepi‍ə kˈɛŋke and wˈat‍ʃe ba‍ɪ ða ɾˈodsa‍ɪd</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/food.en.wav"></audio>
-        <p class="ipa">ðe‍ɪ sˈɜːvd bˈɑːŋku wɪð tɪlˈe‍ɪpi‍ə kˈɛŋke and wˈɑːt‍ʃe ba‍ɪ ðə ɹˈə‍ʊdsa‍ɪd</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Comfort-0.poto.wav"></audio>
+        <p class="ipa">ðe‍ɪ ɑː skˈɪpə kɹˈɪst‍ʃən ɑːmˈoɑː wˈɪnɪfɹɪd ntˈumi and sˈandɹə mɛnsˈimɑːɹ owˈusu</p>
       </div>
     </div>
   </div>
-
   <div class="item">
-    <p class="txt">The Asantehene and the Ga Mantse attended the durbar at Kumasi.</p>
+    <p class="txt">He is the son of the late Emma <mark>Naa</mark> <mark>Ameley</mark> <mark>Tagoe</mark> and hails from the <mark>Adanse</mark> Royal lineage.</p>
     <div class="grid">
       <div class="side">
         <h3>Ordinary Kokoro</h3>
-        <audio controls preload="none" src="audio/titles.kokoro.wav"></audio>
-        <p class="ipa">ðɪʲ ɐsˈæntɪhˌiːn ænd ðə ɡˈɑː mˈæntsiʲ ɐtˈɛndᵻd ðə dˈɜːbɑːɹ æt kjuːmˈɑːsi</p>
+        <audio controls preload="none" src="audio/Comfort-1.kokoro.wav"></audio>
+        <p class="ipa">hiːʲ ɪz ðə sˈʌn ʌvðə lˈe‍ɪt ˈɛmə nˈɑː ɐmˈiːli tˈæɡo‍ʊ ænd hˈe‍ɪlz fɹʌmðɪʲ ɐdˈæns ɹˈɔ‍ɪə‍l lˈɪnɪʲɪd‍ʒ</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/titles.gh.wav"></audio>
-        <p class="ipa">ða asˈantɪhˌiːn and ða ɡˈa mˈantsɛ atˈɛndɪd ða dˈɜːba at kumˈasi</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/titles.en.wav"></audio>
-        <p class="ipa">ðɪʲ ɐsˈantɪhˌiːn and ðə ɡˈɑː mˈɑːntsɛ ɐtˈɛndɪd ðə dˈɜːbɑːɹ at kumˈɑːsi</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Comfort-1.poto.wav"></audio>
+        <p class="ipa">hiːʲ ɪz ðə sˈʌn ɒvðə lˈe‍ɪt ˈɛmə nˈɑːɹ ˌɑːmelˈei tɑːɡˈɔe and hˈe‍ɪlz fɹʌmðɪʲ ɑːdˈɑːnsi ɹˈɔ‍ɪə‍l lˈɪnɪʲɪd‍ʒ</p>
       </div>
     </div>
   </div>
-
   <div class="item">
-    <p class="txt">The convention discussed inflationary policy yesterday afternoon.</p>
+    <p class="txt"><mark>Didi</mark> began his youth career with <mark>Bolga</mark> Soccer Masters at <mark>Bolgatanga</mark> in the Upper East Region of <mark>Ghana</mark>.</p>
     <div class="grid">
       <div class="side">
         <h3>Ordinary Kokoro</h3>
-        <audio controls preload="none" src="audio/english.kokoro.wav"></audio>
-        <p class="ipa">ðə kənvˈɛnʃən dɪskˈʌst ɪnflˈe‍ɪʃənˌɛɹi pˈɑːlɪsi jˈɛstɚdˌe‍ɪ ˌæftɚnˈuːn</p>
+        <audio controls preload="none" src="audio/Comfort-2.kokoro.wav"></audio>
+        <p class="ipa">dˈɪdi bɪɡˈæn hɪz jˈuːθ kɚɹˈɪ‍ɹ wɪð bˈɑːlɡə sˈɑːkɚ mˈæstɚz æt bˌɑːlɡɐtˈæŋɡə ɪnðɪʲ ˌʌpɚɹ ˈiːst ɹˈiːd‍ʒən ʌv ɡˈɑːnə</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/english.gh.wav"></audio>
-        <p class="ipa">ða kənvˈɛnʃən diskˈʌst ɪnflˈeʃənˌɛɾi pˈɒlɪsi jˈɛstədˌe ˌaftənˈuːn</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/english.en.wav"></audio>
-        <p class="ipa">ðə kənvˈɛnʃən dɪskˈʌst ɪnflˈe‍ɪʃənəɹi pˈɒlɪsi jˈɛstədˌe‍ɪ ˌaftənˈuːn</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Comfort-2.poto.wav"></audio>
+        <p class="ipa">dˈɪdɪ bɪɡˈan hɪz jˈuːθ kəɹˈi‍ə wɪð bˈolɡɑː sˈɒkə mˈastəz at bˌolɡɑːtˈɑːŋɡɑːɹ ɪnðɪʲ ˌʌpəɹ ˈiːst ɹˈiːd‍ʒən ɒv ɡˈɑːnə</p>
       </div>
     </div>
   </div>
-
   <div class="item">
-    <p class="txt">Auntie Adjoa asked whether the trotro to Tema had already left.</p>
+    <p class="txt">The arrests occurred in <mark>Blorkorfe</mark> and <mark>Awakpedome</mark>, both suburbs of <mark>Adidome</mark> in the Central <mark>Tongu</mark> District.</p>
     <div class="grid">
       <div class="side">
         <h3>Ordinary Kokoro</h3>
-        <audio controls preload="none" src="audio/mixed.kokoro.wav"></audio>
-        <p class="ipa">ˈæntiʲ ɐd‍ʒˈo‍ʊə ˈæskt wˈɛðɚ ðə tɹˈɑːtɹo‍ʊ tə tˈɛmə hæd ɔːlɹˌɛdi lˈɛft</p>
+        <audio controls preload="none" src="audio/Comfort-3.kokoro.wav"></audio>
+        <p class="ipa">ðɪʲ ɚɹˈɛsts əkˈɜːd ɪn blˈɔː‍ɹkɔː‍ɹf ænd ɐwˈækpɪdˌo‍ʊm bˈo‍ʊθ sˈʌbɜːbz ʌv ˈædɪdˌo‍ʊm ɪnðə sˈɛntɹə‍l tˈʌŋɡuː dˈɪstɹɪkt</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/mixed.gh.wav"></audio>
-        <p class="ipa">ˈantiʲ ˈad‍ʒwa ˈaskt wˈɛðə ða tɾˈɔtɾɔ tə tˈeːma had ɔːlɾˌɛdi lˈɛft</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/mixed.en.wav"></audio>
-        <p class="ipa">ˈantiʲ ˈɑːd‍ʒwɑːɹ ˈaskt wˈɛðə ðə tɹˈɔtɹɔ tə tˈeːmɑː had ɔːlɹˌɛdi lˈɛft</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Comfort-3.poto.wav"></audio>
+        <p class="ipa">ðɪʲ ɐɹˈɛsts əkˈɜːd ɪn blɔːkˈɔfe and ˌɑːwɑːkpedˈome bˈə‍ʊθ sˈʌbɜːbz ɒv ˌɑːdidˈome ɪnðə sˈɛntɹə‍l tˈɔŋɡu dˈɪstɹɪkt</p>
       </div>
     </div>
   </div>
+  </section>
+  <section data-voice="Mercy" hidden>
+  <div class="item">
+    <p class="txt">This ruling was widely interpreted as a validation of <mark>Nii</mark> <mark>Adama</mark> Latse&#x27;s claim to the <mark>Ga</mark> <mark>Mantse</mark> title.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Mercy-0.kokoro.wav"></audio>
+        <p class="ipa">ðɪs ɹˈuːlɪŋ wʌz wˈa‍ɪdliʲ ɪntˈɜːpɹɪɾᵻd æz ɐ vˌælɪdˈe‍ɪʃən ʌv nˈɪʲa‍ɪ ædˈɑːmə lˈætsiʲᵻz klˈe‍ɪm tə ðə ɡˈɑː mˈæntsi tˈa‍ɪɾə‍l</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Mercy-0.poto.wav"></audio>
+        <p class="ipa">ðɪs ɹˈuːlɪŋ wɒz wˈa‍ɪdliʲ ɪntˈɜːpɹɪtɪd az ɐ vˌalɪdˈe‍ɪʃən ɒv nˈiːʲ ɑːdˈɑːmɑː lˈɑːtseɪz klˈe‍ɪm tə ðə ɡˈɑː mˈɑːntsɛ tˈa‍ɪtə‍l</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt">Adams <mark>Atidana</mark> Oliver won gold while <mark>Ofori</mark> <mark>Appiah</mark> Joel and Samuel <mark>Owusu</mark> won silver and bronze respectively.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Mercy-1.kokoro.wav"></audio>
+        <p class="ipa">ˈædəmz ˌæɾɪdˈɑːnə ˈɑːlɪvɚ wˈʌn ɡˈo‍ʊld wˌa‍ɪl ɑːfˈɔːɹiʲ ɐpˈa‍ɪ‍ə d‍ʒˈo‍ʊl ænd sˈæmjuːl o‍ʊˈuːsuː wˈʌn sˈɪlvɚ ænd bɹˈɑːnz ɹᵻspˈɛktɪvli</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Mercy-1.poto.wav"></audio>
+        <p class="ipa">ˈadəmz ˌɑːtidˈɑːnɑːɹ ˈɒlɪvə wˈʌn ɡˈə‍ʊld wˌa‍ɪl ofˈoɹiʲ ɑːpˈiʲɑː d‍ʒˈə‍ʊl and sˈamjuːl owˈusu wˈʌn sˈɪlvə and bɹˈɒnz ɹɪspˈɛktɪvli</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Juabenhene</mark> <mark>Nana</mark> <mark>Otuo</mark> <mark>Sereboe</mark> II was among the chiefs who pleaded on their behalf.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Mercy-2.kokoro.wav"></audio>
+        <p class="ipa">d‍ʒjˈuːe‍ɪbənhˌiːn nˈɑːnə ˈɑːt‍ʃuːˌo‍ʊ səɹˈiːbo‍ʊ ɹˌo‍ʊmən tˈuː wʌz ɐmˌʌŋ ðə t‍ʃˈiːfs hˌuː plˈiːdᵻd ˌɔn ðɛ‍ɹ bᵻhˈæf</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Mercy-2.poto.wav"></audio>
+        <p class="ipa">d‍ʒˌuɑːbɛnhˈɛnɛ nˈɑːnɑːɹ otˈuo sˌeɹebˈuo ɹˌə‍ʊmən tˈuː wɒz ɐmˌʌŋ ðə t‍ʃˈiːfs hˌuː plˈiːdɪd ˌɒn ðe‍ə bɪhˈɑːf</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Chirano</mark> is a mining community in the <mark>Bibiani</mark> <mark>Ahweso</mark> <mark>Bekai</mark> Municipality in the Western North.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Mercy-3.kokoro.wav"></audio>
+        <p class="ipa">ka‍ɪɹˈɑːno‍ʊ ɪz ɐ mˈa‍ɪnɪŋ kəmjˈuːnᵻɾiʲ ɪnðə ba‍ɪbɪʲˈɑːniʲ ɑːwˈiːso‍ʊ bᵻkˈa‍ɪ mjuːnˈɪsɪpˈælᵻɾiʲ ɪnðə wˈɛstɚn nˈɔː‍ɹθ</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Mercy-3.poto.wav"></audio>
+        <p class="ipa">t‍ʃiɹˈɑːno ɪz ɐ mˈa‍ɪnɪŋ kəmjˈuːnɪtiʲ ɪnðə bibiʲˈɑːniʲ ɑːhwˈesɔ bˈɛka‍ɪ mjuːnˈɪsɪpˈalɪtiʲ ɪnðə wˈɛstən nˈɔːθ</p>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section data-voice="Patience" hidden>
+  <div class="item">
+    <p class="txt">The consignment originated from <mark>Kwahu</mark> <mark>Fodoa</mark> and was en route to <mark>Togo</mark> through <mark>Aflao</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Patience-0.kokoro.wav"></audio>
+        <p class="ipa">ðə kənsˈa‍ɪnmənt ɚɹˈɪd‍ʒᵻnˌe‍ɪɾᵻd fɹʌm kwˈɑːhuː fədˈo‍ʊə ænd wʌz ɑːn ɹˈuːt tə tˈo‍ʊɡo‍ʊ θɹuː ɐflˈa‍ʊ</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Patience-0.poto.wav"></audio>
+        <p class="ipa">ðə kənsˈa‍ɪnmənt əɹˈɪd‍ʒɪnˌe‍ɪtɪd fɹɒm kwˈɑːhu fodˈoɑː and wɒz ɒn ɹˈuːt tə tˈoːɡoː θɹuː ɑːflˈɑːɹɔ</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt">Following the fight, <mark>Ghanaians</mark> have been recalling the similar annihilation <mark>Bastie</mark> Samir handed to <mark>Bukom</mark> <mark>Banku</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Patience-1.kokoro.wav"></audio>
+        <p class="ipa">fˈɑːlo‍ʊɪŋ ðə fˈa‍ɪt ɡˈæne‍ɪənz hɐvbɪn ɹᵻkˈɔːlɪŋ ðə sˈɪmɪlɚɹ ɐnˌa‍ɪəlˈe‍ɪʃən bˈæsti sˈæmɪ‍ɹ hˈændᵻd tə bjˈuːkəm bˈæŋkuː</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Patience-1.poto.wav"></audio>
+        <p class="ipa">fˈɒlə‍ʊɪŋ ðə fˈa‍ɪt ɡɑːnˈe‍ənz hɐvbɪn ɹɪkˈɔːlɪŋ ðə sˈɪmɪləɹ ɐnˌa‍ɪəlˈe‍ɪʃən bˈɑːsti sˈami‍ə hˈandɪd tə bˈukɔm bˈɑːŋku</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt">The NPP&#x27;s Solomon <mark>Kwame</mark> <mark>Asumadu</mark> is contesting the <mark>Akwatia</mark> seat against the NDC&#x27;s Bernard <mark>Bediako</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Patience-2.kokoro.wav"></audio>
+        <p class="ipa">ðɪʲ ˌɛnpˌiːpˈiːz sˈɑːlɑːmən kwˈe‍ɪm ɐsuːmˈɑːduː ɪz kəntˈɛstɪŋ ðɪʲ ækwˈe‍ɪʃə sˈiːt ɐɡˈɛnst ðɪʲ ˌɛndˌiːsˈiːz bɜːnˈɑː‍ɹd bᵻdɪʲˈɑːko‍ʊ</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Patience-2.poto.wav"></audio>
+        <p class="ipa">ðɪʲ ˌɛnpˌiːpˈiːz sˈɒlɒmən kwˈɑːme ˌɑːsumˈɑːdu ɪz kəntˈɛstɪŋ ðɪʲ ˌɑːkwɑːtˈiʲɑː sˈiːt ɐɡˈɛnst ðɪʲ ˌɛndˌiːsˈiːz bˈɜːnəd bˌɪdiʲˈɑːkɔ</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Esa</mark> Payin gave birth to <mark>Bediako</mark> <mark>Ntim</mark>, who became the successor of <mark>Opon</mark> Payin.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Patience-3.kokoro.wav"></audio>
+        <p class="ipa">ˈɛsə pˈe‍ɪɪn ɡˈe‍ɪv bˈɜːθ tə bᵻdɪʲˈɑːko‍ʊ ˈɛntˈɪm hˌuː bɪkˌe‍ɪm ðə səksˈɛsɚɹ ʌv ˈɑːpɑːn pˈe‍ɪɪn</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Patience-3.poto.wav"></audio>
+        <p class="ipa">ˈɛsɑː pˈe‍ɪɪn ɡˈe‍ɪv bˈɜːθ tə bˌɪdiʲˈɑːkɔ ntˈim hˌuː bɪkˌe‍ɪm ðə səksˈɛsəɹ ɒv ˈopon pˈe‍ɪɪn</p>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section data-voice="Emmanuel" hidden>
+  <div class="item">
+    <p class="txt"><mark>Volivo</mark> to <mark>Dorfor</mark> <mark>Adidome</mark> Bridge across the <mark>Volta</mark> River has been revived.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Emmanuel-0.kokoro.wav"></audio>
+        <p class="ipa">vəlˈɪvo‍ʊ tə dˈɔː‍ɹfɚɹ ˈædɪdˌo‍ʊm bɹˈɪd‍ʒ əkɹˌɑːs ðə vˈo‍ʊltɚ ɹˈɪvɚ hˈæzbiːn ɹᵻvˈa‍ɪvd</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Emmanuel-0.poto.wav"></audio>
+        <p class="ipa">volˈivo tə dˈɔrfɔɹ ˌɑːdidˈome bɹˈɪd‍ʒ əkɹˌɒs ðə vˈɔltɑː ɹˈɪvə hˈazbiːn ɹɪvˈa‍ɪvd</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Shatta</mark> Bandle was born <mark>Idris</mark> <mark>Firdaus</mark>, a Northerner from a small village called <mark>Karaga</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Emmanuel-1.kokoro.wav"></audio>
+        <p class="ipa">ʃˈæɾə bˈændə‍l wʌz bˈɔː‍ɹn ˈa‍ɪdɹɪs fˈɜːda‍ʊs ɐ nˈɔː‍ɹðɚnɚ fɹʌm ɐ smˈɔːl vˈɪlɪd‍ʒ kˈɔːld kæɹˈɑːɡə</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Emmanuel-1.poto.wav"></audio>
+        <p class="ipa">ʃˈɑːtɑː bˈandə‍l wɒz bˈɔːn ˈidɹis fɪrdˈɑːɹus ɐ nˈɔːðənə fɹɒm ɐ smˈɔːl vˈɪlɪd‍ʒ kˈɔːld kɑːɹˈɑːɡɑː</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt">The Saviour Church of <mark>Ghana</mark> has named a school at <mark>Bonwire</mark> after her, <mark>Nana</mark> <mark>Konadu</mark> Saviour School.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Emmanuel-2.kokoro.wav"></audio>
+        <p class="ipa">ðə sˈe‍ɪvjɚ t‍ʃˈɜːt‍ʃ ʌv ɡˈɑːnə hɐz nˈe‍ɪmd ɐ skˈuːl æt bˈɑːnwa‍ɪ‍ɚɹ ˈæftɚ hɜː nˈɑːnə kənˈɑːduː sˈe‍ɪvjɚ skˈuːl</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Emmanuel-2.poto.wav"></audio>
+        <p class="ipa">ðə sˈe‍ɪvjə t‍ʃˈɜːt‍ʃ ɒv ɡˈɑːnə hɐz nˈe‍ɪmd ɐ skˈuːl at bonwˈiɹe ˈaftə hɜː nˈɑːnɑː kɔnˈɑːdu sˈe‍ɪvjə skˈuːl</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Bofoakwa</mark> <mark>Tano</mark> have severed ties with coach <mark>Frimpong</mark> <mark>Manso</mark> after four months at the helm, the club announced.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Emmanuel-3.kokoro.wav"></audio>
+        <p class="ipa">bˈɑːfo‍ʊkwə tˈɑːno‍ʊ hæv sˈɛvɚd tˈa‍ɪz wɪð kˈo‍ʊt‍ʃ fɹˈɪmpɑːŋ mˈænso‍ʊ ˈæftɚ fˈɔː‍ɹ mˈʌnθs æt ðə hˈɛlm ðə klˈʌb ɐnˈa‍ʊnst</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Emmanuel-3.poto.wav"></audio>
+        <p class="ipa">bˌɔfɔˈɑːkwɑː tˈɑːno hav sˈɛvəd tˈa‍ɪz wɪð kˈə‍ʊt‍ʃ fɹˈɪmpɔŋ mˈɑːnso ˈaftə fˈɔː mˈʌnθs at ðə hˈɛlm ðə klˈʌb ɐnˈa‍ʊnst</p>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section data-voice="Isaac" hidden>
+  <div class="item">
+    <p class="txt">Member of Parliament for <mark>Bawku</mark> Central, <mark>Mahama</mark> <mark>Ayariga</mark> has reported that three more people were killed in <mark>Bawku</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Isaac-0.kokoro.wav"></audio>
+        <p class="ipa">mˈɛmbɚɹ ʌv pˈɑː‍ɹləmənt fɔː‍ɹ bˈɔːkuː sˈɛntɹə‍l mæhˈɑːmə ˈa‍ɪʲɑː‍ɹɹˌɪɡə hɐz ɹᵻpˈɔː‍ɹɾᵻd ðæt θɹˈiː mˈɔː‍ɹ pˈiːpə‍l wɜː kˈɪld ɪn bˈɔːkuː</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Isaac-0.poto.wav"></audio>
+        <p class="ipa">mˈɛmbəɹ ɒv pˈɑːləmənt fɔː bˈɔku sˈɛntɹə‍l mɑːhˈɑːmɑːɹ ˌɑːjɑːɹˈiɡɑː hɐz ɹɪpˈɔːtɪd ðat θɹˈiː mˈɔː pˈiːpə‍l wɜː kˈɪld ɪn bˈɔku</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Ghanaian</mark> musician <mark>Stonebwoy</mark> has taken legal action against politician and entertainment critic, <mark>Baba</mark> <mark>Sadiq</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Isaac-1.kokoro.wav"></audio>
+        <p class="ipa">ɡˈæne‍ɪən mjuːzˈɪʃən stˈo‍ʊnbwɔ‍ɪ hɐz tˈe‍ɪkən lˈiːɡə‍l ˈækʃən ɐɡˈɛnst pˌɑːlɪtˈɪʃən ænd ˌɛntɚtˈe‍ɪnmənt kɹˈɪɾɪk bˈɑːbə sˈædɪk</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Isaac-1.poto.wav"></audio>
+        <p class="ipa">ɡɑːnˈe‍ən mjuːzˈɪʃən stˈoːnbwɔ‍ɪ hɐz tˈe‍ɪkən lˈiːɡə‍l ˈakʃən ɐɡˈɛnst pˌɒlɪtˈɪʃən and ˌɛntətˈe‍ɪnmənt kɹˈɪtɪk bˈɑːbɑː sˈɑːdik</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Ghana</mark> legend and former Asante <mark>Kotoko</mark> star <mark>Opoku</mark> <mark>Afriyie</mark> has passed away.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Isaac-2.kokoro.wav"></audio>
+        <p class="ipa">ɡˈɑːnə lˈɛd‍ʒənd ænd fˈɔː‍ɹmɚɹ ɐsˈænt kətˈo‍ʊko‍ʊ stˈɑːɹ ˈɑːpo‍ʊkˌuː ˈæfɹɪji hɐz pˈæst ɐwˈe‍ɪ</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Isaac-2.poto.wav"></audio>
+        <p class="ipa">ɡˈɑːnə lˈɛd‍ʒənd and fˈɔːməɹ ɐsˈant kotˈoko stˈɑːɹ opˈoku ˌɑːfɹijˈiʲe hɐz pˈast ɐwˈe‍ɪ</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Ghanaians</mark> on social media are eulogising veteran Highlife musician, <mark>Nana</mark> <mark>Kwame</mark> <mark>Ampadu</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Isaac-3.kokoro.wav"></audio>
+        <p class="ipa">ɡˈæne‍ɪənz ˌɔn sˈo‍ʊʃə‍l mˈiːdiːʲə ɑː‍ɹ jˈuːləd‍ʒˌa‍ɪzɪŋ vˈɛɾɚɹən hˈa‍ɪla‍ɪf mjuːzˈɪʃən nˈɑːnə kwˈe‍ɪm æmpˈɑːduː</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Isaac-3.poto.wav"></audio>
+        <p class="ipa">ɡɑːnˈe‍ənz ˌɒn sˈə‍ʊʃə‍l mˈiːdiːʲəɹ ɑː jˈuːləd‍ʒˌa‍ɪzɪŋ vˈɛtəɹən hˈa‍ɪla‍ɪf mjuːzˈɪʃən nˈɑːnɑː kwˈɑːme ɑːmpˈɑːdu</p>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section data-voice="Ebenezer" hidden>
+  <div class="item">
+    <p class="txt">The Information Minister, <mark>Kojo</mark> <mark>Oppong</mark> <mark>Nkrumah</mark> says government is working to stabilise the <mark>cedi</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Ebenezer-0.kokoro.wav"></audio>
+        <p class="ipa">ðɪʲ ˌɪnfɚmˈe‍ɪʃən mˈɪnɪstɚ kˈo‍ʊd‍ʒo‍ʊ ˈɑːpɑːŋ ˈɛŋkɹˈuːmə sˈɛz ɡˈʌvɚnmənt ɪz wˈɜːkɪŋ tə stˈe‍ɪbəlˌa‍ɪz ðə sˈɛdi</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Ebenezer-0.poto.wav"></audio>
+        <p class="ipa">ðɪʲ ˌɪnfəmˈe‍ɪʃən mˈɪnɪstə kˈɔd‍ʒɔ ˈɔpɔŋ ŋkɹˈumɑː sˈɛz ɡˈʌvənmənt ɪz wˈɜːkɪŋ tə stˈe‍ɪbəlˌa‍ɪz ðə sˈiːdi</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt">The <mark>Adom</mark> TV <mark>Fufuo</mark> Party is underway at the forecourt of The Multimedia Group at <mark>Kokomlemle</mark> in <mark>Accra</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Ebenezer-1.kokoro.wav"></audio>
+        <p class="ipa">ðɪʲ ɐdˈɑːm tˌiːvˈiː fjˈuːfjuːˌo‍ʊ pˈɑː‍ɹɾiʲ ɪz ˌʌndɚwˈe‍ɪ æt ðə fˈɔː‍ɹkɔː‍ɹt ʌvðə mˌʌltɪmˈiːdiːʲə ɡɹˈuːp æt kˈɑːkəmlˌɛmə‍l ɪn ˈækɹɐ</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Ebenezer-1.poto.wav"></audio>
+        <p class="ipa">ðɪʲ ˈədɔm tˌiːvˈiː fufˈuo pˈɑːtiʲ ɪz ˌʌndəwˈe‍ɪ at ðə fˈɔːkɔːt ɒvðə mˌʌltɪmˈiːdiːʲə ɡɹˈuːp at kˌɔkɔmlˈɛmlɛ ɪn ˈəkɹɑː</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt">A court has ordered <mark>Marwako</mark> Fast Food in <mark>Accra</mark> to pay over a million <mark>Ghana</mark> <mark>cedis</mark> in damages.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Ebenezer-2.kokoro.wav"></audio>
+        <p class="ipa">ɐ kˈɔː‍ɹt hɐz ˈɔː‍ɹdɚd mɑː‍ɹwˈɑːko‍ʊ fˈæst fˈuːd ɪn ˈækɹɐ tə pˈe‍ɪ ˌo‍ʊvɚɹ ɐ mˈɪli‍ən ɡˈɑːnə sˈɛdiz ɪn dˈæmɪd‍ʒᵻz</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Ebenezer-2.poto.wav"></audio>
+        <p class="ipa">ɐ kˈɔːt hɐz ˈɔːdəd mɑːwˈɑːkɔ fˈast fˈuːd ɪn ˈəkɹɑː tə pˈe‍ɪ ˌə‍ʊvəɹ ɐ mˈɪli‍ən ɡˈɑːnə sˈiːdiz ɪn dˈamɪd‍ʒɪz</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Sarkodie</mark>, <mark>Shatta</mark> <mark>Wale</mark> and <mark>Stonebwoy</mark> are undoubtedly three of Ghana&#x27;s biggest musicians.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Ebenezer-3.kokoro.wav"></audio>
+        <p class="ipa">sˈɑː‍ɹko‍ʊdi ʃˈæɾə wˈe‍ɪl ænd stˈo‍ʊnbwɔ‍ɪ ɑːɹ ʌndˈa‍ʊɾᵻdli θɹˈiːʲ ʌv ɡˈɑːnəz bˈɪɡɪst mjuːzˈɪʃənz</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Ebenezer-3.poto.wav"></audio>
+        <p class="ipa">sˌɑːkodˈiʲe ʃˈɑːtɑː wˈɑːle and stˈoːnbwɔ‍ɪ ɑːɹ ʌndˈa‍ʊtɪdli θɹˈiːʲ ɒv ɡˈɑːnəz bˈɪɡɪst mjuːzˈɪʃənz</p>
+      </div>
+    </div>
+  </div>
+  </section>
+  <section data-voice="Bright" hidden>
+  <div class="item">
+    <p class="txt"><mark>Odododiodio</mark> MP Edwin <mark>Nii</mark> <mark>Lante</mark> <mark>Vanderpuye</mark>, will not return to Parliament after the expiration of his current term.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Bright-0.kokoro.wav"></audio>
+        <p class="ipa">ˌo‍ʊdədˌo‍ʊdɪʲˈo‍ʊdɪʲˌo‍ʊ ˌɛmpˈiːʲ ˈɛdwɪn nˈɪʲa‍ɪ lˈænt vˌændɚpˈuːj wɪl nˌɑːt ɹᵻtˈɜːn tə pˈɑː‍ɹləmənt ˈæftɚ ðɪʲ ɛkspɚɹˈe‍ɪʃən ʌv hɪz kˈɜːɹənt tˈɜːm</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Bright-0.poto.wav"></audio>
+        <p class="ipa">ˌododˌodiʲodˈiʲo ˌɛmpˈiːʲ ˈɛdwɪn nˈiː lˈɑːnte vˌɑːndəpˈuːje wɪl nˌɒt ɹɪtˈɜːn tə pˈɑːləmənt ˈaftə ðɪʲ ɛkspəɹˈe‍ɪʃən ɒv hɪz kˈʌɹənt tˈɜːm</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Ghanaian</mark> singer <mark>Kofi</mark> <mark>Mante</mark> has acknowledged <mark>Bisa</mark> Kdei&#x27;s influence on the highlife music genre.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Bright-1.kokoro.wav"></audio>
+        <p class="ipa">ɡˈæne‍ɪən sˈɪŋɚ kˈo‍ʊfi mˈænt hɐz ɐknˈɑːlɪd‍ʒd bˈiːsə kˈe‍ɪdˈe‍ɪz ˈɪnfluːəns ɔnðə hˈa‍ɪla‍ɪf mjˈuːzɪk ʒˈɑːnɹə</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Bright-1.poto.wav"></audio>
+        <p class="ipa">ɡɑːnˈe‍ən sˈɪŋə kkˈofi mˈɑːntɛ hɐz ɐknˈɒlɪd‍ʒd bˈisɑː kˈe‍ɪdˈe‍ɪz ˈɪnfluːəns ɒnðə hˈa‍ɪla‍ɪf mjˈuːzɪk ʒˈɒnɹə</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt">Former President, John <mark>Dramani</mark> <mark>Mahama</mark> has condemned the killing of Al Jazeera journalist Shireen <mark>Abu</mark> <mark>Akleh</mark>.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Bright-2.kokoro.wav"></audio>
+        <p class="ipa">fˈɔː‍ɹmɚ pɹˈɛzɪdənt d‍ʒˈɑːn dɹæmˈɑːni mæhˈɑːmə hɐz kəndˈɛmd ðə kˈɪlɪŋ ʌv ˈæl d‍ʒæzˈɪɹə d‍ʒˈɜːnəlˌɪst ʃˈa‍ɪ‍ɚɹiːn ˈæbuː ˈækle‍ɪ</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Bright-2.poto.wav"></audio>
+        <p class="ipa">fˈɔːmə pɹˈɛzɪdənt d‍ʒˈɒn dɹɑːmˈɑːni mɑːhˈɑːmɑː hɐz kəndˈɛmd ðə kˈɪlɪŋ ɒv ˈal d‍ʒazˈi‍əɹə d‍ʒˈɜːnəlˌɪst ʃˈa‍ɪ‍əɹiːn ˈɑːbu ˈɑːklɛ</p>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <p class="txt"><mark>Ghanaian</mark> legal luminary <mark>Tsatsu</mark> <mark>Tsikata</mark> has proposed a solution to Ghana&#x27;s recurring <mark>Cedi</mark> depreciation.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/Bright-3.kokoro.wav"></audio>
+        <p class="ipa">ɡˈæne‍ɪən lˈiːɡə‍l lˈuːmɪnˌɛɹi tsˈætsuː tsɪkˈɑːɾə hɐz pɹəpˈo‍ʊzd ɐ səlˈuːʃən tə ɡˈɑːnəz ɹᵻkˈɜːɹɪŋ sˈɛdi dᵻpɹˌiːʃɪʲˈe‍ɪʃən</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/Bright-3.poto.wav"></audio>
+        <p class="ipa">ɡɑːnˈe‍ən lˈiːɡə‍l lˈuːmɪnəɹi tsˈɑːtsu tsikˈɑːtɑː hɐz pɹəpˈə‍ʊzd ɐ səlˈuːʃən tə ɡˈɑːnəz ɹɪkˈɜːɹɪŋ sˈiːdi dɪpɹˌiːʃɪʲˈe‍ɪʃən</p>
+      </div>
+    </div>
+  </div>
+  </section>
 
+
+  <script>
+    const VOICES = ["Grace", "Comfort", "Mercy", "Patience", "Emmanuel", "Isaac", "Ebenezer", "Bright"];
+    const tabs = document.getElementById("tabs");
+    function show(voice) {
+      for (const b of tabs.children)
+        b.setAttribute("aria-selected", String(b.dataset.voice === voice));
+      for (const s of document.querySelectorAll("section[data-voice]")) {
+        const on = s.dataset.voice === voice;
+        s.hidden = !on;
+        if (!on) for (const a of s.querySelectorAll("audio")) a.pause();
+      }
+    }
+    for (const v of VOICES) {
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = v; b.dataset.voice = v;
+      b.setAttribute("role", "tab"); b.onclick = () => show(v);
+      tabs.appendChild(b);
+    }
+    show(VOICES[0]);
+  </script>
 
   <footer>
     Kokoro v1.0 via sherpa-onnx, speaker Grace (bf_alice). Pronunciation from a

@@ -31,17 +31,17 @@ PAGE = """<!doctype html>
 <style>
   :root {{
     --bg: #fbfaf8; --fg: #1a1a1a; --muted: #5c5c5c; --line: #e3e0da;
-    --card: #ffffff; --accent: #1a6b4f; --accent-soft: #eaf3ef;
+    --card: #ffffff; --accent: #1a6b4f;
   }}
   @media (prefers-color-scheme: dark) {{
     :root:not([data-theme="light"]) {{
       --bg: #16181a; --fg: #eceae6; --muted: #9c9a95; --line: #2b2e31;
-      --card: #1d2022; --accent: #6cc4a1; --accent-soft: #1d2b26;
+      --card: #1d2022; --accent: #6cc4a1;
     }}
   }}
   :root[data-theme="dark"] {{
     --bg: #16181a; --fg: #eceae6; --muted: #9c9a95; --line: #2b2e31;
-    --card: #1d2022; --accent: #6cc4a1; --accent-soft: #1d2b26;
+    --card: #1d2022; --accent: #6cc4a1;
   }}
   * {{ box-sizing: border-box; }}
   body {{
@@ -52,11 +52,6 @@ PAGE = """<!doctype html>
   .wrap {{ max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }}
   h1 {{ font-size: 1.7rem; margin: 0 0 .3em; letter-spacing: -.01em; }}
   .lede {{ color: var(--muted); max-width: 62ch; margin: 0 0 1.6em; }}
-  .note {{
-    background: var(--accent-soft); border-left: 3px solid var(--accent);
-    padding: .85em 1.1em; margin: 0 0 2.2em; font-size: .93rem; max-width: 70ch;
-  }}
-  .note strong {{ color: var(--accent); }}
   .item {{ border: 1px solid var(--line); background: var(--card);
            border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }}
   .txt {{ font-size: 1.03rem; margin: 0 0 14px; }}
@@ -73,6 +68,21 @@ PAGE = """<!doctype html>
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   }}
   .side.poto .ipa {{ color: var(--fg); }}
+  .tabs {{ display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 22px; }}
+  .tabs button {{
+    font: inherit; font-size: .88rem; padding: .42em .9em; cursor: pointer;
+    background: var(--card); color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px;
+  }}
+  .tabs button[aria-selected="true"] {{
+    background: var(--accent); border-color: var(--accent); color: var(--bg);
+    font-weight: 600;
+  }}
+  mark {{
+    background: none; color: var(--accent); font-weight: 600;
+    border-bottom: 2px solid var(--accent); padding-bottom: 1px;
+  }}
+  .legend {{ font-size: .84rem; color: var(--muted); margin: 0 0 26px; }}
   footer {{ margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line);
             color: var(--muted); font-size: .88rem; }}
   a {{ color: var(--accent); }}
@@ -84,15 +94,35 @@ PAGE = """<!doctype html>
   <p class="lede">English text-to-speech that pronounces Ghanaian words properly.
   Same model, same speaker, same text &mdash; the only difference is the front-end.</p>
 
-  <div class="note"><strong>Not Ghanaian-accented voices.</strong> All three columns
-  are Kokoro's British speaker &ldquo;Grace&rdquo;: what changes is what she says, not
-  who she sounds like. Both poto-tts modes pronounce the Ghanaian words correctly and
-  differ only in the accent &mdash; <strong>gh</strong> gives them Ghanaian vowels and
-  a tapped r, and lets a little of that reach the English too; <strong>en</strong>
-  gives them English vowels and leaves every other word exactly as an English TTS
-  would say it.</div>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <p class="legend"><mark>Underlined</mark> words are in the Ghanaian lexicon, so
+  poto-tts pronounces them from it. Everything else is left to espeak's English and is
+  said exactly as any English TTS would. Each voice reads different sentences, drawn
+  from a Ghanaian English news corpus.</p>
 
 {items}
+
+  <script>
+    const VOICES = {voices};
+    const tabs = document.getElementById("tabs");
+    function show(voice) {{
+      for (const b of tabs.children)
+        b.setAttribute("aria-selected", String(b.dataset.voice === voice));
+      for (const s of document.querySelectorAll("section[data-voice]")) {{
+        const on = s.dataset.voice === voice;
+        s.hidden = !on;
+        if (!on) for (const a of s.querySelectorAll("audio")) a.pause();
+      }}
+    }}
+    for (const v of VOICES) {{
+      const b = document.createElement("button");
+      b.type = "button"; b.textContent = v; b.dataset.voice = v;
+      b.setAttribute("role", "tab"); b.onclick = () => show(v);
+      tabs.appendChild(b);
+    }}
+    show(VOICES[0]);
+  </script>
 
   <footer>
     Kokoro v1.0 via sherpa-onnx, speaker Grace (bf_alice). Pronunciation from a
@@ -118,42 +148,61 @@ ITEM = """  <div class="item">
         <p class="ipa">{kokoro_ipa}</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts &middot; gh mode</h3>
-        <audio controls preload="none" src="audio/{gh_file}"></audio>
-        <p class="ipa">{gh_ipa}</p>
-      </div>
-      <div class="side poto">
-        <h3>poto-tts &middot; en mode</h3>
-        <audio controls preload="none" src="audio/{en_file}"></audio>
-        <p class="ipa">{en_ipa}</p>
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/{poto_file}"></audio>
+        <p class="ipa">{poto_ipa}</p>
       </div>
     </div>
   </div>
 """
 
+SECTION = """  <section data-voice="{voice}" hidden>
+{items}  </section>
+"""
+
+
+def marked(annotation, fallback):
+    """The sentence with lexicon words wrapped in <mark>.
+
+    Built from the annotation the library produced rather than re-derived here, so the
+    page cannot claim a word came from the lexicon when the dictionary disagrees.
+    """
+    if not annotation:
+        return html.escape(fallback)
+    out = []
+    for word, hit in annotation:
+        safe = html.escape(word)
+        out.append(f"<mark>{safe}</mark>" if hit else safe)
+    text = " ".join(out)
+    for mark in (".", ",", "?", "!", ";", ":", "'s", "'"):
+        text = text.replace(f" {mark}", mark)
+    return text
+
 
 def main() -> int:
     data = json.loads((SPACE / "samples.json").read_text())
-    by: dict[str, dict[str, dict]] = {}
-    for row in data["rows"]:
-        by.setdefault(row["key"], {})[row["route"]] = row
-    items = []
-    for key, text in data["texts"].items():
-        pair = by.get(key, {})
-        if {"gh", "en", "kokoro"} - set(pair):
-            print(f"  skipping {key}: needs all three routes")
-            continue
-        items.append(ITEM.format(
-            text=html.escape(text),
-            kokoro_file=html.escape(pair["kokoro"]["file"]),
-            gh_file=html.escape(pair["gh"]["file"]),
-            en_file=html.escape(pair["en"]["file"]),
-            kokoro_ipa=html.escape(pair["kokoro"]["phonemes"]),
-            gh_ipa=html.escape(pair["gh"]["phonemes"]),
-            en_ipa=html.escape(pair["en"]["phonemes"]),
-        ))
-    (SPACE / "index.html").write_text(PAGE.format(items="\n".join(items)))
-    print(f"wrote {SPACE / 'index.html'} with {len(items)} comparisons")
+    voices = data["voices"]
+    files = {(r["key"], r["route"]): r["file"] for r in data["rows"]}
+    sections = []
+    for voice in voices:
+        items = []
+        for key in data["scripts"][voice]:
+            if (key, "poto") not in files or (key, "kokoro") not in files:
+                print(f"  skipping {key}: missing audio")
+                continue
+            ipa = data["phonemes"].get(key, {})
+            items.append(ITEM.format(
+                text=marked(data.get("annotations", {}).get(key), data["texts"][key]),
+                kokoro_file=html.escape(files[(key, "kokoro")]),
+                poto_file=html.escape(files[(key, "poto")]),
+                kokoro_ipa=html.escape(ipa.get("kokoro", "")),
+                poto_ipa=html.escape(ipa.get("poto", "")),
+            ))
+        sections.append(SECTION.format(voice=html.escape(voice), items="".join(items)))
+    (SPACE / "index.html").write_text(PAGE.format(
+        items="".join(sections), voices=json.dumps(voices)))
+    print(f"wrote {SPACE / 'index.html'}: {len(voices)} voices, "
+          f"{len(data['texts'])} sentences")
     return 0
 
 

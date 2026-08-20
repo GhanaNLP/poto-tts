@@ -1,206 +1,2890 @@
 {
  "texts": {
-  "names": "Kwabena went to Achimota and met the Okuapenhene at Nyankpani.",
-  "news": "The Bank of Ghana raised the policy rate, citing pressure on the cedi.",
-  "places": "The bus from Adenta passed through Madina on the way to Kotoka.",
-  "people": "Yaw Mensah and Akosua Boateng arrived with Nana Addo.",
-  "food": "They served banku with tilapia, kenkey, and waakye by the roadside.",
-  "titles": "The Asantehene and the Ga Mantse attended the durbar at Kumasi.",
-  "english": "The convention discussed inflationary policy yesterday afternoon.",
-  "mixed": "Auntie Adjoa asked whether the trotro to Tema had already left."
+  "Grace-0": "Akple and Ademe are traditional Ghanaian dishes, particularly popular among the Ewe people of the Volta Region.",
+  "Grace-1": "Ayisha Modi has issued a stern warning to popular Ghanaian fetish priestess, Nana Agradaa.",
+  "Grace-2": "Following his installation, he has assumed the stool name Nii Otanka Okaija Akraman.",
+  "Grace-3": "Team Ghana were disqualified on infringement in the final changeover from Joseph Oduro Manu and Joseph Amoah.",
+  "Comfort-0": "They are skipper Christian Amoah, Winifred Ntumi and Sandra Mensimah Owusu.",
+  "Comfort-1": "He is the son of the late Emma Naa Ameley Tagoe and hails from the Adanse Royal lineage.",
+  "Comfort-2": "Didi began his youth career with Bolga Soccer Masters at Bolgatanga in the Upper East Region of Ghana.",
+  "Comfort-3": "The arrests occurred in Blorkorfe and Awakpedome, both suburbs of Adidome in the Central Tongu District.",
+  "Mercy-0": "This ruling was widely interpreted as a validation of Nii Adama Latse's claim to the Ga Mantse title.",
+  "Mercy-1": "Adams Atidana Oliver won gold while Ofori Appiah Joel and Samuel Owusu won silver and bronze respectively.",
+  "Mercy-2": "Juabenhene Nana Otuo Sereboe II was among the chiefs who pleaded on their behalf.",
+  "Mercy-3": "Chirano is a mining community in the Bibiani Ahweso Bekai Municipality in the Western North.",
+  "Patience-0": "The consignment originated from Kwahu Fodoa and was en route to Togo through Aflao.",
+  "Patience-1": "Following the fight, Ghanaians have been recalling the similar annihilation Bastie Samir handed to Bukom Banku.",
+  "Patience-2": "The NPP's Solomon Kwame Asumadu is contesting the Akwatia seat against the NDC's Bernard Bediako.",
+  "Patience-3": "Esa Payin gave birth to Bediako Ntim, who became the successor of Opon Payin.",
+  "Emmanuel-0": "Volivo to Dorfor Adidome Bridge across the Volta River has been revived.",
+  "Emmanuel-1": "Shatta Bandle was born Idris Firdaus, a Northerner from a small village called Karaga.",
+  "Emmanuel-2": "The Saviour Church of Ghana has named a school at Bonwire after her, Nana Konadu Saviour School.",
+  "Emmanuel-3": "Bofoakwa Tano have severed ties with coach Frimpong Manso after four months at the helm, the club announced.",
+  "Isaac-0": "Member of Parliament for Bawku Central, Mahama Ayariga has reported that three more people were killed in Bawku.",
+  "Isaac-1": "Ghanaian musician Stonebwoy has taken legal action against politician and entertainment critic, Baba Sadiq.",
+  "Isaac-2": "Ghana legend and former Asante Kotoko star Opoku Afriyie has passed away.",
+  "Isaac-3": "Ghanaians on social media are eulogising veteran Highlife musician, Nana Kwame Ampadu.",
+  "Ebenezer-0": "The Information Minister, Kojo Oppong Nkrumah says government is working to stabilise the cedi.",
+  "Ebenezer-1": "The Adom TV Fufuo Party is underway at the forecourt of The Multimedia Group at Kokomlemle in Accra.",
+  "Ebenezer-2": "A court has ordered Marwako Fast Food in Accra to pay over a million Ghana cedis in damages.",
+  "Ebenezer-3": "Sarkodie, Shatta Wale and Stonebwoy are undoubtedly three of Ghana's biggest musicians.",
+  "Bright-0": "Odododiodio MP Edwin Nii Lante Vanderpuye, will not return to Parliament after the expiration of his current term.",
+  "Bright-1": "Ghanaian singer Kofi Mante has acknowledged Bisa Kdei's influence on the highlife music genre.",
+  "Bright-2": "Former President, John Dramani Mahama has condemned the killing of Al Jazeera journalist Shireen Abu Akleh.",
+  "Bright-3": "Ghanaian legal luminary Tsatsu Tsikata has proposed a solution to Ghana's recurring Cedi depreciation."
  },
  "rows": [
   {
-   "key": "names",
-   "route": "gh",
-   "text": "Kwabena went to Achimota and met the Okuapenhene at Nyankpani.",
-   "file": "names.gh.wav",
-   "seconds": 4.02,
-   "phonemes": "kwabˈɪna wɛnt tʊ ˌat‍ʃimˈota and mˈɛt ða ˌokwapɛnhˈɛnɛ at njaŋkpˈani"
+   "key": "Grace-0",
+   "route": "poto",
+   "voice": "Grace",
+   "file": "Grace-0.poto.wav",
+   "seconds": 6.87
   },
   {
-   "key": "news",
-   "route": "gh",
-   "text": "The Bank of Ghana raised the policy rate, citing pressure on the cedi.",
-   "file": "news.gh.wav",
-   "seconds": 3.99,
-   "phonemes": "ða bˈaŋk ɒv ɡˈanə ɾˈezd ða pˈɒlɪsi ɾˈet sˈa‍ɪtɪŋ pɾˈɛʃəɹ onða sˈiːdi"
+   "key": "Grace-1",
+   "route": "poto",
+   "voice": "Grace",
+   "file": "Grace-1.poto.wav",
+   "seconds": 5.9
   },
   {
-   "key": "places",
-   "route": "gh",
-   "text": "The bus from Adenta passed through Madina on the way to Kotoka.",
-   "file": "places.gh.wav",
-   "seconds": 3.58,
-   "phonemes": "ða bˈʌs fɾʌm adˈɛnta pˈast θɾuː madˈina onða wˈe tə kotˈoka"
+   "key": "Grace-2",
+   "route": "poto",
+   "voice": "Grace",
+   "file": "Grace-2.poto.wav",
+   "seconds": 5.83
   },
   {
-   "key": "people",
-   "route": "gh",
-   "text": "Yaw Mensah and Akosua Boateng arrived with Nana Addo.",
-   "file": "people.gh.wav",
-   "seconds": 3.39,
-   "phonemes": "jˈaw mˈensa and ˌakosˈua buˈateŋ aɾˈa‍ɪvd wɪð nˈana ˈado"
+   "key": "Grace-3",
+   "route": "poto",
+   "voice": "Grace",
+   "file": "Grace-3.poto.wav",
+   "seconds": 7.3
   },
   {
-   "key": "food",
-   "route": "gh",
-   "text": "They served banku with tilapia, kenkey, and waakye by the roadside.",
-   "file": "food.gh.wav",
-   "seconds": 3.83,
-   "phonemes": "ðe sˈɜːvd bˈaŋku wɪð tɪlˈepi‍ə kˈɛŋke and wˈat‍ʃe ba‍ɪ ða ɾˈodsa‍ɪd"
-  },
-  {
-   "key": "titles",
-   "route": "gh",
-   "text": "The Asantehene and the Ga Mantse attended the durbar at Kumasi.",
-   "file": "titles.gh.wav",
-   "seconds": 3.92,
-   "phonemes": "ða asˈantɪhˌiːn and ða ɡˈa mˈantsɛ atˈɛndɪd ða dˈɜːba at kumˈasi"
-  },
-  {
-   "key": "english",
-   "route": "gh",
-   "text": "The convention discussed inflationary policy yesterday afternoon.",
-   "file": "english.gh.wav",
-   "seconds": 4.15,
-   "phonemes": "ða kənvˈɛnʃən diskˈʌst ɪnflˈeʃənˌɛɾi pˈɒlɪsi jˈɛstədˌe ˌaftənˈuːn"
-  },
-  {
-   "key": "mixed",
-   "route": "gh",
-   "text": "Auntie Adjoa asked whether the trotro to Tema had already left.",
-   "file": "mixed.gh.wav",
-   "seconds": 3.89,
-   "phonemes": "ˈantiʲ ˈad‍ʒwa ˈaskt wˈɛðə ða tɾˈɔtɾɔ tə tˈeːma had ɔːlɾˌɛdi lˈɛft"
-  },
-  {
-   "key": "names",
-   "route": "en",
-   "text": "Kwabena went to Achimota and met the Okuapenhene at Nyankpani.",
-   "file": "names.en.wav",
-   "seconds": 4.37,
-   "phonemes": "kwɑːbˈɪnɑː wɛnt tʊ ˌɑːt‍ʃimˈotɑː and mˈɛt ðɪʲ ˌokwɑːpɛnhˈɛnɛ at njɑːŋkpˈɑːni"
-  },
-  {
-   "key": "news",
-   "route": "en",
-   "text": "The Bank of Ghana raised the policy rate, citing pressure on the cedi.",
-   "file": "news.en.wav",
-   "seconds": 4.1,
-   "phonemes": "ðə bˈaŋk ɒv ɡˈɑːnə ɹˈe‍ɪzd ðə pˈɒlɪsi ɹˈe‍ɪt sˈa‍ɪtɪŋ pɹˈɛʃəɹ ɒnðə sˈiːdi"
-  },
-  {
-   "key": "places",
-   "route": "en",
-   "text": "The bus from Adenta passed through Madina on the way to Kotoka.",
-   "file": "places.en.wav",
-   "seconds": 3.83,
-   "phonemes": "ðə bˈʌs fɹɒm ɑːdˈɛntɑː pˈast θɹuː mɑːdˈinɑːɹ ɒnðə wˈe‍ɪ tə kotˈokɑː"
-  },
-  {
-   "key": "people",
-   "route": "en",
-   "text": "Yaw Mensah and Akosua Boateng arrived with Nana Addo.",
-   "file": "people.en.wav",
-   "seconds": 3.84,
-   "phonemes": "jˈɑːw mˈensɑː and ˌɑːkosˈuɑː buˈɑːteŋ ɐɹˈa‍ɪvd wɪð nˈɑːnɑːɹ ˈɑːdo"
-  },
-  {
-   "key": "food",
-   "route": "en",
-   "text": "They served banku with tilapia, kenkey, and waakye by the roadside.",
-   "file": "food.en.wav",
-   "seconds": 4.12,
-   "phonemes": "ðe‍ɪ sˈɜːvd bˈɑːŋku wɪð tɪlˈe‍ɪpi‍ə kˈɛŋke and wˈɑːt‍ʃe ba‍ɪ ðə ɹˈə‍ʊdsa‍ɪd"
-  },
-  {
-   "key": "titles",
-   "route": "en",
-   "text": "The Asantehene and the Ga Mantse attended the durbar at Kumasi.",
-   "file": "titles.en.wav",
-   "seconds": 4.12,
-   "phonemes": "ðɪʲ ɐsˈantɪhˌiːn and ðə ɡˈɑː mˈɑːntsɛ ɐtˈɛndɪd ðə dˈɜːbɑːɹ at kumˈɑːsi"
-  },
-  {
-   "key": "english",
-   "route": "en",
-   "text": "The convention discussed inflationary policy yesterday afternoon.",
-   "file": "english.en.wav",
-   "seconds": 4.23,
-   "phonemes": "ðə kənvˈɛnʃən dɪskˈʌst ɪnflˈe‍ɪʃənəɹi pˈɒlɪsi jˈɛstədˌe‍ɪ ˌaftənˈuːn"
-  },
-  {
-   "key": "mixed",
-   "route": "en",
-   "text": "Auntie Adjoa asked whether the trotro to Tema had already left.",
-   "file": "mixed.en.wav",
-   "seconds": 4.08,
-   "phonemes": "ˈantiʲ ˈɑːd‍ʒwɑːɹ ˈaskt wˈɛðə ðə tɹˈɔtɹɔ tə tˈeːmɑː had ɔːlɹˌɛdi lˈɛft"
-  },
-  {
-   "key": "names",
+   "key": "Grace-0",
    "route": "kokoro",
-   "text": "Kwabena went to Achimota and met the Okuapenhene at Nyankpani.",
-   "file": "names.kokoro.wav",
-   "seconds": 4.32,
-   "phonemes": "kwˈe‍ɪbnə wɛnt tʊ ɐt‍ʃɪmˈo‍ʊɾə ænd mˈɛt ðɪʲ ˈo‍ʊkjuːˌe‍ɪpənhˌiːn æt nˌa‍ɪɐŋkpˈɑːni"
+   "voice": "Grace",
+   "file": "Grace-0.kokoro.wav",
+   "seconds": 7.06
   },
   {
-   "key": "news",
+   "key": "Grace-1",
    "route": "kokoro",
-   "text": "The Bank of Ghana raised the policy rate, citing pressure on the cedi.",
-   "file": "news.kokoro.wav",
-   "seconds": 4.01,
-   "phonemes": "ðə bˈæŋk ʌv ɡˈɑːnɚ ɹˈe‍ɪzd ðə pˈɑːlɪsi ɹˈe‍ɪt sˈa‍ɪɾɪŋ pɹˈɛʃɚɹ ɔnðə sˈɛdi"
+   "voice": "Grace",
+   "file": "Grace-1.kokoro.wav",
+   "seconds": 5.87
   },
   {
-   "key": "places",
+   "key": "Grace-2",
    "route": "kokoro",
-   "text": "The bus from Adenta passed through Madina on the way to Kotoka.",
-   "file": "places.kokoro.wav",
-   "seconds": 3.73,
-   "phonemes": "ðə bˈʌs fɹʌm ædˈɛntə pˈæst θɹuː mˈædɪnə ɔnðə wˈe‍ɪ tə kətˈo‍ʊkə"
+   "voice": "Grace",
+   "file": "Grace-2.kokoro.wav",
+   "seconds": 5.52
   },
   {
-   "key": "people",
+   "key": "Grace-3",
    "route": "kokoro",
-   "text": "Yaw Mensah and Akosua Boateng arrived with Nana Addo.",
-   "file": "people.kokoro.wav",
-   "seconds": 3.68,
-   "phonemes": "jˈɔː mˈɛnsə ænd ˈækəsˌuːə bo‍ʊtˈɛŋ ɚɹˈa‍ɪvd wɪð nˈɑːnə ˈædo‍ʊ"
+   "voice": "Grace",
+   "file": "Grace-3.kokoro.wav",
+   "seconds": 7.22
   },
   {
-   "key": "food",
-   "route": "kokoro",
-   "text": "They served banku with tilapia, kenkey, and waakye by the roadside.",
-   "file": "food.kokoro.wav",
-   "seconds": 4.07,
-   "phonemes": "ðe‍ɪ sˈɜːvd bˈæŋkuː wɪð tɪlˈe‍ɪpi‍ə kˈɛŋki ænd wˈɑːka‍ɪ ba‍ɪ ðə ɹˈo‍ʊdsa‍ɪd"
+   "key": "Comfort-0",
+   "route": "poto",
+   "voice": "Comfort",
+   "file": "Comfort-0.poto.wav",
+   "seconds": 4.24
   },
   {
-   "key": "titles",
-   "route": "kokoro",
-   "text": "The Asantehene and the Ga Mantse attended the durbar at Kumasi.",
-   "file": "titles.kokoro.wav",
-   "seconds": 4.02,
-   "phonemes": "ðɪʲ ɐsˈæntɪhˌiːn ænd ðə ɡˈɑː mˈæntsiʲ ɐtˈɛndᵻd ðə dˈɜːbɑːɹ æt kjuːmˈɑːsi"
+   "key": "Comfort-1",
+   "route": "poto",
+   "voice": "Comfort",
+   "file": "Comfort-1.poto.wav",
+   "seconds": 4.92
   },
   {
-   "key": "english",
-   "route": "kokoro",
-   "text": "The convention discussed inflationary policy yesterday afternoon.",
-   "file": "english.kokoro.wav",
-   "seconds": 4.16,
-   "phonemes": "ðə kənvˈɛnʃən dɪskˈʌst ɪnflˈe‍ɪʃənˌɛɹi pˈɑːlɪsi jˈɛstɚdˌe‍ɪ ˌæftɚnˈuːn"
+   "key": "Comfort-2",
+   "route": "poto",
+   "voice": "Comfort",
+   "file": "Comfort-2.poto.wav",
+   "seconds": 5.79
   },
   {
-   "key": "mixed",
+   "key": "Comfort-3",
+   "route": "poto",
+   "voice": "Comfort",
+   "file": "Comfort-3.poto.wav",
+   "seconds": 5.77
+  },
+  {
+   "key": "Comfort-0",
    "route": "kokoro",
-   "text": "Auntie Adjoa asked whether the trotro to Tema had already left.",
-   "file": "mixed.kokoro.wav",
-   "seconds": 4.08,
-   "phonemes": "ˈæntiʲ ɐd‍ʒˈo‍ʊə ˈæskt wˈɛðɚ ðə tɹˈɑːtɹo‍ʊ tə tˈɛmə hæd ɔːlɹˌɛdi lˈɛft"
+   "voice": "Comfort",
+   "file": "Comfort-0.kokoro.wav",
+   "seconds": 4.2
+  },
+  {
+   "key": "Comfort-1",
+   "route": "kokoro",
+   "voice": "Comfort",
+   "file": "Comfort-1.kokoro.wav",
+   "seconds": 4.83
+  },
+  {
+   "key": "Comfort-2",
+   "route": "kokoro",
+   "voice": "Comfort",
+   "file": "Comfort-2.kokoro.wav",
+   "seconds": 5.77
+  },
+  {
+   "key": "Comfort-3",
+   "route": "kokoro",
+   "voice": "Comfort",
+   "file": "Comfort-3.kokoro.wav",
+   "seconds": 5.77
+  },
+  {
+   "key": "Mercy-0",
+   "route": "poto",
+   "voice": "Mercy",
+   "file": "Mercy-0.poto.wav",
+   "seconds": 6.16
+  },
+  {
+   "key": "Mercy-1",
+   "route": "poto",
+   "voice": "Mercy",
+   "file": "Mercy-1.poto.wav",
+   "seconds": 6.71
+  },
+  {
+   "key": "Mercy-2",
+   "route": "poto",
+   "voice": "Mercy",
+   "file": "Mercy-2.poto.wav",
+   "seconds": 4.98
+  },
+  {
+   "key": "Mercy-3",
+   "route": "poto",
+   "voice": "Mercy",
+   "file": "Mercy-3.poto.wav",
+   "seconds": 5.62
+  },
+  {
+   "key": "Mercy-0",
+   "route": "kokoro",
+   "voice": "Mercy",
+   "file": "Mercy-0.kokoro.wav",
+   "seconds": 6.11
+  },
+  {
+   "key": "Mercy-1",
+   "route": "kokoro",
+   "voice": "Mercy",
+   "file": "Mercy-1.kokoro.wav",
+   "seconds": 6.7
+  },
+  {
+   "key": "Mercy-2",
+   "route": "kokoro",
+   "voice": "Mercy",
+   "file": "Mercy-2.kokoro.wav",
+   "seconds": 4.86
+  },
+  {
+   "key": "Mercy-3",
+   "route": "kokoro",
+   "voice": "Mercy",
+   "file": "Mercy-3.kokoro.wav",
+   "seconds": 5.53
+  },
+  {
+   "key": "Patience-0",
+   "route": "poto",
+   "voice": "Patience",
+   "file": "Patience-0.poto.wav",
+   "seconds": 5.14
+  },
+  {
+   "key": "Patience-1",
+   "route": "poto",
+   "voice": "Patience",
+   "file": "Patience-1.poto.wav",
+   "seconds": 6.42
+  },
+  {
+   "key": "Patience-2",
+   "route": "poto",
+   "voice": "Patience",
+   "file": "Patience-2.poto.wav",
+   "seconds": 7.3
+  },
+  {
+   "key": "Patience-3",
+   "route": "poto",
+   "voice": "Patience",
+   "file": "Patience-3.poto.wav",
+   "seconds": 4.99
+  },
+  {
+   "key": "Patience-0",
+   "route": "kokoro",
+   "voice": "Patience",
+   "file": "Patience-0.kokoro.wav",
+   "seconds": 5.18
+  },
+  {
+   "key": "Patience-1",
+   "route": "kokoro",
+   "voice": "Patience",
+   "file": "Patience-1.kokoro.wav",
+   "seconds": 6.45
+  },
+  {
+   "key": "Patience-2",
+   "route": "kokoro",
+   "voice": "Patience",
+   "file": "Patience-2.kokoro.wav",
+   "seconds": 7.43
+  },
+  {
+   "key": "Patience-3",
+   "route": "kokoro",
+   "voice": "Patience",
+   "file": "Patience-3.kokoro.wav",
+   "seconds": 4.94
+  },
+  {
+   "key": "Emmanuel-0",
+   "route": "poto",
+   "voice": "Emmanuel",
+   "file": "Emmanuel-0.poto.wav",
+   "seconds": 4.74
+  },
+  {
+   "key": "Emmanuel-1",
+   "route": "poto",
+   "voice": "Emmanuel",
+   "file": "Emmanuel-1.poto.wav",
+   "seconds": 5.78
+  },
+  {
+   "key": "Emmanuel-2",
+   "route": "poto",
+   "voice": "Emmanuel",
+   "file": "Emmanuel-2.poto.wav",
+   "seconds": 5.74
+  },
+  {
+   "key": "Emmanuel-3",
+   "route": "poto",
+   "voice": "Emmanuel",
+   "file": "Emmanuel-3.poto.wav",
+   "seconds": 6.43
+  },
+  {
+   "key": "Emmanuel-0",
+   "route": "kokoro",
+   "voice": "Emmanuel",
+   "file": "Emmanuel-0.kokoro.wav",
+   "seconds": 4.9
+  },
+  {
+   "key": "Emmanuel-1",
+   "route": "kokoro",
+   "voice": "Emmanuel",
+   "file": "Emmanuel-1.kokoro.wav",
+   "seconds": 5.68
+  },
+  {
+   "key": "Emmanuel-2",
+   "route": "kokoro",
+   "voice": "Emmanuel",
+   "file": "Emmanuel-2.kokoro.wav",
+   "seconds": 5.74
+  },
+  {
+   "key": "Emmanuel-3",
+   "route": "kokoro",
+   "voice": "Emmanuel",
+   "file": "Emmanuel-3.kokoro.wav",
+   "seconds": 6.47
+  },
+  {
+   "key": "Isaac-0",
+   "route": "poto",
+   "voice": "Isaac",
+   "file": "Isaac-0.poto.wav",
+   "seconds": 6.59
+  },
+  {
+   "key": "Isaac-1",
+   "route": "poto",
+   "voice": "Isaac",
+   "file": "Isaac-1.poto.wav",
+   "seconds": 6.68
+  },
+  {
+   "key": "Isaac-2",
+   "route": "poto",
+   "voice": "Isaac",
+   "file": "Isaac-2.poto.wav",
+   "seconds": 5.04
+  },
+  {
+   "key": "Isaac-3",
+   "route": "poto",
+   "voice": "Isaac",
+   "file": "Isaac-3.poto.wav",
+   "seconds": 5.88
+  },
+  {
+   "key": "Isaac-0",
+   "route": "kokoro",
+   "voice": "Isaac",
+   "file": "Isaac-0.kokoro.wav",
+   "seconds": 6.53
+  },
+  {
+   "key": "Isaac-1",
+   "route": "kokoro",
+   "voice": "Isaac",
+   "file": "Isaac-1.kokoro.wav",
+   "seconds": 6.68
+  },
+  {
+   "key": "Isaac-2",
+   "route": "kokoro",
+   "voice": "Isaac",
+   "file": "Isaac-2.kokoro.wav",
+   "seconds": 5.04
+  },
+  {
+   "key": "Isaac-3",
+   "route": "kokoro",
+   "voice": "Isaac",
+   "file": "Isaac-3.kokoro.wav",
+   "seconds": 5.82
+  },
+  {
+   "key": "Ebenezer-0",
+   "route": "poto",
+   "voice": "Ebenezer",
+   "file": "Ebenezer-0.poto.wav",
+   "seconds": 5.52
+  },
+  {
+   "key": "Ebenezer-1",
+   "route": "poto",
+   "voice": "Ebenezer",
+   "file": "Ebenezer-1.poto.wav",
+   "seconds": 6.16
+  },
+  {
+   "key": "Ebenezer-2",
+   "route": "poto",
+   "voice": "Ebenezer",
+   "file": "Ebenezer-2.poto.wav",
+   "seconds": 5.42
+  },
+  {
+   "key": "Ebenezer-3",
+   "route": "poto",
+   "voice": "Ebenezer",
+   "file": "Ebenezer-3.poto.wav",
+   "seconds": 5.07
+  },
+  {
+   "key": "Ebenezer-0",
+   "route": "kokoro",
+   "voice": "Ebenezer",
+   "file": "Ebenezer-0.kokoro.wav",
+   "seconds": 5.46
+  },
+  {
+   "key": "Ebenezer-1",
+   "route": "kokoro",
+   "voice": "Ebenezer",
+   "file": "Ebenezer-1.kokoro.wav",
+   "seconds": 5.99
+  },
+  {
+   "key": "Ebenezer-2",
+   "route": "kokoro",
+   "voice": "Ebenezer",
+   "file": "Ebenezer-2.kokoro.wav",
+   "seconds": 5.45
+  },
+  {
+   "key": "Ebenezer-3",
+   "route": "kokoro",
+   "voice": "Ebenezer",
+   "file": "Ebenezer-3.kokoro.wav",
+   "seconds": 5.05
+  },
+  {
+   "key": "Bright-0",
+   "route": "poto",
+   "voice": "Bright",
+   "file": "Bright-0.poto.wav",
+   "seconds": 7.13
+  },
+  {
+   "key": "Bright-1",
+   "route": "poto",
+   "voice": "Bright",
+   "file": "Bright-1.poto.wav",
+   "seconds": 6.23
+  },
+  {
+   "key": "Bright-2",
+   "route": "poto",
+   "voice": "Bright",
+   "file": "Bright-2.poto.wav",
+   "seconds": 6.78
+  },
+  {
+   "key": "Bright-3",
+   "route": "poto",
+   "voice": "Bright",
+   "file": "Bright-3.poto.wav",
+   "seconds": 6.77
+  },
+  {
+   "key": "Bright-0",
+   "route": "kokoro",
+   "voice": "Bright",
+   "file": "Bright-0.kokoro.wav",
+   "seconds": 7.25
+  },
+  {
+   "key": "Bright-1",
+   "route": "kokoro",
+   "voice": "Bright",
+   "file": "Bright-1.kokoro.wav",
+   "seconds": 6.34
+  },
+  {
+   "key": "Bright-2",
+   "route": "kokoro",
+   "voice": "Bright",
+   "file": "Bright-2.kokoro.wav",
+   "seconds": 6.95
+  },
+  {
+   "key": "Bright-3",
+   "route": "kokoro",
+   "voice": "Bright",
+   "file": "Bright-3.kokoro.wav",
+   "seconds": 6.68
   }
- ]
+ ],
+ "phonemes": {
+  "Grace-0": {
+   "poto": "ˈɑːkplɛ and ɐdˈiːm ɑː tɹɐdˈɪʃənə‍l ɡɑːnˈe‍ən dˈɪʃɪz pətˈɪkjʊləli pˈɒpjʊləɹ ɐmˌʌŋ ðɪʲ ˈɛvɛ pˈiːpə‍l ɒvðə vˈɔltɑː ɹˈiːd‍ʒən",
+   "kokoro": "ˈækpə‍l ænd ɐdˈiːm ɑː‍ɹ tɹɐdˈɪʃənə‍l ɡˈæne‍ɪən dˈɪʃᵻz pɚtˈɪkjʊlɚli pˈɑːpjʊlɚɹ ɐmˌʌŋ ðə jˈuː pˈiːpə‍l ʌvðə vˈo‍ʊltɚ ɹˈiːd‍ʒən"
+  },
+  "Grace-1": {
+   "poto": "ɑːjˈiʃɑː mˈə‍ʊdi hɐz ˈɪʃuːd ɐ stˈɜːn wˈɔːnɪŋ tə pˈɒpjʊlə ɡɑːnˈe‍ən fˈɛtɪʃ pɹˈiːstɛs nˈɑːnɑːɹ ɑːɡɹˈɑːdɑː",
+   "kokoro": "a‍ɪˈiːʃə mˈo‍ʊdi hɐz ˈɪʃuːd ɐ stˈɜːn wˈɔː‍ɹnɪŋ tə pˈɑːpjʊlɚ ɡˈæne‍ɪən fˈɛɾɪʃ pɹˈiːstəs nˈɑːnə ˈæɡɹɐdˌɑː"
+  },
+  "Grace-2": {
+   "poto": "fˈɒlə‍ʊɪŋ hɪz ˌɪnstəlˈe‍ɪʃən hiː hɐz ɐsjˈuːmd ðə stˈuːl nˈe‍ɪm nˈiːʲ otˈɑːŋkɑːɹ ˌokɑːɹˈid‍ʒɑːɹ ɑːkɹˈɑːmɑːn",
+   "kokoro": "fˈɑːlo‍ʊɪŋ hɪz ˌɪnstəlˈe‍ɪʃən hiː hɐz ɐsˈuːmd ðə stˈuːl nˈe‍ɪm nˈɪʲa‍ɪʲ ɑːtˈæŋkə ɑːkˈe‍ɪd‍ʒə ˈækɹæmən"
+  },
+  "Grace-3": {
+   "poto": "tˈiːm ɡˈɑːnə wɜː dɪskwˈɒlɪfˌa‍ɪd ˌɒn ɪnfɹˈɪnd‍ʒmənt ɪnðə fˈa‍ɪnə‍l t‍ʃˈe‍ɪnd‍ʒə‍ʊvə fɹɒm d‍ʒˈə‍ʊsəf odˈuɹo mˈɑːnu and d‍ʒˈə‍ʊsəf ɑːmˈoɑː",
+   "kokoro": "tˈiːm ɡˈɑːnə wɜː dɪskwˈɑːlᵻfˌa‍ɪd ˌɔn ɪnfɹˈɪnd‍ʒmənt ɪnðə fˈa‍ɪnə‍l t‍ʃˈe‍ɪnd‍ʒo‍ʊvɚ fɹʌm d‍ʒˈo‍ʊsəf o‍ʊd‍ʒˈuːɹo‍ʊ mˈɑːnjuː ænd d‍ʒˈo‍ʊsəf ˈæmo‍ʊ"
+  },
+  "Comfort-0": {
+   "poto": "ðe‍ɪ ɑː skˈɪpə kɹˈɪst‍ʃən ɑːmˈoɑː wˈɪnɪfɹɪd ntˈumi and sˈandɹə mɛnsˈimɑːɹ owˈusu",
+   "kokoro": "ðe‍ɪ ɑː‍ɹ skˈɪpɚ kɹˈɪst‍ʃən ˈæmo‍ʊ wˈɪnɪfɹɪd ˈɛntˈuːmi ænd sˈændɹə mˈɛnsɪmə o‍ʊˈuːsuː"
+  },
+  "Comfort-1": {
+   "poto": "hiːʲ ɪz ðə sˈʌn ɒvðə lˈe‍ɪt ˈɛmə nˈɑːɹ ˌɑːmelˈei tɑːɡˈɔe and hˈe‍ɪlz fɹʌmðɪʲ ɑːdˈɑːnsi ɹˈɔ‍ɪə‍l lˈɪnɪʲɪd‍ʒ",
+   "kokoro": "hiːʲ ɪz ðə sˈʌn ʌvðə lˈe‍ɪt ˈɛmə nˈɑː ɐmˈiːli tˈæɡo‍ʊ ænd hˈe‍ɪlz fɹʌmðɪʲ ɐdˈæns ɹˈɔ‍ɪə‍l lˈɪnɪʲɪd‍ʒ"
+  },
+  "Comfort-2": {
+   "poto": "dˈɪdɪ bɪɡˈan hɪz jˈuːθ kəɹˈi‍ə wɪð bˈolɡɑː sˈɒkə mˈastəz at bˌolɡɑːtˈɑːŋɡɑːɹ ɪnðɪʲ ˌʌpəɹ ˈiːst ɹˈiːd‍ʒən ɒv ɡˈɑːnə",
+   "kokoro": "dˈɪdi bɪɡˈæn hɪz jˈuːθ kɚɹˈɪ‍ɹ wɪð bˈɑːlɡə sˈɑːkɚ mˈæstɚz æt bˌɑːlɡɐtˈæŋɡə ɪnðɪʲ ˌʌpɚɹ ˈiːst ɹˈiːd‍ʒən ʌv ɡˈɑːnə"
+  },
+  "Comfort-3": {
+   "poto": "ðɪʲ ɐɹˈɛsts əkˈɜːd ɪn blɔːkˈɔfe and ˌɑːwɑːkpedˈome bˈə‍ʊθ sˈʌbɜːbz ɒv ˌɑːdidˈome ɪnðə sˈɛntɹə‍l tˈɔŋɡu dˈɪstɹɪkt",
+   "kokoro": "ðɪʲ ɚɹˈɛsts əkˈɜːd ɪn blˈɔː‍ɹkɔː‍ɹf ænd ɐwˈækpɪdˌo‍ʊm bˈo‍ʊθ sˈʌbɜːbz ʌv ˈædɪdˌo‍ʊm ɪnðə sˈɛntɹə‍l tˈʌŋɡuː dˈɪstɹɪkt"
+  },
+  "Mercy-0": {
+   "poto": "ðɪs ɹˈuːlɪŋ wɒz wˈa‍ɪdliʲ ɪntˈɜːpɹɪtɪd az ɐ vˌalɪdˈe‍ɪʃən ɒv nˈiːʲ ɑːdˈɑːmɑː lˈɑːtseɪz klˈe‍ɪm tə ðə ɡˈɑː mˈɑːntsɛ tˈa‍ɪtə‍l",
+   "kokoro": "ðɪs ɹˈuːlɪŋ wʌz wˈa‍ɪdliʲ ɪntˈɜːpɹɪɾᵻd æz ɐ vˌælɪdˈe‍ɪʃən ʌv nˈɪʲa‍ɪ ædˈɑːmə lˈætsiʲᵻz klˈe‍ɪm tə ðə ɡˈɑː mˈæntsi tˈa‍ɪɾə‍l"
+  },
+  "Mercy-1": {
+   "poto": "ˈadəmz ˌɑːtidˈɑːnɑːɹ ˈɒlɪvə wˈʌn ɡˈə‍ʊld wˌa‍ɪl ofˈoɹiʲ ɑːpˈiʲɑː d‍ʒˈə‍ʊl and sˈamjuːl owˈusu wˈʌn sˈɪlvə and bɹˈɒnz ɹɪspˈɛktɪvli",
+   "kokoro": "ˈædəmz ˌæɾɪdˈɑːnə ˈɑːlɪvɚ wˈʌn ɡˈo‍ʊld wˌa‍ɪl ɑːfˈɔːɹiʲ ɐpˈa‍ɪ‍ə d‍ʒˈo‍ʊl ænd sˈæmjuːl o‍ʊˈuːsuː wˈʌn sˈɪlvɚ ænd bɹˈɑːnz ɹᵻspˈɛktɪvli"
+  },
+  "Mercy-2": {
+   "poto": "d‍ʒˌuɑːbɛnhˈɛnɛ nˈɑːnɑːɹ otˈuo sˌeɹebˈuo ɹˌə‍ʊmən tˈuː wɒz ɐmˌʌŋ ðə t‍ʃˈiːfs hˌuː plˈiːdɪd ˌɒn ðe‍ə bɪhˈɑːf",
+   "kokoro": "d‍ʒjˈuːe‍ɪbənhˌiːn nˈɑːnə ˈɑːt‍ʃuːˌo‍ʊ səɹˈiːbo‍ʊ ɹˌo‍ʊmən tˈuː wʌz ɐmˌʌŋ ðə t‍ʃˈiːfs hˌuː plˈiːdᵻd ˌɔn ðɛ‍ɹ bᵻhˈæf"
+  },
+  "Mercy-3": {
+   "poto": "t‍ʃiɹˈɑːno ɪz ɐ mˈa‍ɪnɪŋ kəmjˈuːnɪtiʲ ɪnðə bibiʲˈɑːniʲ ɑːhwˈesɔ bˈɛka‍ɪ mjuːnˈɪsɪpˈalɪtiʲ ɪnðə wˈɛstən nˈɔːθ",
+   "kokoro": "ka‍ɪɹˈɑːno‍ʊ ɪz ɐ mˈa‍ɪnɪŋ kəmjˈuːnᵻɾiʲ ɪnðə ba‍ɪbɪʲˈɑːniʲ ɑːwˈiːso‍ʊ bᵻkˈa‍ɪ mjuːnˈɪsɪpˈælᵻɾiʲ ɪnðə wˈɛstɚn nˈɔː‍ɹθ"
+  },
+  "Patience-0": {
+   "poto": "ðə kənsˈa‍ɪnmənt əɹˈɪd‍ʒɪnˌe‍ɪtɪd fɹɒm kwˈɑːhu fodˈoɑː and wɒz ɒn ɹˈuːt tə tˈoːɡoː θɹuː ɑːflˈɑːɹɔ",
+   "kokoro": "ðə kənsˈa‍ɪnmənt ɚɹˈɪd‍ʒᵻnˌe‍ɪɾᵻd fɹʌm kwˈɑːhuː fədˈo‍ʊə ænd wʌz ɑːn ɹˈuːt tə tˈo‍ʊɡo‍ʊ θɹuː ɐflˈa‍ʊ"
+  },
+  "Patience-1": {
+   "poto": "fˈɒlə‍ʊɪŋ ðə fˈa‍ɪt ɡɑːnˈe‍ənz hɐvbɪn ɹɪkˈɔːlɪŋ ðə sˈɪmɪləɹ ɐnˌa‍ɪəlˈe‍ɪʃən bˈɑːsti sˈami‍ə hˈandɪd tə bˈukɔm bˈɑːŋku",
+   "kokoro": "fˈɑːlo‍ʊɪŋ ðə fˈa‍ɪt ɡˈæne‍ɪənz hɐvbɪn ɹᵻkˈɔːlɪŋ ðə sˈɪmɪlɚɹ ɐnˌa‍ɪəlˈe‍ɪʃən bˈæsti sˈæmɪ‍ɹ hˈændᵻd tə bjˈuːkəm bˈæŋkuː"
+  },
+  "Patience-2": {
+   "poto": "ðɪʲ ˌɛnpˌiːpˈiːz sˈɒlɒmən kwˈɑːme ˌɑːsumˈɑːdu ɪz kəntˈɛstɪŋ ðɪʲ ˌɑːkwɑːtˈiʲɑː sˈiːt ɐɡˈɛnst ðɪʲ ˌɛndˌiːsˈiːz bˈɜːnəd bˌɪdiʲˈɑːkɔ",
+   "kokoro": "ðɪʲ ˌɛnpˌiːpˈiːz sˈɑːlɑːmən kwˈe‍ɪm ɐsuːmˈɑːduː ɪz kəntˈɛstɪŋ ðɪʲ ækwˈe‍ɪʃə sˈiːt ɐɡˈɛnst ðɪʲ ˌɛndˌiːsˈiːz bɜːnˈɑː‍ɹd bᵻdɪʲˈɑːko‍ʊ"
+  },
+  "Patience-3": {
+   "poto": "ˈɛsɑː pˈe‍ɪɪn ɡˈe‍ɪv bˈɜːθ tə bˌɪdiʲˈɑːkɔ ntˈim hˌuː bɪkˌe‍ɪm ðə səksˈɛsəɹ ɒv ˈopon pˈe‍ɪɪn",
+   "kokoro": "ˈɛsə pˈe‍ɪɪn ɡˈe‍ɪv bˈɜːθ tə bᵻdɪʲˈɑːko‍ʊ ˈɛntˈɪm hˌuː bɪkˌe‍ɪm ðə səksˈɛsɚɹ ʌv ˈɑːpɑːn pˈe‍ɪɪn"
+  },
+  "Emmanuel-0": {
+   "poto": "volˈivo tə dˈɔrfɔɹ ˌɑːdidˈome bɹˈɪd‍ʒ əkɹˌɒs ðə vˈɔltɑː ɹˈɪvə hˈazbiːn ɹɪvˈa‍ɪvd",
+   "kokoro": "vəlˈɪvo‍ʊ tə dˈɔː‍ɹfɚɹ ˈædɪdˌo‍ʊm bɹˈɪd‍ʒ əkɹˌɑːs ðə vˈo‍ʊltɚ ɹˈɪvɚ hˈæzbiːn ɹᵻvˈa‍ɪvd"
+  },
+  "Emmanuel-1": {
+   "poto": "ʃˈɑːtɑː bˈandə‍l wɒz bˈɔːn ˈidɹis fɪrdˈɑːɹus ɐ nˈɔːðənə fɹɒm ɐ smˈɔːl vˈɪlɪd‍ʒ kˈɔːld kɑːɹˈɑːɡɑː",
+   "kokoro": "ʃˈæɾə bˈændə‍l wʌz bˈɔː‍ɹn ˈa‍ɪdɹɪs fˈɜːda‍ʊs ɐ nˈɔː‍ɹðɚnɚ fɹʌm ɐ smˈɔːl vˈɪlɪd‍ʒ kˈɔːld kæɹˈɑːɡə"
+  },
+  "Emmanuel-2": {
+   "poto": "ðə sˈe‍ɪvjə t‍ʃˈɜːt‍ʃ ɒv ɡˈɑːnə hɐz nˈe‍ɪmd ɐ skˈuːl at bonwˈiɹe ˈaftə hɜː nˈɑːnɑː kɔnˈɑːdu sˈe‍ɪvjə skˈuːl",
+   "kokoro": "ðə sˈe‍ɪvjɚ t‍ʃˈɜːt‍ʃ ʌv ɡˈɑːnə hɐz nˈe‍ɪmd ɐ skˈuːl æt bˈɑːnwa‍ɪ‍ɚɹ ˈæftɚ hɜː nˈɑːnə kənˈɑːduː sˈe‍ɪvjɚ skˈuːl"
+  },
+  "Emmanuel-3": {
+   "poto": "bˌɔfɔˈɑːkwɑː tˈɑːno hav sˈɛvəd tˈa‍ɪz wɪð kˈə‍ʊt‍ʃ fɹˈɪmpɔŋ mˈɑːnso ˈaftə fˈɔː mˈʌnθs at ðə hˈɛlm ðə klˈʌb ɐnˈa‍ʊnst",
+   "kokoro": "bˈɑːfo‍ʊkwə tˈɑːno‍ʊ hæv sˈɛvɚd tˈa‍ɪz wɪð kˈo‍ʊt‍ʃ fɹˈɪmpɑːŋ mˈænso‍ʊ ˈæftɚ fˈɔː‍ɹ mˈʌnθs æt ðə hˈɛlm ðə klˈʌb ɐnˈa‍ʊnst"
+  },
+  "Isaac-0": {
+   "poto": "mˈɛmbəɹ ɒv pˈɑːləmənt fɔː bˈɔku sˈɛntɹə‍l mɑːhˈɑːmɑːɹ ˌɑːjɑːɹˈiɡɑː hɐz ɹɪpˈɔːtɪd ðat θɹˈiː mˈɔː pˈiːpə‍l wɜː kˈɪld ɪn bˈɔku",
+   "kokoro": "mˈɛmbɚɹ ʌv pˈɑː‍ɹləmənt fɔː‍ɹ bˈɔːkuː sˈɛntɹə‍l mæhˈɑːmə ˈa‍ɪʲɑː‍ɹɹˌɪɡə hɐz ɹᵻpˈɔː‍ɹɾᵻd ðæt θɹˈiː mˈɔː‍ɹ pˈiːpə‍l wɜː kˈɪld ɪn bˈɔːkuː"
+  },
+  "Isaac-1": {
+   "poto": "ɡɑːnˈe‍ən mjuːzˈɪʃən stˈoːnbwɔ‍ɪ hɐz tˈe‍ɪkən lˈiːɡə‍l ˈakʃən ɐɡˈɛnst pˌɒlɪtˈɪʃən and ˌɛntətˈe‍ɪnmənt kɹˈɪtɪk bˈɑːbɑː sˈɑːdik",
+   "kokoro": "ɡˈæne‍ɪən mjuːzˈɪʃən stˈo‍ʊnbwɔ‍ɪ hɐz tˈe‍ɪkən lˈiːɡə‍l ˈækʃən ɐɡˈɛnst pˌɑːlɪtˈɪʃən ænd ˌɛntɚtˈe‍ɪnmənt kɹˈɪɾɪk bˈɑːbə sˈædɪk"
+  },
+  "Isaac-2": {
+   "poto": "ɡˈɑːnə lˈɛd‍ʒənd and fˈɔːməɹ ɐsˈant kotˈoko stˈɑːɹ opˈoku ˌɑːfɹijˈiʲe hɐz pˈast ɐwˈe‍ɪ",
+   "kokoro": "ɡˈɑːnə lˈɛd‍ʒənd ænd fˈɔː‍ɹmɚɹ ɐsˈænt kətˈo‍ʊko‍ʊ stˈɑːɹ ˈɑːpo‍ʊkˌuː ˈæfɹɪji hɐz pˈæst ɐwˈe‍ɪ"
+  },
+  "Isaac-3": {
+   "poto": "ɡɑːnˈe‍ənz ˌɒn sˈə‍ʊʃə‍l mˈiːdiːʲəɹ ɑː jˈuːləd‍ʒˌa‍ɪzɪŋ vˈɛtəɹən hˈa‍ɪla‍ɪf mjuːzˈɪʃən nˈɑːnɑː kwˈɑːme ɑːmpˈɑːdu",
+   "kokoro": "ɡˈæne‍ɪənz ˌɔn sˈo‍ʊʃə‍l mˈiːdiːʲə ɑː‍ɹ jˈuːləd‍ʒˌa‍ɪzɪŋ vˈɛɾɚɹən hˈa‍ɪla‍ɪf mjuːzˈɪʃən nˈɑːnə kwˈe‍ɪm æmpˈɑːduː"
+  },
+  "Ebenezer-0": {
+   "poto": "ðɪʲ ˌɪnfəmˈe‍ɪʃən mˈɪnɪstə kˈɔd‍ʒɔ ˈɔpɔŋ ŋkɹˈumɑː sˈɛz ɡˈʌvənmənt ɪz wˈɜːkɪŋ tə stˈe‍ɪbəlˌa‍ɪz ðə sˈiːdi",
+   "kokoro": "ðɪʲ ˌɪnfɚmˈe‍ɪʃən mˈɪnɪstɚ kˈo‍ʊd‍ʒo‍ʊ ˈɑːpɑːŋ ˈɛŋkɹˈuːmə sˈɛz ɡˈʌvɚnmənt ɪz wˈɜːkɪŋ tə stˈe‍ɪbəlˌa‍ɪz ðə sˈɛdi"
+  },
+  "Ebenezer-1": {
+   "poto": "ðɪʲ ˈədɔm tˌiːvˈiː fufˈuo pˈɑːtiʲ ɪz ˌʌndəwˈe‍ɪ at ðə fˈɔːkɔːt ɒvðə mˌʌltɪmˈiːdiːʲə ɡɹˈuːp at kˌɔkɔmlˈɛmlɛ ɪn ˈəkɹɑː",
+   "kokoro": "ðɪʲ ɐdˈɑːm tˌiːvˈiː fjˈuːfjuːˌo‍ʊ pˈɑː‍ɹɾiʲ ɪz ˌʌndɚwˈe‍ɪ æt ðə fˈɔː‍ɹkɔː‍ɹt ʌvðə mˌʌltɪmˈiːdiːʲə ɡɹˈuːp æt kˈɑːkəmlˌɛmə‍l ɪn ˈækɹɐ"
+  },
+  "Ebenezer-2": {
+   "poto": "ɐ kˈɔːt hɐz ˈɔːdəd mɑːwˈɑːkɔ fˈast fˈuːd ɪn ˈəkɹɑː tə pˈe‍ɪ ˌə‍ʊvəɹ ɐ mˈɪli‍ən ɡˈɑːnə sˈiːdiz ɪn dˈamɪd‍ʒɪz",
+   "kokoro": "ɐ kˈɔː‍ɹt hɐz ˈɔː‍ɹdɚd mɑː‍ɹwˈɑːko‍ʊ fˈæst fˈuːd ɪn ˈækɹɐ tə pˈe‍ɪ ˌo‍ʊvɚɹ ɐ mˈɪli‍ən ɡˈɑːnə sˈɛdiz ɪn dˈæmɪd‍ʒᵻz"
+  },
+  "Ebenezer-3": {
+   "poto": "sˌɑːkodˈiʲe ʃˈɑːtɑː wˈɑːle and stˈoːnbwɔ‍ɪ ɑːɹ ʌndˈa‍ʊtɪdli θɹˈiːʲ ɒv ɡˈɑːnəz bˈɪɡɪst mjuːzˈɪʃənz",
+   "kokoro": "sˈɑː‍ɹko‍ʊdi ʃˈæɾə wˈe‍ɪl ænd stˈo‍ʊnbwɔ‍ɪ ɑːɹ ʌndˈa‍ʊɾᵻdli θɹˈiːʲ ʌv ɡˈɑːnəz bˈɪɡɪst mjuːzˈɪʃənz"
+  },
+  "Bright-0": {
+   "poto": "ˌododˌodiʲodˈiʲo ˌɛmpˈiːʲ ˈɛdwɪn nˈiː lˈɑːnte vˌɑːndəpˈuːje wɪl nˌɒt ɹɪtˈɜːn tə pˈɑːləmənt ˈaftə ðɪʲ ɛkspəɹˈe‍ɪʃən ɒv hɪz kˈʌɹənt tˈɜːm",
+   "kokoro": "ˌo‍ʊdədˌo‍ʊdɪʲˈo‍ʊdɪʲˌo‍ʊ ˌɛmpˈiːʲ ˈɛdwɪn nˈɪʲa‍ɪ lˈænt vˌændɚpˈuːj wɪl nˌɑːt ɹᵻtˈɜːn tə pˈɑː‍ɹləmənt ˈæftɚ ðɪʲ ɛkspɚɹˈe‍ɪʃən ʌv hɪz kˈɜːɹənt tˈɜːm"
+  },
+  "Bright-1": {
+   "poto": "ɡɑːnˈe‍ən sˈɪŋə kkˈofi mˈɑːntɛ hɐz ɐknˈɒlɪd‍ʒd bˈisɑː kˈe‍ɪdˈe‍ɪz ˈɪnfluːəns ɒnðə hˈa‍ɪla‍ɪf mjˈuːzɪk ʒˈɒnɹə",
+   "kokoro": "ɡˈæne‍ɪən sˈɪŋɚ kˈo‍ʊfi mˈænt hɐz ɐknˈɑːlɪd‍ʒd bˈiːsə kˈe‍ɪdˈe‍ɪz ˈɪnfluːəns ɔnðə hˈa‍ɪla‍ɪf mjˈuːzɪk ʒˈɑːnɹə"
+  },
+  "Bright-2": {
+   "poto": "fˈɔːmə pɹˈɛzɪdənt d‍ʒˈɒn dɹɑːmˈɑːni mɑːhˈɑːmɑː hɐz kəndˈɛmd ðə kˈɪlɪŋ ɒv ˈal d‍ʒazˈi‍əɹə d‍ʒˈɜːnəlˌɪst ʃˈa‍ɪ‍əɹiːn ˈɑːbu ˈɑːklɛ",
+   "kokoro": "fˈɔː‍ɹmɚ pɹˈɛzɪdənt d‍ʒˈɑːn dɹæmˈɑːni mæhˈɑːmə hɐz kəndˈɛmd ðə kˈɪlɪŋ ʌv ˈæl d‍ʒæzˈɪɹə d‍ʒˈɜːnəlˌɪst ʃˈa‍ɪ‍ɚɹiːn ˈæbuː ˈækle‍ɪ"
+  },
+  "Bright-3": {
+   "poto": "ɡɑːnˈe‍ən lˈiːɡə‍l lˈuːmɪnəɹi tsˈɑːtsu tsikˈɑːtɑː hɐz pɹəpˈə‍ʊzd ɐ səlˈuːʃən tə ɡˈɑːnəz ɹɪkˈɜːɹɪŋ sˈiːdi dɪpɹˌiːʃɪʲˈe‍ɪʃən",
+   "kokoro": "ɡˈæne‍ɪən lˈiːɡə‍l lˈuːmɪnˌɛɹi tsˈætsuː tsɪkˈɑːɾə hɐz pɹəpˈo‍ʊzd ɐ səlˈuːʃən tə ɡˈɑːnəz ɹᵻkˈɜːɹɪŋ sˈɛdi dᵻpɹˌiːʃɪʲˈe‍ɪʃən"
+  }
+ },
+ "voices": [
+  "Grace",
+  "Comfort",
+  "Mercy",
+  "Patience",
+  "Emmanuel",
+  "Isaac",
+  "Ebenezer",
+  "Bright"
+ ],
+ "scripts": {
+  "Grace": [
+   "Grace-0",
+   "Grace-1",
+   "Grace-2",
+   "Grace-3"
+  ],
+  "Comfort": [
+   "Comfort-0",
+   "Comfort-1",
+   "Comfort-2",
+   "Comfort-3"
+  ],
+  "Mercy": [
+   "Mercy-0",
+   "Mercy-1",
+   "Mercy-2",
+   "Mercy-3"
+  ],
+  "Patience": [
+   "Patience-0",
+   "Patience-1",
+   "Patience-2",
+   "Patience-3"
+  ],
+  "Emmanuel": [
+   "Emmanuel-0",
+   "Emmanuel-1",
+   "Emmanuel-2",
+   "Emmanuel-3"
+  ],
+  "Isaac": [
+   "Isaac-0",
+   "Isaac-1",
+   "Isaac-2",
+   "Isaac-3"
+  ],
+  "Ebenezer": [
+   "Ebenezer-0",
+   "Ebenezer-1",
+   "Ebenezer-2",
+   "Ebenezer-3"
+  ],
+  "Bright": [
+   "Bright-0",
+   "Bright-1",
+   "Bright-2",
+   "Bright-3"
+  ]
+ },
+ "annotations": {
+  "Grace-0": [
+   [
+    "Akple",
+    true
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "Ademe",
+    false
+   ],
+   [
+    "are",
+    false
+   ],
+   [
+    "traditional",
+    false
+   ],
+   [
+    "Ghanaian",
+    true
+   ],
+   [
+    "dishes",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "particularly",
+    false
+   ],
+   [
+    "popular",
+    false
+   ],
+   [
+    "among",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Ewe",
+    true
+   ],
+   [
+    "people",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Volta",
+    true
+   ],
+   [
+    "Region",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Grace-1": [
+   [
+    "Ayisha",
+    true
+   ],
+   [
+    "Modi",
+    false
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "issued",
+    false
+   ],
+   [
+    "a",
+    false
+   ],
+   [
+    "stern",
+    false
+   ],
+   [
+    "warning",
+    false
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "popular",
+    false
+   ],
+   [
+    "Ghanaian",
+    true
+   ],
+   [
+    "fetish",
+    false
+   ],
+   [
+    "priestess",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Nana",
+    true
+   ],
+   [
+    "Agradaa",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Grace-2": [
+   [
+    "Following",
+    false
+   ],
+   [
+    "his",
+    false
+   ],
+   [
+    "installation",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "he",
+    false
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "assumed",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "stool",
+    false
+   ],
+   [
+    "name",
+    false
+   ],
+   [
+    "Nii",
+    true
+   ],
+   [
+    "Otanka",
+    true
+   ],
+   [
+    "Okaija",
+    true
+   ],
+   [
+    "Akraman",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Grace-3": [
+   [
+    "Team",
+    false
+   ],
+   [
+    "Ghana",
+    true
+   ],
+   [
+    "were",
+    false
+   ],
+   [
+    "disqualified",
+    false
+   ],
+   [
+    "on",
+    false
+   ],
+   [
+    "infringement",
+    false
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "final",
+    false
+   ],
+   [
+    "changeover",
+    false
+   ],
+   [
+    "from",
+    false
+   ],
+   [
+    "Joseph",
+    false
+   ],
+   [
+    "Oduro",
+    true
+   ],
+   [
+    "Manu",
+    true
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "Joseph",
+    false
+   ],
+   [
+    "Amoah",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Comfort-0": [
+   [
+    "They",
+    false
+   ],
+   [
+    "are",
+    false
+   ],
+   [
+    "skipper",
+    false
+   ],
+   [
+    "Christian",
+    false
+   ],
+   [
+    "Amoah",
+    true
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Winifred",
+    false
+   ],
+   [
+    "Ntumi",
+    true
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "Sandra",
+    false
+   ],
+   [
+    "Mensimah",
+    true
+   ],
+   [
+    "Owusu",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Comfort-1": [
+   [
+    "He",
+    false
+   ],
+   [
+    "is",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "son",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "late",
+    false
+   ],
+   [
+    "Emma",
+    false
+   ],
+   [
+    "Naa",
+    true
+   ],
+   [
+    "Ameley",
+    true
+   ],
+   [
+    "Tagoe",
+    true
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "hails",
+    false
+   ],
+   [
+    "from",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Adanse",
+    true
+   ],
+   [
+    "Royal",
+    false
+   ],
+   [
+    "lineage",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Comfort-2": [
+   [
+    "Didi",
+    true
+   ],
+   [
+    "began",
+    false
+   ],
+   [
+    "his",
+    false
+   ],
+   [
+    "youth",
+    false
+   ],
+   [
+    "career",
+    false
+   ],
+   [
+    "with",
+    false
+   ],
+   [
+    "Bolga",
+    true
+   ],
+   [
+    "Soccer",
+    false
+   ],
+   [
+    "Masters",
+    false
+   ],
+   [
+    "at",
+    false
+   ],
+   [
+    "Bolgatanga",
+    true
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Upper",
+    false
+   ],
+   [
+    "East",
+    false
+   ],
+   [
+    "Region",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "Ghana",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Comfort-3": [
+   [
+    "The",
+    false
+   ],
+   [
+    "arrests",
+    false
+   ],
+   [
+    "occurred",
+    false
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "Blorkorfe",
+    true
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "Awakpedome",
+    true
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "both",
+    false
+   ],
+   [
+    "suburbs",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "Adidome",
+    true
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Central",
+    false
+   ],
+   [
+    "Tongu",
+    true
+   ],
+   [
+    "District",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Mercy-0": [
+   [
+    "This",
+    false
+   ],
+   [
+    "ruling",
+    false
+   ],
+   [
+    "was",
+    false
+   ],
+   [
+    "widely",
+    false
+   ],
+   [
+    "interpreted",
+    false
+   ],
+   [
+    "as",
+    false
+   ],
+   [
+    "a",
+    false
+   ],
+   [
+    "validation",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "Nii",
+    true
+   ],
+   [
+    "Adama",
+    true
+   ],
+   [
+    "Latse's",
+    false
+   ],
+   [
+    "claim",
+    false
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Ga",
+    true
+   ],
+   [
+    "Mantse",
+    true
+   ],
+   [
+    "title",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Mercy-1": [
+   [
+    "Adams",
+    false
+   ],
+   [
+    "Atidana",
+    true
+   ],
+   [
+    "Oliver",
+    false
+   ],
+   [
+    "won",
+    false
+   ],
+   [
+    "gold",
+    false
+   ],
+   [
+    "while",
+    false
+   ],
+   [
+    "Ofori",
+    true
+   ],
+   [
+    "Appiah",
+    true
+   ],
+   [
+    "Joel",
+    false
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "Samuel",
+    false
+   ],
+   [
+    "Owusu",
+    true
+   ],
+   [
+    "won",
+    false
+   ],
+   [
+    "silver",
+    false
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "bronze",
+    false
+   ],
+   [
+    "respectively",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Mercy-2": [
+   [
+    "Juabenhene",
+    true
+   ],
+   [
+    "Nana",
+    true
+   ],
+   [
+    "Otuo",
+    true
+   ],
+   [
+    "Sereboe",
+    true
+   ],
+   [
+    "II",
+    false
+   ],
+   [
+    "was",
+    false
+   ],
+   [
+    "among",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "chiefs",
+    false
+   ],
+   [
+    "who",
+    false
+   ],
+   [
+    "pleaded",
+    false
+   ],
+   [
+    "on",
+    false
+   ],
+   [
+    "their",
+    false
+   ],
+   [
+    "behalf",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Mercy-3": [
+   [
+    "Chirano",
+    true
+   ],
+   [
+    "is",
+    false
+   ],
+   [
+    "a",
+    false
+   ],
+   [
+    "mining",
+    false
+   ],
+   [
+    "community",
+    false
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Bibiani",
+    true
+   ],
+   [
+    "Ahweso",
+    true
+   ],
+   [
+    "Bekai",
+    true
+   ],
+   [
+    "Municipality",
+    false
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Western",
+    false
+   ],
+   [
+    "North",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Patience-0": [
+   [
+    "The",
+    false
+   ],
+   [
+    "consignment",
+    false
+   ],
+   [
+    "originated",
+    false
+   ],
+   [
+    "from",
+    false
+   ],
+   [
+    "Kwahu",
+    true
+   ],
+   [
+    "Fodoa",
+    true
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "was",
+    false
+   ],
+   [
+    "en",
+    false
+   ],
+   [
+    "route",
+    false
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "Togo",
+    true
+   ],
+   [
+    "through",
+    false
+   ],
+   [
+    "Aflao",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Patience-1": [
+   [
+    "Following",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "fight",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Ghanaians",
+    true
+   ],
+   [
+    "have",
+    false
+   ],
+   [
+    "been",
+    false
+   ],
+   [
+    "recalling",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "similar",
+    false
+   ],
+   [
+    "annihilation",
+    false
+   ],
+   [
+    "Bastie",
+    true
+   ],
+   [
+    "Samir",
+    false
+   ],
+   [
+    "handed",
+    false
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "Bukom",
+    true
+   ],
+   [
+    "Banku",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Patience-2": [
+   [
+    "The",
+    false
+   ],
+   [
+    "NPP's",
+    false
+   ],
+   [
+    "Solomon",
+    false
+   ],
+   [
+    "Kwame",
+    true
+   ],
+   [
+    "Asumadu",
+    true
+   ],
+   [
+    "is",
+    false
+   ],
+   [
+    "contesting",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Akwatia",
+    true
+   ],
+   [
+    "seat",
+    false
+   ],
+   [
+    "against",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "NDC's",
+    false
+   ],
+   [
+    "Bernard",
+    false
+   ],
+   [
+    "Bediako",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Patience-3": [
+   [
+    "Esa",
+    true
+   ],
+   [
+    "Payin",
+    false
+   ],
+   [
+    "gave",
+    false
+   ],
+   [
+    "birth",
+    false
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "Bediako",
+    true
+   ],
+   [
+    "Ntim",
+    true
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "who",
+    false
+   ],
+   [
+    "became",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "successor",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "Opon",
+    true
+   ],
+   [
+    "Payin",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Emmanuel-0": [
+   [
+    "Volivo",
+    true
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "Dorfor",
+    true
+   ],
+   [
+    "Adidome",
+    true
+   ],
+   [
+    "Bridge",
+    false
+   ],
+   [
+    "across",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "Volta",
+    true
+   ],
+   [
+    "River",
+    false
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "been",
+    false
+   ],
+   [
+    "revived",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Emmanuel-1": [
+   [
+    "Shatta",
+    true
+   ],
+   [
+    "Bandle",
+    false
+   ],
+   [
+    "was",
+    false
+   ],
+   [
+    "born",
+    false
+   ],
+   [
+    "Idris",
+    true
+   ],
+   [
+    "Firdaus",
+    true
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "a",
+    false
+   ],
+   [
+    "Northerner",
+    false
+   ],
+   [
+    "from",
+    false
+   ],
+   [
+    "a",
+    false
+   ],
+   [
+    "small",
+    false
+   ],
+   [
+    "village",
+    false
+   ],
+   [
+    "called",
+    false
+   ],
+   [
+    "Karaga",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Emmanuel-2": [
+   [
+    "The",
+    false
+   ],
+   [
+    "Saviour",
+    false
+   ],
+   [
+    "Church",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "Ghana",
+    true
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "named",
+    false
+   ],
+   [
+    "a",
+    false
+   ],
+   [
+    "school",
+    false
+   ],
+   [
+    "at",
+    false
+   ],
+   [
+    "Bonwire",
+    true
+   ],
+   [
+    "after",
+    false
+   ],
+   [
+    "her",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Nana",
+    true
+   ],
+   [
+    "Konadu",
+    true
+   ],
+   [
+    "Saviour",
+    false
+   ],
+   [
+    "School",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Emmanuel-3": [
+   [
+    "Bofoakwa",
+    true
+   ],
+   [
+    "Tano",
+    true
+   ],
+   [
+    "have",
+    false
+   ],
+   [
+    "severed",
+    false
+   ],
+   [
+    "ties",
+    false
+   ],
+   [
+    "with",
+    false
+   ],
+   [
+    "coach",
+    false
+   ],
+   [
+    "Frimpong",
+    true
+   ],
+   [
+    "Manso",
+    true
+   ],
+   [
+    "after",
+    false
+   ],
+   [
+    "four",
+    false
+   ],
+   [
+    "months",
+    false
+   ],
+   [
+    "at",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "helm",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "club",
+    false
+   ],
+   [
+    "announced",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Isaac-0": [
+   [
+    "Member",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "Parliament",
+    false
+   ],
+   [
+    "for",
+    false
+   ],
+   [
+    "Bawku",
+    true
+   ],
+   [
+    "Central",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Mahama",
+    true
+   ],
+   [
+    "Ayariga",
+    true
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "reported",
+    false
+   ],
+   [
+    "that",
+    false
+   ],
+   [
+    "three",
+    false
+   ],
+   [
+    "more",
+    false
+   ],
+   [
+    "people",
+    false
+   ],
+   [
+    "were",
+    false
+   ],
+   [
+    "killed",
+    false
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "Bawku",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Isaac-1": [
+   [
+    "Ghanaian",
+    true
+   ],
+   [
+    "musician",
+    false
+   ],
+   [
+    "Stonebwoy",
+    true
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "taken",
+    false
+   ],
+   [
+    "legal",
+    false
+   ],
+   [
+    "action",
+    false
+   ],
+   [
+    "against",
+    false
+   ],
+   [
+    "politician",
+    false
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "entertainment",
+    false
+   ],
+   [
+    "critic",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Baba",
+    true
+   ],
+   [
+    "Sadiq",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Isaac-2": [
+   [
+    "Ghana",
+    true
+   ],
+   [
+    "legend",
+    false
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "former",
+    false
+   ],
+   [
+    "Asante",
+    false
+   ],
+   [
+    "Kotoko",
+    true
+   ],
+   [
+    "star",
+    false
+   ],
+   [
+    "Opoku",
+    true
+   ],
+   [
+    "Afriyie",
+    true
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "passed",
+    false
+   ],
+   [
+    "away",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Isaac-3": [
+   [
+    "Ghanaians",
+    true
+   ],
+   [
+    "on",
+    false
+   ],
+   [
+    "social",
+    false
+   ],
+   [
+    "media",
+    false
+   ],
+   [
+    "are",
+    false
+   ],
+   [
+    "eulogising",
+    false
+   ],
+   [
+    "veteran",
+    false
+   ],
+   [
+    "Highlife",
+    false
+   ],
+   [
+    "musician",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Nana",
+    true
+   ],
+   [
+    "Kwame",
+    true
+   ],
+   [
+    "Ampadu",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Ebenezer-0": [
+   [
+    "The",
+    false
+   ],
+   [
+    "Information",
+    false
+   ],
+   [
+    "Minister",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Kojo",
+    true
+   ],
+   [
+    "Oppong",
+    true
+   ],
+   [
+    "Nkrumah",
+    true
+   ],
+   [
+    "says",
+    false
+   ],
+   [
+    "government",
+    false
+   ],
+   [
+    "is",
+    false
+   ],
+   [
+    "working",
+    false
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "stabilise",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "cedi",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Ebenezer-1": [
+   [
+    "The",
+    false
+   ],
+   [
+    "Adom",
+    true
+   ],
+   [
+    "TV",
+    false
+   ],
+   [
+    "Fufuo",
+    true
+   ],
+   [
+    "Party",
+    false
+   ],
+   [
+    "is",
+    false
+   ],
+   [
+    "underway",
+    false
+   ],
+   [
+    "at",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "forecourt",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "The",
+    false
+   ],
+   [
+    "Multimedia",
+    false
+   ],
+   [
+    "Group",
+    false
+   ],
+   [
+    "at",
+    false
+   ],
+   [
+    "Kokomlemle",
+    true
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "Accra",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Ebenezer-2": [
+   [
+    "A",
+    false
+   ],
+   [
+    "court",
+    false
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "ordered",
+    false
+   ],
+   [
+    "Marwako",
+    true
+   ],
+   [
+    "Fast",
+    false
+   ],
+   [
+    "Food",
+    false
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "Accra",
+    true
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "pay",
+    false
+   ],
+   [
+    "over",
+    false
+   ],
+   [
+    "a",
+    false
+   ],
+   [
+    "million",
+    false
+   ],
+   [
+    "Ghana",
+    true
+   ],
+   [
+    "cedis",
+    true
+   ],
+   [
+    "in",
+    false
+   ],
+   [
+    "damages",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Ebenezer-3": [
+   [
+    "Sarkodie",
+    true
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "Shatta",
+    true
+   ],
+   [
+    "Wale",
+    true
+   ],
+   [
+    "and",
+    false
+   ],
+   [
+    "Stonebwoy",
+    true
+   ],
+   [
+    "are",
+    false
+   ],
+   [
+    "undoubtedly",
+    false
+   ],
+   [
+    "three",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "Ghana's",
+    false
+   ],
+   [
+    "biggest",
+    false
+   ],
+   [
+    "musicians",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Bright-0": [
+   [
+    "Odododiodio",
+    true
+   ],
+   [
+    "MP",
+    false
+   ],
+   [
+    "Edwin",
+    false
+   ],
+   [
+    "Nii",
+    true
+   ],
+   [
+    "Lante",
+    true
+   ],
+   [
+    "Vanderpuye",
+    true
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "will",
+    false
+   ],
+   [
+    "not",
+    false
+   ],
+   [
+    "return",
+    false
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "Parliament",
+    false
+   ],
+   [
+    "after",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "expiration",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "his",
+    false
+   ],
+   [
+    "current",
+    false
+   ],
+   [
+    "term",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Bright-1": [
+   [
+    "Ghanaian",
+    true
+   ],
+   [
+    "singer",
+    false
+   ],
+   [
+    "Kofi",
+    true
+   ],
+   [
+    "Mante",
+    true
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "acknowledged",
+    false
+   ],
+   [
+    "Bisa",
+    true
+   ],
+   [
+    "Kdei's",
+    false
+   ],
+   [
+    "influence",
+    false
+   ],
+   [
+    "on",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "highlife",
+    false
+   ],
+   [
+    "music",
+    false
+   ],
+   [
+    "genre",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Bright-2": [
+   [
+    "Former",
+    false
+   ],
+   [
+    "President",
+    false
+   ],
+   [
+    ",",
+    false
+   ],
+   [
+    "John",
+    false
+   ],
+   [
+    "Dramani",
+    true
+   ],
+   [
+    "Mahama",
+    true
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "condemned",
+    false
+   ],
+   [
+    "the",
+    false
+   ],
+   [
+    "killing",
+    false
+   ],
+   [
+    "of",
+    false
+   ],
+   [
+    "Al",
+    false
+   ],
+   [
+    "Jazeera",
+    false
+   ],
+   [
+    "journalist",
+    false
+   ],
+   [
+    "Shireen",
+    false
+   ],
+   [
+    "Abu",
+    true
+   ],
+   [
+    "Akleh",
+    true
+   ],
+   [
+    ".",
+    false
+   ]
+  ],
+  "Bright-3": [
+   [
+    "Ghanaian",
+    true
+   ],
+   [
+    "legal",
+    false
+   ],
+   [
+    "luminary",
+    false
+   ],
+   [
+    "Tsatsu",
+    true
+   ],
+   [
+    "Tsikata",
+    true
+   ],
+   [
+    "has",
+    false
+   ],
+   [
+    "proposed",
+    false
+   ],
+   [
+    "a",
+    false
+   ],
+   [
+    "solution",
+    false
+   ],
+   [
+    "to",
+    false
+   ],
+   [
+    "Ghana's",
+    false
+   ],
+   [
+    "recurring",
+    false
+   ],
+   [
+    "Cedi",
+    true
+   ],
+   [
+    "depreciation",
+    false
+   ],
+   [
+    ".",
+    false
+   ]
+  ]
+ }
 }
