@@ -44,7 +44,7 @@ class KokoroBackend(Backend):
                     # Set explicitly rather than left to the model's metadata, so a
                     # future model naming a different voice cannot silently
                     # phonemise against a dictionary we are not patching.
-                    lang=self.config.get("espeak_voice", "en-us"),
+                    lang=self.espeak_voice,
                 ),
                 provider=provider,
                 num_threads=num_threads,
@@ -55,4 +55,4 @@ class KokoroBackend(Backend):
     def _prepare(self, gen) -> None:
         # Belt and braces: the config carries lang already, but a per-call value
         # cannot be overridden by a metadata fallback.
-        gen.extra = {"lang": self.config.get("espeak_voice", "en-us")}
+        gen.extra = {"lang": self.espeak_voice}

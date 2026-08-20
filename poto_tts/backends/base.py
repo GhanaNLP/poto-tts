@@ -51,6 +51,11 @@ class Backend:
         espeak_data: The patched `espeak-ng-data`. None uses the one in the voice
             directory, and warns if it is not a poto-tts dictionary.
         voice: Speaker name or id. None takes the config's first recommendation.
+        espeak_voice: Override the espeak voice the engine phonemises with. The
+            voice's config names the right one and there is normally no reason to
+            change it -- but the choice is what decides which dictionary applies,
+            so it is exposed for experiments (e.g. 'lfn', whose five-vowel
+            orthography reads Ghanaian spellings closer than English does).
         speed: Rate multiplier.
         num_threads: onnxruntime intra-op threads.
         provider: 'cpu', 'cuda' or 'coreml'.
@@ -65,6 +70,7 @@ class Backend:
         repo_id: Optional[str] = None,
         espeak_data: Optional[Union[str, Path]] = None,
         voice: Optional[Union[str, int]] = None,
+        espeak_voice: Optional[str] = None,
         speed: float = 1.0,
         num_threads: int = 2,
         provider: str = "cpu",
@@ -102,6 +108,7 @@ class Backend:
             self.espeak_data = found
 
         self.voice = voice if voice is not None else self._default_voice()
+        self.espeak_voice = espeak_voice or self.config.get("espeak_voice", "en-us")
         self.speed = speed
         config = self._config(num_threads=num_threads, provider=provider, debug=debug)
         if not config.validate():
