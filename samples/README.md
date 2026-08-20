@@ -10,6 +10,14 @@ What each file says, so you can listen without opening a manifest.
 | `mixed` | Yaw Mensah drove from Adenta through Madina to Kotoka. |
 | `question` | Have you told Ama that the meeting at Ridge is postponed? |
 
+> **Only `kokoro_engh/` is how poto-tts works.** The other directories are the
+> record of getting there -- respelling through lfn, the names-only dictionary, two
+> Piper checkpoints. None of them is a supported option any more and the code for
+> them has been removed: `respell.py`, `frontend.py` and the `respell=` argument are
+> gone, because keeping three front-ends meant three ways for a user to get a worse
+> result. The audio stays because the decisions were made by listening, and someone
+> should be able to check that.
+
 ## Sets
 
 | folder | what it is |
@@ -116,3 +124,61 @@ outputs sit at 0.04-0.07, i.e. quieter than what they learned from, which is
 what an undertrained VITS does. Kokoro sits near 0.22. Judge the voices, not
 the volume -- or normalise before comparing.
 
+
+## kokoro_engh/ -- the lexicon, on any platform, without Python
+
+Compare against `kokoro_lfn_respelled/`. Same texts, same speaker. Plain text,
+`lang=en-gh`, a dictionary and a voice file: no respelling, no lfn, no Python.
+Built with `poto-tts dict --ghanaian-stress`.
+
+**One lexicon, one rule.** All 104,623 lexicon words are entered and stressed by the
+Ghanaian penultimate rule, whether or not English spells them the same way. There is
+no membership test in the build and no second class of entry. That replaced a split
+which excluded the 35,425 words English also has -- which is why `Yaw` was read as
+the nautical term /jˈɔː/ though the lexicon plainly holds [j, a, w].
+
+**The lexicon decides pronunciation; rules may not contradict it.** This is the
+constraint that shaped the voice file, and it was learned the hard way. `replace`
+rules fire on every word *after* dictionary lookup, so a rule whose source is a
+phoneme our entries can emit does not fill a gap in the lexicon -- it overwrites
+what the lexicon said, on every word the lexicon knows, invisibly. An earlier
+version collapsed E to e, O: to o, I to i and @ to a, and so overrode the lexicon's
+ɛ, ɔ, ɪ and ə everywhere: `Okuapɛnhɛnɛ` flattened to /okwapenhene/, and `the` came
+out /da/ while the lexicon records [ð, ə]. Those rules are gone, and
+`tests/test_espeak_voice.py` fails if one comes back.
+
+So the vowels are now the lexicon's own -- something the Python route cannot manage,
+because lfn has five vowels and Akan has seven:
+
+    Okuapenhene   python /ˌokwapenhˈene/   en-gh /ˌokwapɛnhˈɛnɛ/
+    Kwabena       python /kwabˈina/        en-gh /kwabˈɪna/
+    the           python /dˈa/             en-gh /ðə/
+    through       python /tɾˈu/            en-gh /θɾˈuː/
+
+The last two are the lexicon asserting itself against a rule I had invented:
+th-stopping is real in Ghanaian English, but the lexicon spells `the` with ð and
+`through` with θ, and that call is the lexicon's to make word by word.
+
+Three rules do touch known words, and none changes a phoneme the lexicon chose:
+`t# -> t` restores the /t/ in `Achimota` and `meeting` after espeak flaps it
+post-lexically; `r -> *` reads the lexicon's /r/ as a tap rather than espeak's
+approximant ɹ; `A: -> a` reconciles two espeak phoneme tables, since mnemonics.py
+writes Ghanaian /a/ for the American inventory and this voice reads it with the
+British one.
+
+Known artefacts, neither of them a lexicon problem:
+
+- **Intrusive r.** British rules insert a linking `r-` after ə or ɑː before a
+  vowel-initial word, so `the Okuapenhene` is /ðəɹ okwapɛnhɛnɛ/. `r-` is inserted
+  after the replace stage, so no rule can remove it. `A: -> a` removes the ɑː
+  case; the ə case remains, and `ghana` really is [ɡ, ɑː, n, ə] in the lexicon.
+  The American table has no intrusive r but flaps every intervocalic /t/, also
+  post-lexically and also unremovable, which is why the base here is British.
+- **The velar nasal.** `replace` has no positional condition, so the rule that
+  writes `ng` word-finally and `n` elsewhere has no equivalent. `Nyankpani` keeps
+  its ŋ.
+
+Two words are wrong because the lexicon has them wrong, and are left that way
+deliberately: `have` is [h, a, v, ɛ] so it reads /hˈavɛ/, and `Kofi` is
+[k, k, o, f, i] so it reads /kkˈofi/ in every route, Python included. Both are fixes
+for `ghana-english-g2p`.

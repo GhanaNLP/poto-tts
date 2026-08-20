@@ -73,16 +73,21 @@ import subprocess
 import sys
 import tempfile
 import urllib.request
+from typing import Optional
+from typing import Optional
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from .inject import stress_index
+from .inject import FUNCTION_WORDS
 from .mnemonics import MnemonicError, injection
 
 DICTSOURCE = "https://raw.githubusercontent.com/espeak-ng/espeak-ng/{version}/dictsource/{name}"
 # A general English word list, used to decide what *not* to touch. espeak already
 # pronounces English correctly, including its stress; the Ghanaian realisation of
 # an English word is the acoustic model's job.
+VOICE_FILE = "en-gh"
+
 ENGLISH_WORDS = "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
 # en_extra is ours to write. The others are espeak's own sources and have to be
 # present, or the compile produces a dictionary with only our entries in it.
@@ -229,8 +234,24 @@ def english_vocabulary(cache: Path) -> set:
     return {w.strip().lower() for w in cache.read_text(encoding="utf-8").split() if w.strip()}
 
 
-def build_entries(quiet: bool = False):
-    """Lexicon -> {word: mnemonics} for every word, before selection."""
+def build_entries(quiet: bool = False, english: Optional[set] = None,
+                  uniform_stress: bool = False):
+    """Lexicon -> {word: mnemonics} for every word, before selection.
+
+    Two ways to place stress, and they encode different claims about what the
+    lexicon is.
+
+    `english` is the English vocabulary, and passing it means: a word that English
+    also has keeps English rhythm, because espeak read it from its own dictionary.
+    'yesterday' stays YES-ter-day and only its vowels become Ghanaian.
+
+    `uniform_stress` means the opposite, and simpler: every word in the lexicon is
+    a Ghanaian word, so every word takes the Ghanaian penultimate rule, whether or
+    not English happens to spell it the same way. 'yesterday' becomes
+    /jɛstadˈei/. One lexicon, one rule, no membership test anywhere in the build --
+    which is the point, since the alternative is two classes of entry that behave
+    differently for reasons a reader of the dictionary cannot see.
+    """
     from .inject import _require_lexicon
 
     _require_lexicon()
@@ -255,7 +276,23 @@ def build_entries(quiet: bool = False):
         if not phones:
             continue
         try:
-            mnemonics = injection(phones, stress_at=stress_index(phones, stock.get(word)))
+            # Function words carry no stress mark, the same way GhanaInjector
+            # leaves them alone. They are grammar rather than vocabulary: their
+            # weight depends on the sentence, and a dictionary entry can only
+            # record the citation form. Marked, every 'and', 'at' and 'to' in a
+            # sentence takes a beat of its own and the line reads like a list.
+            if word.lower() in FUNCTION_WORDS:
+                at = None
+            else:
+                # `None` for the English IPA is what forces the penultimate rule:
+                # stress_index only borrows espeak's stress when it is given
+                # espeak's pronunciation to borrow from.
+                at = stress_index(
+                    phones,
+                    None if uniform_stress else stock.get(word),
+                    known_english=(not uniform_stress
+                                   and bool(english) and word in english))
+            mnemonics = injection(phones, stress_at=at)
         except MnemonicError:
             unmappable.append(word)
             continue
@@ -377,6 +414,9 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="poto-tts dict",
                                  description=__doc__.splitlines()[0])
     ap.add_argument("--out", required=True, help="directory to write espeak-ng-data into")
+    ap.add_argument("--ghanaian-stress", action="store_true",
+                    help="stress every entry by the Ghanaian penultimate rule, "
+                         "including words English also has (implies --all-words)")
     ap.add_argument("--all-words", action="store_true",
                     help="write entries for ordinary English words too, giving the "
                          "whole utterance Ghanaian vowels rather than only the "
@@ -417,10 +457,18 @@ def main(argv=None) -> int:
     shutil.copytree(base, staging)
     print(f"copied {base} -> {out}", file=sys.stderr)
 
-    print("building entries from the Ghana lexicon", file=sys.stderr)
-    entries, unmappable, stock = build_entries()
+    # Loaded before the entries are built, not after: an entry for an English word
+    # has to take espeak's stress rather than the Ghanaian penultimate rule, and
+    # that decision is made while the mnemonic is written.
+    print("loading the English vocabulary", file=sys.stderr)
+    english = english_vocabulary(out.parent / "words_alpha.txt")
+    print(f"  {len(english)} English words", file=sys.stderr)
 
-    if args.all_words:
+    print("building entries from the Ghana lexicon", file=sys.stderr)
+    entries, unmappable, stock = build_entries(
+        english=english, uniform_stress=args.ghanaian_stress)
+
+    if args.all_words or args.ghanaian_stress:
         # Every lexicon word gets an entry, so ordinary English is spoken with
         # Ghanaian vowels too -- /kɔnvɛnʃən/ rather than /kənvˈɛnʃən/. This is the
         # accent applied to the whole utterance rather than only to Ghanaian words.
@@ -435,10 +483,7 @@ def main(argv=None) -> int:
         print(f"  --all-words: entries for all {len(differing)} lexicon words",
               file=sys.stderr)
     else:
-        print("loading the English vocabulary", file=sys.stderr)
-        english = english_vocabulary(out.parent / "words_alpha.txt")
         print(f"  {len(english)} English words will be left to espeak", file=sys.stderr)
-
         differing = {w: m for w, m in entries.items() if w not in english}
         print(f"  {len(differing)} of {len(entries)} lexicon words are not English "
               f"and get an entry", file=sys.stderr)
@@ -481,6 +526,21 @@ def main(argv=None) -> int:
             cwd=work, capture_output=True, text=True,
         )
         print(compiled.stdout.strip() or compiled.stderr.strip(), file=sys.stderr)
+
+    # The voice file goes in beside the dictionary, because the two are one
+    # deliverable: the entries decide pronunciation and the voice decides how
+    # espeak reads them back. Shipping the dictionary without the voice leaves a
+    # data directory that works and mispronounces everything slightly, which is
+    # the failure mode this project exists to avoid.
+    voice_src = Path(__file__).resolve().parent.parent / "espeak" / VOICE_FILE
+    if voice_src.is_file():
+        voice_dst = staging / "lang" / "gmw" / VOICE_FILE
+        voice_dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy(voice_src, voice_dst)
+        print(f"installed voice {VOICE_FILE} -> lang/gmw/{VOICE_FILE}", file=sys.stderr)
+    else:
+        print(f"WARNING: no voice file at {voice_src}; the dictionary alone will be "
+              f"read with espeak's own English vowels", file=sys.stderr)
 
     print(f"\nentries written: {len(differing)}", file=sys.stderr)
     if unmappable:

@@ -119,3 +119,42 @@ def test_english_stress_can_be_disabled():
 def test_coverage(inj):
     assert inj.coverage("Kwabena Achimota Nkrumah") == 1.0
     assert inj.coverage("zzzqx flurbleglonk") == 0.0
+
+
+# -- whose stress does an entry take? -------------------------------------
+#
+# These pin down the rule that lets ordinary English words carry lexicon
+# pronunciations at all. Before it, the decision was made by comparing consonant
+# skeletons, and espeak writes tie-barred diphthongs and affricates with a
+# zero-width joiner that `segment` returns as its own phone -- so the skeletons
+# never matched for any English word containing one, the Ghanaian penultimate
+# rule took over, and 'yesterday' came out /jɛstadˈei/. Stripping that joiner
+# looks like the fix and is not: it makes 'Kwabena' match too, and espeak's guess
+# /kwˈeɪbnə/ has consonants that line up while its vowels do not, so the name
+# takes espeak's initial stress -- KWA-bina. Membership in the English vocabulary
+# is the question that separates the two cases.
+
+
+def test_english_word_takes_espeak_stress_despite_the_joiner():
+    """'yesterday' is initial-stressed in English; espeak writes /deɪ/ with a
+    zero-width joiner, which used to defeat the skeleton comparison."""
+    phones = ["j", "ɛ", "s", "t", "a", "d", "e", "i"]
+    espeak = "jˈɛstɚdˌe‍ɪ"
+    at = stress_index(phones, espeak, known_english=True)
+    assert at == nuclei(phones)[0], "English stress should land on the first nucleus"
+
+
+def test_ghanaian_name_keeps_penultimate_even_when_skeletons_agree():
+    """espeak's guess at 'Kwabena' has the same consonants as the lexicon, so a
+    skeleton test accepts it. It must still not donate its stress."""
+    phones = ["k", "w", "a", "b", "ɪ", "n", "a"]
+    espeak = "kwˈe‍ɪbnə"
+    at = stress_index(phones, espeak, known_english=False)
+    assert at == nuclei(phones)[-2], "a name espeak guessed at keeps penultimate stress"
+
+
+def test_known_english_does_not_override_a_syllable_count_mismatch():
+    """The count check still guards: espeak reading a different number of
+    syllables means the ordinal mapping is meaningless, whatever the word is."""
+    phones = ["k", "w", "a", "b", "ɪ", "n", "a"]          # three nuclei
+    assert stress_index(phones, "kwˈebn", known_english=True) == nuclei(phones)[-2]

@@ -25,7 +25,7 @@ rather than only the ones a dictionary has entries for.
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Union
+from typing import List, Union
 
 from .. import voices as _voices
 from .base import Backend
@@ -36,40 +36,26 @@ __all__ = ["KokoroBackend"]
 class KokoroBackend(Backend):
     """Kokoro v1.0 on sherpa-onnx, speaking Ghanaian English.
 
-    Args:
-        respell: Send every word through the Ghanaian front-end. False sends the text
-            as it stands, which is worth doing once to hear the difference -- with
-            `espeak_voice='en-us'` that is stock Kokoro.
-        lexicon: Extra word -> IPA entries for the front-end, e.g.
-            `{'Owusu': 'o w u s u'}` for a name the lexicon lacks or gets wrong.
-        Everything else is as `Backend`.
+    There is nothing to configure about the front-end, because there is no
+    front-end here: the text is passed through untouched and the pronunciation
+    comes from the voice's `espeak-ng-data` -- the Ghana lexicon compiled into
+    espeak's dictionary, read by the `en-gh` accent voice. That is what makes the
+    result identical on Android, iOS and WebAssembly, which cannot run Python.
+
+    To change a pronunciation, change the lexicon or the voice file and rebuild the
+    dictionary: see docs/CUSTOMISING.md. Args are as `Backend`.
     """
 
     name = "kokoro"
 
-    def __init__(self, *args, respell: bool = True,
-                 lexicon: Optional[Dict[str, str]] = None, **kw):
-        # lfn unless told otherwise: it is the notation the front-end writes, and
-        # pairing respelled text with an English voice would read the spellings as
-        # English words.
-        kw.setdefault("espeak_voice", "lfn" if respell else None)
-        self.respell = respell
-        self._lexicon_overrides = lexicon
-        self._frontend = None
-        super().__init__(*args, **kw)
-
-    @property
-    def frontend(self):
-        """The Ghanaian front-end, built on first use (it loads a 104k-word lexicon)."""
-        if self._frontend is None:
-            from ..frontend import GhanaFrontend
-
-            self._frontend = GhanaFrontend(lexicon=self._lexicon_overrides)
-        return self._frontend
-
     def prepare_text(self, text: str) -> str:
-        """What will actually be sent to sherpa-onnx. Useful for debugging a name."""
-        return self.frontend(text) if self.respell else text
+        """What will actually be sent to sherpa-onnx.
+
+        The text itself, unchanged. Kept because callers and the REST API use it to
+        show what the engine receives, and because it used to rewrite every word --
+        a reader who remembers that should see plainly that it no longer does.
+        """
+        return text
 
     # -- voices ------------------------------------------------------------
 
@@ -109,10 +95,9 @@ class KokoroBackend(Backend):
         return self.recommended[0] if self.recommended else self.voices[0]
 
     def speak(self, text: str, **kw):
-        """Respell, then synthesise. See `prepare_text` for what gets sent."""
         if not text.strip():
             raise ValueError("nothing to speak")
-        return super().speak(self.prepare_text(text), **kw)
+        return super().speak(text, **kw)
 
     def _config(self, *, num_threads: int, provider: str, debug: bool):
         s = self._sherpa

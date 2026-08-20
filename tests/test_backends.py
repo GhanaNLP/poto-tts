@@ -23,9 +23,6 @@ def make(**kw):
     backend = object.__new__(KokoroBackend)
     backend.config = {"files": {"model": "onnx/model.onnx", "tokens": "tokens.txt"},
                       "licence": {"model": "Apache-2.0", "commercial_use": True}}
-    backend.respell = kw.get("respell", True)
-    backend._frontend = kw.get("frontend")
-    backend._lexicon_overrides = None
     return backend
 
 
@@ -102,19 +99,16 @@ def test_default_voice_is_a_recommended_one():
     assert make()._default_voice() in make().recommended
 
 
-# -- respelling ------------------------------------------------------------
+# -- the text reaches the model untouched ----------------------------------
 
 
-def test_prepare_text_respells_by_default():
-    backend = make(frontend=lambda text: "kwabina")
-    assert backend.prepare_text("Kwabena") == "kwabina"
-
-
-def test_respell_can_be_turned_off():
-    """With espeak_voice='en-us' this is stock Kokoro, which is how the comparison
-    in samples/ was made."""
-    backend = make(respell=False, frontend=lambda text: "SHOULD NOT BE USED")
-    assert backend.prepare_text("Kwabena") == "Kwabena"
+def test_prepare_text_changes_nothing():
+    """There is no front-end in this library any more. Pronunciation lives in the
+    voice's espeak-ng-data -- the lexicon compiled into espeak's dictionary, read
+    by the en-gh accent voice -- which is why Android and iOS get the same result.
+    A rewrite here would be a Python-only behaviour and a divergence."""
+    text = "Kwabena went to Achimota"
+    assert make().prepare_text(text) == text
 
 
 # -- audio output ----------------------------------------------------------

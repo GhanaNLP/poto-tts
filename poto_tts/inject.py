@@ -82,7 +82,8 @@ def nuclei(phones: Sequence[str]) -> List[int]:
     return out
 
 
-def stress_index(phones: Sequence[str], english_ipa: Optional[str] = None) -> Optional[int]:
+def stress_index(phones: Sequence[str], english_ipa: Optional[str] = None,
+                 known_english: bool = False) -> Optional[int]:
     """Which phone to mark with primary stress, or None if there is no vowel.
 
     `english_ipa` is espeak's pronunciation of the word's spelling. It is used
@@ -105,12 +106,24 @@ def stress_index(phones: Sequence[str], english_ipa: Optional[str] = None) -> Op
         mark = english_ipa.find(_STRESS_MARK)
         if mark >= 0:
             english = [i for i, ch in enumerate(english_ipa) if _english_nucleus(english_ipa, i)]
-            if len(english) == len(positions) and _same_shape(phones, english_ipa):
+            # `known_english` means the word is in the English vocabulary, so
+            # espeak is reading it from its own dictionary rather than guessing
+            # from spelling, and its stress is the English stress we want to
+            # keep. The skeleton test is a proxy for exactly that, and only a
+            # proxy: it rejects 'yesterday' (espeak writes the diphthong with a
+            # zero-width joiner, which no lexicon entry can match) and accepts
+            # 'Kwabena' (whose consonants happen to line up while the vowels
+            # are wrong). Asking the vocabulary directly gets both right.
+            trusted = known_english or _same_shape(phones, english_ipa)
+            if len(english) == len(positions) and trusted:
                 ordinal = sum(1 for i in english if i < mark)
                 if 0 <= ordinal < len(positions):
                     return positions[ordinal]
 
     return positions[-2]
+
+
+_JOINERS = "‍‌͜͢͡"
 
 
 def _consonants(phones: Sequence[str]) -> str:

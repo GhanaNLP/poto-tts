@@ -1,58 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="430" viewBox="0 0 720 430"
-     font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 290" width="980" height="290"
+     font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+     fill="currentColor" role="img">
+  <title>How poto-tts decides a pronunciation</title>
   <style>
-    .box   { fill: none; stroke: #ddd5c8; stroke-width: 1.5; rx: 8; }
-    .step  { font-size: 13px; font-weight: 600; fill: #16130f; }
-    .note  { font-size: 11.5px; fill: #6b6357; }
-    .data  { font-size: 13px; font-family: ui-monospace, "SF Mono", Menlo, monospace; fill: #8a2f1d; }
-    .arrow { stroke: #ddd5c8; stroke-width: 1.5; fill: none; marker-end: url(#a); }
-    .head  { fill: #ddd5c8; }
-    @media (prefers-color-scheme: dark) {
-      .box, .arrow { stroke: #37322a; }
-      .step { fill: #f2ede4; }
-      .note { fill: #a09889; }
-      .data { fill: #e0836b; }
-      .head { fill: #37322a; }
-    }
+    .box  { fill: none; stroke: currentColor; stroke-width: 1.5; opacity: .5; }
+    .grp  { fill: none; stroke: currentColor; stroke-width: 1.5; opacity: .25;
+            stroke-dasharray: 5 4; }
+    .lbl  { font-size: 14.5px; font-weight: 600; }
+    .sub  { font-size: 11.5px; opacity: .62; }
+    .tag  { font-size: 10px; opacity: .45; letter-spacing: .1em; }
+    .fl   { stroke: currentColor; stroke-width: 1.5; opacity: .45; fill: none; }
   </style>
   <defs>
-    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-      <path d="M0,0 L10,5 L0,10 z" class="head"/>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="currentColor" opacity=".45"/>
     </marker>
   </defs>
 
-  <!-- input -->
-  <text x="20" y="26" class="step">your text</text>
-  <text x="140" y="26" class="data">Kwabena went to Achimota</text>
-  <path d="M75,36 L75,62" class="arrow"/>
+  <text class="lbl" x="14" y="146">your text</text>
+  <text class="sub" x="14" y="164">unchanged</text>
+  <line class="fl" x1="98" y1="141" x2="140" y2="141" marker-end="url(#ar)"/>
 
-  <!-- per-word lookup -->
-  <rect x="20" y="66" width="680" height="96" class="box"/>
-  <text x="36" y="88" class="step">every word, one at a time</text>
-  <text x="36" y="112" class="note">in the Ghanaian lexicon?</text>
-  <text x="200" y="112" class="note">yes  →  its Ghanaian pronunciation</text>
-  <text x="470" y="112" class="data">/kwabɪna/</text>
-  <text x="200" y="136" class="note">no   →  ask espeak for the English one</text>
-  <text x="470" y="136" class="data">/ɪnfleɪʃənɛɹi/</text>
-  <text x="36" y="154" class="note">either way, what comes out is a pronunciation, not a spelling</text>
-  <path d="M75,162 L75,190" class="arrow"/>
+  <rect class="grp" x="142" y="34" width="500" height="214" rx="10"/>
+  <text class="tag" x="158" y="56">ESPEAK-NG</text>
 
-  <!-- respell -->
-  <rect x="20" y="194" width="680" height="62" class="box"/>
-  <text x="36" y="216" class="step">write that pronunciation in lfn letters</text>
-  <text x="36" y="238" class="note">one letter per sound, so it can be read back exactly</text>
-  <text x="410" y="230" class="data">kwabina went tu atximota</text>
-  <path d="M75,256 L75,284" class="arrow"/>
+  <rect class="box" x="166" y="72" width="198" height="56" rx="7"/>
+  <text class="lbl" x="182" y="96">Ghana lexicon</text>
+  <text class="sub" x="182" y="114">every word it knows</text>
 
-  <!-- espeak -->
-  <rect x="20" y="288" width="680" height="62" class="box"/>
-  <text x="36" y="310" class="step">espeak reads the lfn spelling</text>
-  <text x="36" y="332" class="note">this is the only way phonemes can reach the model</text>
-  <text x="410" y="324" class="data">kwabˈina wˈent tu atʃimˈota</text>
-  <path d="M75,350 L75,378" class="arrow"/>
+  <rect class="box" x="166" y="158" width="198" height="56" rx="7"/>
+  <text class="lbl" x="182" y="182">letter-to-sound</text>
+  <text class="sub" x="182" y="200">only what it does not</text>
 
-  <!-- kokoro -->
-  <rect x="20" y="382" width="680" height="40" class="box"/>
-  <text x="36" y="407" class="step">Kokoro speaks it</text>
-  <text x="410" y="407" class="note">sherpa-onnx · same files on desktop, Android, iOS, web</text>
+  <path class="fl" d="M364,100 H400 V164" marker-end="url(#ar)"/>
+  <path class="fl" d="M364,186 H436" marker-end="url(#ar)"/>
+
+  <rect class="box" x="438" y="158" width="180" height="56" rx="7"/>
+  <text class="lbl" x="454" y="182">accent rules</text>
+  <text class="sub" x="454" y="200">applied to both</text>
+  <text class="sub" x="438" y="106">the lexicon decides;</text>
+  <text class="sub" x="438" y="123">rules may not overrule it</text>
+
+  <line class="fl" x1="642" y1="186" x2="686" y2="186" marker-end="url(#ar)"/>
+  <text class="lbl" x="692" y="182">phonemes</text>
+  <line class="fl" x1="784" y1="186" x2="826" y2="186" marker-end="url(#ar)"/>
+  <text class="lbl" x="832" y="182">Kokoro</text>
+  <text class="sub" x="832" y="200">speaks it</text>
 </svg>

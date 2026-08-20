@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>poto-tts &mdash; Ghanaian English on Kokoro</title>
+<style>
+  :root {
+    --bg: #fbfaf8; --fg: #1a1a1a; --muted: #5c5c5c; --line: #e3e0da;
+    --card: #ffffff; --accent: #1a6b4f; --accent-soft: #eaf3ef;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #16181a; --fg: #eceae6; --muted: #9c9a95; --line: #2b2e31;
+      --card: #1d2022; --accent: #6cc4a1; --accent-soft: #1d2b26;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #16181a; --fg: #eceae6; --muted: #9c9a95; --line: #2b2e31;
+    --card: #1d2022; --accent: #6cc4a1; --accent-soft: #1d2b26;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg); line-height: 1.55;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+  h1 { font-size: 1.7rem; margin: 0 0 .3em; letter-spacing: -.01em; }
+  .lede { color: var(--muted); max-width: 62ch; margin: 0 0 1.6em; }
+  .note {
+    background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: .85em 1.1em; margin: 0 0 2.2em; font-size: .93rem; max-width: 70ch;
+  }
+  .note strong { color: var(--accent); }
+  .item { border: 1px solid var(--line); background: var(--card);
+           border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }
+  .txt { font-size: 1.03rem; margin: 0 0 14px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+  .side h3 {
+    font-size: .72rem; text-transform: uppercase; letter-spacing: .09em;
+    margin: 0 0 .5em; color: var(--muted); font-weight: 600;
+  }
+  .side.poto h3 { color: var(--accent); }
+  audio { width: 100%; height: 34px; }
+  .ipa {
+    font-size: .84rem; color: var(--muted); margin: .6em 0 0; word-break: break-word;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .side.poto .ipa { color: var(--fg); }
+  footer { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line);
+            color: var(--muted); font-size: .88rem; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>poto-tts</h1>
+  <p class="lede">English text-to-speech that pronounces Ghanaian words properly.
+  Same model, same speaker, same text &mdash; the only difference is the front-end.</p>
+
+  <div class="note"><strong>These are not Ghanaian-accented voices.</strong>
+  Both columns are Kokoro's British speaker &ldquo;Grace&rdquo;. What changes is what she
+  says, not who she sounds like. A Ghanaian-sounding voice needs a model trained on
+  Ghanaian speech, which is a different problem.</div>
+
+  <div class="item">
+    <p class="txt">Kwabena went to Achimota and met the Okuapenhene at Nyankpani.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/names.kokoro.wav"></audio>
+        <p class="ipa">kwˈe‍ɪbnə wɛnt tʊ ɐt‍ʃɪmˈo‍ʊɾə ænd mˈɛt ðɪʲ ˈo‍ʊkjuːˌe‍ɪpənhˌiːn æt nˌa‍ɪɐŋkpˈɑːni</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/names.poto.wav"></audio>
+        <p class="ipa">kwabˈɪna wˈɛnt tˈuː ˌat‍ʃimˈota ˈand mˈɛt ðəɹ ˌokwapɛnhˈɛnɛ ˈat njaŋkpˈani</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <p class="txt">The Bank of Ghana raised the policy rate, citing pressure on the cedi.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/news.kokoro.wav"></audio>
+        <p class="ipa">ðə bˈæŋk ʌv ɡˈɑːnɚ ɹˈe‍ɪzd ðə pˈɑːlɪsi ɹˈe‍ɪt sˈa‍ɪɾɪŋ pɹˈɛʃɚɹ ɔnðə sˈɛdi</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/news.poto.wav"></audio>
+        <p class="ipa">ðə bˈaŋk ˈɔv ɡˈanə ɾˈeezd ðə pɔlˈɪsi ɾˈet sˈa‍ɪtɪŋ pɾˈɛʃəɹ ˈan ðə sˈiːdi</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <p class="txt">The bus from Adenta passed through Madina on the way to Kotoka.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/places.kokoro.wav"></audio>
+        <p class="ipa">ðə bˈʌs fɹʌm ædˈɛntə pˈæst θɹuː mˈædɪnə ɔnðə wˈe‍ɪ tə kətˈo‍ʊkə</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/places.poto.wav"></audio>
+        <p class="ipa">ðə bˈʌs fɾˈɔm adˈɛnta pˈast θɾˈuː madˈina ˈan ðə wˈe tˈuː kotˈoka</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <p class="txt">Yaw Mensah and Akosua Boateng arrived with Nana Addo.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/people.kokoro.wav"></audio>
+        <p class="ipa">jˈɔː mˈɛnsə ænd ˈækəsˌuːə bo‍ʊtˈɛŋ ɚɹˈa‍ɪvd wɪð nˈɑːnə ˈædo‍ʊ</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/people.poto.wav"></audio>
+        <p class="ipa">jˈaw mˈensa ˈand ˌakosˈua buˈateŋ ˈəɾa‍ɪvd wˈɪð nˈana ˈado</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <p class="txt">They served banku with tilapia, kenkey, and waakye by the roadside.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/food.kokoro.wav"></audio>
+        <p class="ipa">ðe‍ɪ sˈɜːvd bˈæŋkuː wɪð tɪlˈe‍ɪpi‍ə kˈɛŋki ænd wˈɑːka‍ɪ ba‍ɪ ðə ɹˈo‍ʊdsa‍ɪd</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/food.poto.wav"></audio>
+        <p class="ipa">ðˈe sˈɛɾvd bˈaŋku wˈɪð tilapˈiʲa kˈɛŋke ˈand wˈat‍ʃe bˈa‍ɪ ðə ɾˈodsa‍ɪd</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <p class="txt">The Asantehene and the Ga Mantse attended the durbar at Kumasi.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/titles.kokoro.wav"></audio>
+        <p class="ipa">ðɪʲ ɐsˈæntɪhˌiːn ænd ðə ɡˈɑː mˈæntsiʲ ɐtˈɛndᵻd ðə dˈɜːbɑːɹ æt kjuːmˈɑːsi</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/titles.poto.wav"></audio>
+        <p class="ipa">ðəɹ asˈantɪhˌiːn ˈand ðə ɡˈa mˈantsɛ atˈɛndɛd ðə dˈɜːba ˈat kumˈasi</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <p class="txt">The convention discussed inflationary policy yesterday afternoon.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/english.kokoro.wav"></audio>
+        <p class="ipa">ðə kənvˈɛnʃən dɪskˈʌst ɪnflˈe‍ɪʃənˌɛɹi pˈɑːlɪsi jˈɛstɚdˌe‍ɪ ˌæftɚnˈuːn</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/english.poto.wav"></audio>
+        <p class="ipa">ðə kɔnvˈɛnʃən dˈɪskʌst ɪnflˈeʃənˌɛɾi pɔlˈɪsi jˌɛstadˈeiʲ aftˈənuːn</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <p class="txt">Auntie Adjoa asked whether the trotro to Tema had already left.</p>
+    <div class="grid">
+      <div class="side">
+        <h3>Ordinary Kokoro</h3>
+        <audio controls preload="none" src="audio/mixed.kokoro.wav"></audio>
+        <p class="ipa">ˈæntiʲ ɐd‍ʒˈo‍ʊə ˈæskt wˈɛðɚ ðə tɹˈɑːtɹo‍ʊ tə tˈɛmə hæd ɔːlɹˌɛdi lˈɛft</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts</h3>
+        <audio controls preload="none" src="audio/mixed.poto.wav"></audio>
+        <p class="ipa">ˈantiʲ ˈad‍ʒwa ˈaskt wˈɛðə ðə tɾˈɔtɾɔ tˈuː tˈeːma hˈad ɔːlɾˈɛdi lˈɛft</p>
+      </div>
+    </div>
+  </div>
+
+
+  <footer>
+    Kokoro v1.0 via sherpa-onnx, speaker Grace (bf_alice). Pronunciation from a
+    104,623-word lexicon compiled into espeak's dictionary and read by the
+    <code>en-gh</code> accent voice &mdash; data, not code, so Android, iOS and
+    WebAssembly get the same result.
+    <br>
+    <a href="https://github.com/GhanaNLP/poto-tts">GhanaNLP/poto-tts</a> &middot;
+    <a href="https://huggingface.co/ghananlpcommunity/poto-tts-kokoro-gh">the voice on the Hub</a>
+    &middot; <code>pip install poto-tts</code>
+  </footer>
+</div>
+</body>
+</html>

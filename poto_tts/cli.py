@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from pathlib import Path
 
 
 def _entry() -> int:
@@ -53,11 +54,10 @@ def main(argv=None) -> int:
     p.add_argument("--phonemes", action="store_true",
                    help="show what the front-end sends to espeak, without loading "
                         "a model")
-    p.add_argument("--no-respell", action="store_true",
-                   help="send the text as it stands. With --espeak-voice en-us that "
-                        "is stock Kokoro, for comparison.")
     p.add_argument("--espeak-voice", default=None,
-                   help="the espeak voice to phonemise with (default lfn)")
+                   help="the espeak voice to phonemise with. The voice's config "
+                        "names the right one (en-gh); 'en-us' gives stock Kokoro, "
+                        "for comparison.")
     p.add_argument("--debug", action="store_true", help="sherpa-onnx diagnostics")
     args = p.parse_args(argv)
 
@@ -67,29 +67,39 @@ def main(argv=None) -> int:
 
     if args.phonemes:
         # Deliberately model-free: this answers "how will it say this?", and loading
-        # 380 MB to answer it would be absurd.
-        from .frontend import GhanaFrontend
-        from .respell import read_back
+        # 380 MB to answer it would be absurd. espeak alone knows -- the dictionary
+        # and the voice file are the whole front-end.
+        import subprocess
+
+        from .download import find_espeak_data
 
         if not text.strip():
             p.error("--phonemes needs some text")
-        frontend = GhanaFrontend()
-        respelled = frontend(text)
-        print(f"respelled: {respelled}")
+        data = args.espeak_data or find_espeak_data()
+        if not data:
+            p.error("no patched espeak-ng-data found; pass --espeak-data, or run "
+                    "'poto-tts dict --out build/espeak-ng-data --ghanaian-stress'")
+        voice = args.espeak_voice or "en-gh"
+        # espeak wants the directory *containing* espeak-ng-data, by that exact name.
+        root = Path(data).resolve().parent
         try:
-            print(f"espeak:    {read_back(respelled)}")
-        except RuntimeError as exc:
-            print(f"espeak:    ({exc})")
-        print(f"coverage:  {frontend.coverage(text):.0%} of words come from the "
-              f"Ghanaian lexicon; the rest fall back to English")
+            out = subprocess.run(
+                ["espeak-ng", f"--path={root}", "-v", voice, "--ipa=3", "-q", text],
+                capture_output=True, text=True, check=True)
+        except FileNotFoundError:
+            p.error("needs the espeak-ng binary (apt install espeak-ng)")
+        except subprocess.CalledProcessError as exc:
+            p.error(f"espeak-ng failed: {exc.stderr.strip()}")
+        print(f"voice:     {voice}")
+        print(f"data:      {data}")
+        print(f"phonemes:  {' '.join(out.stdout.split())}")
         return 0
 
     from .backends import load
 
     kwargs = dict(model_dir=args.model_dir, repo_id=args.repo_id,
                   espeak_data=args.espeak_data, num_threads=args.threads,
-                  provider=args.provider, debug=args.debug, speed=args.speed,
-                  respell=not args.no_respell)
+                  provider=args.provider, debug=args.debug, speed=args.speed)
     if args.espeak_voice:
         kwargs["espeak_voice"] = args.espeak_voice
     if args.voice:
