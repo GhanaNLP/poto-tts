@@ -18,9 +18,11 @@ Same model, same speaker, same text; only the front-end differs.
 The voices are Kokoro's British speakers, so this is **not** a Ghanaian accent.
 What changes is what they say.
 
-Ordinary English is identical in both modes: the lexicon holds only Ghanaian words,
-so English words are left to espeak. The modes differ on the Ghanaian words — `gh`
-gives them Ghanaian vowel qualities and a tapped r, `en` gives them English ones.
+Both modes get the Ghanaian words right. `gh` says them with Ghanaian vowel
+qualities and a tapped r; because its rules run on every word, ordinary English picks
+up a little of the same accent (`late` as /let/). `en` uses no voice file, so the
+names carry English vowels and every other word is exactly what any English TTS
+would say.
 
 Regenerate this page with `python tools/build_space.py` in
 [GhanaNLP/poto-tts](https://github.com/GhanaNLP/poto-tts).

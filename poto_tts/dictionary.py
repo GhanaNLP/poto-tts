@@ -557,7 +557,11 @@ def main(argv=None) -> int:
     # espeak reads them back. Shipping the dictionary without the voice leaves a
     # data directory that works and mispronounces everything slightly, which is
     # the failure mode this project exists to avoid.
-    voice_src = Path(__file__).resolve().parent.parent / "espeak" / VOICE_FILE
+    # Inside the package first, so a pip install has it; the repo copy second, so a
+    # checkout picks up an edit to espeak/en-gh without reinstalling.
+    voice_src = Path(__file__).resolve().parent / "data" / VOICE_FILE
+    if not voice_src.is_file():
+        voice_src = Path(__file__).resolve().parent.parent / "espeak" / VOICE_FILE
     if voice_src.is_file():
         voice_dst = staging / "lang" / "gmw" / VOICE_FILE
         voice_dst.parent.mkdir(parents=True, exist_ok=True)
