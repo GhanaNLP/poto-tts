@@ -44,10 +44,10 @@ def test_unknown_backend_lists_the_known_ones():
 # -- voices ----------------------------------------------------------------
 
 
-def test_only_english_voices_are_offered():
+def test_only_british_voices_are_offered():
     """Kokoro's 25 other-language speakers exist in the model but are not listed:
     a Ghanaian English library cannot vouch for a Japanese speaker."""
-    assert len(voices_mod.VOICES) == 28
+    assert len(voices_mod.VOICES) == 8
     assert all(v.accent in ("British", "American") for v in voices_mod.VOICES)
     assert voices_mod.by_name("jf_alpha") is None
 
@@ -92,7 +92,7 @@ def test_describe_voices_exposes_gender_and_accent():
     described = {v["name"]: v for v in make().describe_voices()}
     assert described["Emmanuel"]["gender"] == "male"
     assert described["Emmanuel"]["accent"] == "British"
-    assert described["Gifty"]["kokoro"] == "af_heart"
+    assert described["Grace"]["kokoro"] == "bf_alice"
 
 
 def test_default_voice_is_a_recommended_one():
@@ -134,3 +134,14 @@ def test_write_wav_clips_instead_of_wrapping(tmp_path):
 
 def test_synthesis_duration():
     assert Synthesis([0.0] * 24000, 24000, "hi", "kokoro", "Grace").duration == 1.0
+
+
+def test_unoffered_kokoro_speakers_are_still_reachable_by_their_own_name():
+    """Only British voices are offered -- the pronunciations are shaped for the
+    British phoneme table, so handing them to an American speaker is a mismatch.
+    That is a default, not a prohibition: a caller who names `af_heart` outright
+    has said what they want, and the model does have 53 speakers."""
+    backend = make()
+    assert backend.resolve("af_heart") == 3
+    assert backend.resolve("bf_alice") == 20
+    assert all(v.accent == "British" for v in voices_mod.VOICES)

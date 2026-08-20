@@ -25,7 +25,7 @@ rather than only the ones a dictionary has entries for.
 
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List, Optional, Union
 
 from .. import voices as _voices
 from .base import Backend
@@ -47,6 +47,31 @@ class KokoroBackend(Backend):
     """
 
     name = "kokoro"
+
+    # Two ways to read the same dictionary, and the difference is confined to the
+    # Ghanaian words -- English is ordinary English either way, because the lexicon
+    # no longer has entries for it.
+    #
+    #   gh  the `en-gh` voice file: Ghanaian /a/ read as /a/ rather than espeak's
+    #       /ɑː/, and /r/ as a tap. Closer to how the names are said.
+    #   en  British English with no voice file at all. The dictionary alone gets the
+    #       names right; they simply carry English vowel qualities.
+    MODES = {"gh": "en-gh", "en": "en"}
+
+    def __init__(self, *args, mode: Optional[str] = None, **kw):
+        """`mode` picks how the dictionary is read: 'gh' or 'en'. See MODES."""
+        if mode is not None:
+            if mode not in self.MODES:
+                raise ValueError(
+                    f"mode must be one of {sorted(self.MODES)}, not {mode!r}")
+            if kw.get("espeak_voice") and kw["espeak_voice"] != self.MODES[mode]:
+                raise ValueError(
+                    f"mode={mode!r} means espeak_voice={self.MODES[mode]!r}; "
+                    f"you also passed {kw['espeak_voice']!r}. Pass one or the other.")
+            kw["espeak_voice"] = self.MODES[mode]
+        super().__init__(*args, **kw)
+        self.mode = next((m for m, v in self.MODES.items()
+                          if v == self.espeak_voice), None)
 
     def prepare_text(self, text: str) -> str:
         """What will actually be sent to sherpa-onnx.
@@ -83,6 +108,14 @@ class KokoroBackend(Backend):
                     f"speaker id {sid} is outside 0..{len(_voices.KOKORO_SPEAKERS) - 1}")
             return sid
         found = _voices.by_name(str(voice))
+        if found is not None:
+            return found.sid
+        # Kokoro's own name for a speaker we do not offer -- an American or an
+        # other-language one. Honoured rather than refused: the model has 53
+        # speakers and a caller naming one directly has said what they want. The
+        # docs say why the offered set is British.
+        if str(voice).strip() in _voices.KOKORO_SPEAKERS:
+            return _voices.KOKORO_SPEAKERS.index(str(voice).strip())
         if found is None:
             close = [v.name for v in _voices.VOICES
                      if str(voice).strip().lower() in v.name.lower()]

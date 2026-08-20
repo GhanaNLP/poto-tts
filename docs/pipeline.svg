@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 290" width="980" height="290"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" width="900" height="250"
      font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
      fill="currentColor" role="img">
   <title>How poto-tts decides a pronunciation</title>
@@ -18,33 +18,27 @@
     </marker>
   </defs>
 
-  <text class="lbl" x="14" y="146">your text</text>
-  <text class="sub" x="14" y="164">unchanged</text>
-  <line class="fl" x1="98" y1="141" x2="140" y2="141" marker-end="url(#ar)"/>
+  <text class="lbl" x="14" y="126">your text</text>
+  <text class="sub" x="14" y="144">unchanged</text>
+  <line class="fl" x1="98" y1="121" x2="140" y2="121" marker-end="url(#ar)"/>
 
-  <rect class="grp" x="142" y="34" width="500" height="214" rx="10"/>
-  <text class="tag" x="158" y="56">ESPEAK-NG</text>
+  <rect class="grp" x="142" y="26" width="404" height="190" rx="10"/>
+  <text class="tag" x="158" y="48">ESPEAK-NG</text>
 
-  <rect class="box" x="166" y="72" width="198" height="56" rx="7"/>
-  <text class="lbl" x="182" y="96">Ghana lexicon</text>
-  <text class="sub" x="182" y="114">every word it knows</text>
+  <rect class="box" x="168" y="64" width="230" height="56" rx="7"/>
+  <text class="lbl" x="184" y="88">Ghanaian lexicon</text>
+  <text class="sub" x="184" y="106">44,321 words it knows</text>
 
-  <rect class="box" x="166" y="158" width="198" height="56" rx="7"/>
-  <text class="lbl" x="182" y="182">letter-to-sound</text>
-  <text class="sub" x="182" y="200">only what it does not</text>
+  <rect class="box" x="168" y="146" width="230" height="52" rx="7"/>
+  <text class="lbl" x="184" y="170">English rules</text>
+  <text class="sub" x="184" y="188">every other word</text>
 
-  <path class="fl" d="M364,100 H400 V164" marker-end="url(#ar)"/>
-  <path class="fl" d="M364,186 H436" marker-end="url(#ar)"/>
+  <path class="fl" d="M398,92 H452 V118" marker-end="url(#ar)"/>
+  <path class="fl" d="M398,172 H452 V128" marker-end="url(#ar)"/>
 
-  <rect class="box" x="438" y="158" width="180" height="56" rx="7"/>
-  <text class="lbl" x="454" y="182">accent rules</text>
-  <text class="sub" x="454" y="200">applied to both</text>
-  <text class="sub" x="438" y="106">the lexicon decides;</text>
-  <text class="sub" x="438" y="123">rules may not overrule it</text>
-
-  <line class="fl" x1="642" y1="186" x2="686" y2="186" marker-end="url(#ar)"/>
-  <text class="lbl" x="692" y="182">phonemes</text>
-  <line class="fl" x1="784" y1="186" x2="826" y2="186" marker-end="url(#ar)"/>
-  <text class="lbl" x="832" y="182">Kokoro</text>
-  <text class="sub" x="832" y="200">speaks it</text>
+  <line class="fl" x1="546" y1="121" x2="592" y2="121" marker-end="url(#ar)"/>
+  <text class="lbl" x="598" y="117">phonemes</text>
+  <line class="fl" x1="690" y1="121" x2="736" y2="121" marker-end="url(#ar)"/>
+  <text class="lbl" x="742" y="117">Kokoro</text>
+  <text class="sub" x="742" y="135">speaks it</text>
 </svg>

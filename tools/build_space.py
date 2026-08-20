@@ -60,8 +60,8 @@ PAGE = """<!doctype html>
   .item {{ border: 1px solid var(--line); background: var(--card);
            border-radius: 10px; padding: 18px 20px; margin: 0 0 16px; }}
   .txt {{ font-size: 1.03rem; margin: 0 0 14px; }}
-  .grid {{ display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }}
-  @media (max-width: 620px) {{ .grid {{ grid-template-columns: 1fr; }} }}
+  .grid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }}
+  @media (max-width: 860px) {{ .grid {{ grid-template-columns: 1fr; }} }}
   .side h3 {{
     font-size: .72rem; text-transform: uppercase; letter-spacing: .09em;
     margin: 0 0 .5em; color: var(--muted); font-weight: 600;
@@ -85,9 +85,15 @@ PAGE = """<!doctype html>
   Same model, same speaker, same text &mdash; the only difference is the front-end.</p>
 
   <div class="note"><strong>These are not Ghanaian-accented voices.</strong>
-  Both columns are Kokoro's British speaker &ldquo;Grace&rdquo;. What changes is what she
-  says, not who she sounds like. A Ghanaian-sounding voice needs a model trained on
-  Ghanaian speech, which is a different problem.</div>
+  All three columns are Kokoro's British speaker &ldquo;Grace&rdquo;. What changes is
+  what she says, not who she sounds like. A Ghanaian-sounding voice needs a model
+  trained on Ghanaian speech, which is a different problem.
+  <br><br>
+  Ordinary English is identical in both poto-tts modes &mdash; the lexicon holds only
+  Ghanaian words, so English is left to espeak. The modes differ on the Ghanaian
+  words: <strong>gh</strong> reads them with Ghanaian vowel qualities and a tapped r,
+  <strong>en</strong> reads them with English ones. Both get the word right; they
+  disagree about the accent it is said in.</div>
 
 {items}
 
@@ -115,9 +121,14 @@ ITEM = """  <div class="item">
         <p class="ipa">{kokoro_ipa}</p>
       </div>
       <div class="side poto">
-        <h3>poto-tts</h3>
-        <audio controls preload="none" src="audio/{poto_file}"></audio>
-        <p class="ipa">{poto_ipa}</p>
+        <h3>poto-tts &middot; gh mode</h3>
+        <audio controls preload="none" src="audio/{gh_file}"></audio>
+        <p class="ipa">{gh_ipa}</p>
+      </div>
+      <div class="side poto">
+        <h3>poto-tts &middot; en mode</h3>
+        <audio controls preload="none" src="audio/{en_file}"></audio>
+        <p class="ipa">{en_ipa}</p>
       </div>
     </div>
   </div>
@@ -132,15 +143,17 @@ def main() -> int:
     items = []
     for key, text in data["texts"].items():
         pair = by.get(key, {})
-        if {"poto", "kokoro"} - set(pair):
-            print(f"  skipping {key}: needs both routes")
+        if {"gh", "en", "kokoro"} - set(pair):
+            print(f"  skipping {key}: needs all three routes")
             continue
         items.append(ITEM.format(
             text=html.escape(text),
             kokoro_file=html.escape(pair["kokoro"]["file"]),
-            poto_file=html.escape(pair["poto"]["file"]),
+            gh_file=html.escape(pair["gh"]["file"]),
+            en_file=html.escape(pair["en"]["file"]),
             kokoro_ipa=html.escape(pair["kokoro"]["phonemes"]),
-            poto_ipa=html.escape(pair["poto"]["phonemes"]),
+            gh_ipa=html.escape(pair["gh"]["phonemes"]),
+            en_ipa=html.escape(pair["en"]["phonemes"]),
         ))
     (SPACE / "index.html").write_text(PAGE.format(items="\n".join(items)))
     print(f"wrote {SPACE / 'index.html'} with {len(items)} comparisons")

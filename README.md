@@ -33,34 +33,25 @@ tts.save("The Okuapenhene met Nana Bawumia", "out.wav")
 
 ## How it works
 
-Pronunciation comes from a 104,623-word Ghanaian lexicon, compiled into espeak's own
-dictionary and paired with an accent voice file. Your text is sent to the model
-unchanged:
+Pronunciation comes from a Ghanaian lexicon compiled into espeak's own dictionary.
+Your text is sent to the model unchanged:
 
 <img src="docs/pipeline.svg" width="100%" alt="your text, unchanged, goes into
-espeak-ng: the Ghana lexicon supplies every word it knows and espeak's
-letter-to-sound rules cover only what it does not; accent rules are applied to
-both, and may not overrule the lexicon; the phonemes go to Kokoro, which speaks
-it">
+espeak-ng: the Ghanaian lexicon supplies the words it knows and espeak's
+letter-to-sound rules cover the rest; the phonemes go to Kokoro, which speaks it">
 
-Three layers, in order. The **dictionary** decides how a word is pronounced, and it
-holds the whole lexicon -- names, places, titles, Twi and Ga loans, and ordinary
-English, all treated alike. Words it does not have fall to espeak's **letter-to-sound
-rules**. Then the **voice file** applies the accent to whatever those produced.
+The dictionary holds **44,321 Ghanaian words** -- names, places, titles, Twi and Ga
+loans, food, money, everyday coinage. Every other word is left to espeak's ordinary
+English. So `Kwabena`, `Achimota` and `Okuapenhene` come from the lexicon, while
+`bus`, `passed` and `through` are pronounced as any English TTS would.
 
-The dictionary wins over the rules, and the voice is applied on top of both -- which
-is why a voice rule may not contradict the lexicon. A rule collapsing ɛ to e would
-override the lexicon on every word it knows, and `Okuapɛnhɛnɛ` would come back
-/okwapenhene/ with nothing in the output to show why. `tests/test_espeak_voice.py`
-fails if one appears.
-
-Because the lexicon covers ordinary English too, the Ghanaian pronunciation reaches
-whole sentences and not only the names: `convention` is /kɔnvɛnʃən/ rather than
-/kənvˈɛnʃən/. Stress stays where English puts it inside a word, while the vowels are
-Ghanaian.
-
-Roughly six times more Ghanaian words come out right than with stock Kokoro
-(`tools/measure_coverage.py`), but the honest summary is simpler: the names work now.
+That division is deliberate and was arrived at the hard way. The upstream lexicon
+covers the whole language -- `bus` and `way` have entries too, recording the Ghanaian
+*accent* of an English word rather than a pronunciation that cannot be derived. Using
+all of it made every word of every sentence Ghanaian: `from` as /frɔm/, `on` as /an/.
+That is a different product from an English voice that says Ghanaian names properly.
+`poto_tts/data/ghanaian-words.txt` is the subset used, and
+`tools/classify_lexicon.py` regenerates it.
 
 To see what will be sent to espeak, without loading a model:
 
@@ -68,32 +59,48 @@ To see what will be sent to espeak, without loading a model:
 poto-tts --phonemes "Nana Addo met Kwame Nkrumah"
 ```
 
-Changing any of it -- one word, or the accent as a whole -- is
-[docs/CUSTOMISING.md](docs/CUSTOMISING.md).
+Changing any of it is [docs/CUSTOMISING.md](docs/CUSTOMISING.md).
 
 ## Voices
 
-Twenty-eight English speakers, named so you can choose one without decoding a prefix:
+Eight British speakers:
 
-| | female | male |
-|---|---|---|
-| **British** ★ | Grace, Comfort, Mercy, Patience | Emmanuel, Isaac, Ebenezer, Bright |
-| American | Gifty, Beatrice, Esther, Vida, Felicia, Priscilla, Charity, Regina, Cynthia, Georgina, Adelaide | Samuel, Prince, Godfred, Wisdom, Justice, Solomon, Nathaniel, Cephas, Desmond |
-
-★ British voices sit closest to educated Ghanaian English, so they come first. A
-listening judgement, not a measurement.
+| female | male |
+|---|---|
+| Grace, Comfort, Mercy, Patience | Emmanuel, Isaac, Ebenezer, Bright |
 
 ```python
-tts = load(voice="Emmanuel")      # "bm_george" and 26 work too
+tts = load(voice="Emmanuel")
 ```
 
 ```bash
-poto-tts --voices                 # the full list with genders and ids
+poto-tts --voices
 ```
 
-The names are aliases and do not change a voice's timbre. Kokoro's 25 other-language
-speakers exist in the model but are not offered here — a Ghanaian English library cannot
-vouch for a Japanese speaker.
+British, and only British, for two reasons. It is the variety Ghanaian English is
+closest to -- non-rhotic, with vowels in roughly the same places. And the
+pronunciations shipped here are shaped for it: entries are read with espeak's British
+phoneme table, so the phonemes Kokoro receives are non-rhotic and use /a/ where
+American English has /æ/. Kokoro's American speakers were trained on American
+phonemes, and handing them these is a mismatch users should not have to find by ear.
+
+Kokoro's twenty American speakers and twenty-five other-language speakers are still
+in the model and still reachable by their own names -- `load(voice="af_heart")` -- for
+anyone who wants to try. They are simply not offered.
+
+## Two modes
+
+Both read the same dictionary, and ordinary English is identical in each, because the
+lexicon holds only Ghanaian words. They differ on those words:
+
+```python
+tts = load(mode="gh")      # Ghanaian vowels, tapped r: Kwabena /kwabˈɪna/
+tts = load(mode="en")      # English vowels:            Kwabena /kwɑːbˈɪnɑː/
+```
+
+`gh` is closer to how the names are said; `en` keeps one accent across the whole
+sentence. Both get the word right and disagree only about the accent it is said in.
+Hear them side by side: [the Space](https://huggingface.co/spaces/ghananlpcommunity/poto-tts).
 
 ## Cross-platform
 

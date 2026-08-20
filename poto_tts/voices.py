@@ -60,10 +60,22 @@ KOKORO_SPEAKERS = (
     "zm_yunjian", "zm_yunxi", "zm_yunxia", "zm_yunyang",
 )
 
-# The aliases. British speakers are listed first and marked recommended: they are
-# non-rhotic and their vowels sit closer to educated Ghanaian English than the
-# American ones do. That is a listening judgement, not a measurement, and every
-# other voice works.
+# The offered voices are British, and only British. Two reasons, and the second is
+# the one that decided it:
+#
+#   * British English is the variety Ghanaian English is closest to -- non-rhotic,
+#     with vowels in roughly the same places.
+#   * the pronunciations this library ships are shaped for it. Entries are read with
+#     espeak's British phoneme table, so the phonemes handed to Kokoro are
+#     non-rhotic and use /a/ where American English has /æ/. Kokoro's American
+#     speakers were trained on American phonemes; giving them these is a mismatch,
+#     and not one a user should have to discover by ear.
+#
+# Kokoro's twenty American speakers are still in the model and still reachable by
+# their own names ('af_heart') or by speaker id, for anyone who wants to try. They
+# are simply not offered, the same way its twenty-five other-language speakers are
+# not: a Ghanaian English library should not put a voice in front of users when it
+# knows the front-end does not suit it.
 _ALIASES = (
     # alias        kokoro         gender    accent       recommended
     ("Grace",      "bf_alice",    "female", "British",   True),
@@ -74,26 +86,6 @@ _ALIASES = (
     ("Isaac",      "bm_lewis",    "male",   "British",   True),
     ("Ebenezer",   "bm_daniel",   "male",   "British",   True),
     ("Bright",     "bm_fable",    "male",   "British",   True),
-    ("Gifty",      "af_heart",    "female", "American",  False),
-    ("Beatrice",   "af_bella",    "female", "American",  False),
-    ("Esther",     "af_sarah",    "female", "American",  False),
-    ("Vida",       "af_nicole",   "female", "American",  False),
-    ("Felicia",    "af_sky",      "female", "American",  False),
-    ("Priscilla",  "af_nova",     "female", "American",  False),
-    ("Charity",    "af_aoede",    "female", "American",  False),
-    ("Regina",     "af_kore",     "female", "American",  False),
-    ("Cynthia",    "af_alloy",    "female", "American",  False),
-    ("Georgina",   "af_jessica",  "female", "American",  False),
-    ("Adelaide",   "af_river",    "female", "American",  False),
-    ("Samuel",     "am_michael",  "male",   "American",  False),
-    ("Prince",     "am_adam",     "male",   "American",  False),
-    ("Godfred",    "am_eric",     "male",   "American",  False),
-    ("Wisdom",     "am_liam",     "male",   "American",  False),
-    ("Justice",    "am_onyx",     "male",   "American",  False),
-    ("Solomon",    "am_puck",     "male",   "American",  False),
-    ("Nathaniel",  "am_echo",     "male",   "American",  False),
-    ("Cephas",     "am_fenrir",   "male",   "American",  False),
-    ("Desmond",    "am_santa",    "male",   "American",  False),
 )
 
 def _build() -> List[Voice]:

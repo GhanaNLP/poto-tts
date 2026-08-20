@@ -88,6 +88,24 @@ DICTSOURCE = "https://raw.githubusercontent.com/espeak-ng/espeak-ng/{version}/di
 # an English word is the acoustic model's job.
 VOICE_FILE = "en-gh"
 
+# The lexicon covers the whole language: `bus`, `passed` and `way` all have entries,
+# each recording the Ghanaian accent of an English word rather than a pronunciation
+# that cannot be derived. That is right for a G2P library and wrong here, because an
+# entry for every word means every word of every sentence is pronounced from the
+# lexicon -- so `from` became /frɔm/ and `on` became /an/ when the job was to fix
+# `Kwabena`. This list is the subset a Ghanaian speaker pronounces by local rules;
+# everything else is left to espeak's English. Regenerate with
+# tools/classify_lexicon.py.
+GHANAIAN_WORDS = "ghanaian-words.txt"
+
+
+def ghanaian_words() -> set:
+    """The lexicon entries that are Ghanaian words, or an empty set if unshipped."""
+    path = Path(__file__).resolve().parent / "data" / GHANAIAN_WORDS
+    if not path.is_file():
+        return set()
+    return {w.strip().lower() for w in path.read_text().split() if w.strip()}
+
 ENGLISH_WORDS = "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
 # en_extra is ours to write. The others are espeak's own sources and have to be
 # present, or the compile produces a dictionary with only our entries in it.
@@ -264,6 +282,13 @@ def build_entries(quiet: bool = False, english: Optional[set] = None,
     # espeak's own reading of every candidate, in batches -- one subprocess call
     # per word would take hours for 104k words.
     words = [w for w in lexicon if w.isalpha() and len(w) > 1]
+    ghanaian = ghanaian_words()
+    if ghanaian:
+        before = len(words)
+        words = [w for w in words if w.lower() in ghanaian]
+        if not quiet:
+            print(f"  {len(words)} of {before} lexicon words are Ghanaian; the rest "
+                  f"keep espeak's English", file=sys.stderr)
     report = None if quiet else (
         lambda done, total: print(f"\r  espeak baseline {done}/{total}",
                                   end="", file=sys.stderr, flush=True))
