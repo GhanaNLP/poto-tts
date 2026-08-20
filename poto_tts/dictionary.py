@@ -86,8 +86,6 @@ DICTSOURCE = "https://raw.githubusercontent.com/espeak-ng/espeak-ng/{version}/di
 # A general English word list, used to decide what *not* to touch. espeak already
 # pronounces English correctly, including its stress; the Ghanaian realisation of
 # an English word is the acoustic model's job.
-VOICE_FILE = "en-gh"
-
 # The lexicon covers the whole language: `bus`, `passed` and `way` all have entries,
 # each recording the Ghanaian accent of an English word rather than a pronunciation
 # that cannot be derived. That is right for a G2P library and wrong here, because an
@@ -551,25 +549,6 @@ def main(argv=None) -> int:
             cwd=work, capture_output=True, text=True,
         )
         print(compiled.stdout.strip() or compiled.stderr.strip(), file=sys.stderr)
-
-    # The voice file goes in beside the dictionary, because the two are one
-    # deliverable: the entries decide pronunciation and the voice decides how
-    # espeak reads them back. Shipping the dictionary without the voice leaves a
-    # data directory that works and mispronounces everything slightly, which is
-    # the failure mode this project exists to avoid.
-    # Inside the package first, so a pip install has it; the repo copy second, so a
-    # checkout picks up an edit to espeak/en-gh without reinstalling.
-    voice_src = Path(__file__).resolve().parent / "data" / VOICE_FILE
-    if not voice_src.is_file():
-        voice_src = Path(__file__).resolve().parent.parent / "espeak" / VOICE_FILE
-    if voice_src.is_file():
-        voice_dst = staging / "lang" / "gmw" / VOICE_FILE
-        voice_dst.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy(voice_src, voice_dst)
-        print(f"installed voice {VOICE_FILE} -> lang/gmw/{VOICE_FILE}", file=sys.stderr)
-    else:
-        print(f"WARNING: no voice file at {voice_src}; the dictionary alone will be "
-              f"read with espeak's own English vowels", file=sys.stderr)
 
     print(f"\nentries written: {len(differing)}", file=sys.stderr)
     if unmappable:

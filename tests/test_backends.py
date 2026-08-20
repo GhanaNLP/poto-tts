@@ -105,7 +105,7 @@ def test_default_voice_is_a_recommended_one():
 def test_prepare_text_changes_nothing():
     """There is no front-end in this library any more. Pronunciation lives in the
     voice's espeak-ng-data -- the lexicon compiled into espeak's dictionary, read
-    by the en-gh accent voice -- which is why Android and iOS get the same result.
+    and read as British English -- which is why Android and iOS get the same result.
     A rewrite here would be a Python-only behaviour and a divergence."""
     text = "Kwabena went to Achimota"
     assert make().prepare_text(text) == text
@@ -134,6 +134,24 @@ def test_write_wav_clips_instead_of_wrapping(tmp_path):
 
 def test_synthesis_duration():
     assert Synthesis([0.0] * 24000, 24000, "hi", "kokoro", "Grace").duration == 1.0
+
+
+def test_annotate_marks_which_words_the_lexicon_supplied():
+    """The audio cannot show it: a name from the lexicon and a name espeak guessed at
+    sound equally confident, so a caller needs a way to ask."""
+    backend = make()
+    pairs = dict(backend.annotate("Yaw went to Kumasi by bus"))
+    assert pairs["Yaw"] is True
+    assert pairs["Kumasi"] is True
+    assert pairs["bus"] is False
+    assert pairs["went"] is False
+
+
+def test_coverage_counts_only_words():
+    backend = make()
+    assert backend.coverage("Kumasi!") == 1.0
+    assert backend.coverage("bus") == 0.0
+    assert backend.coverage("") == 0.0
 
 
 def test_unoffered_kokoro_speakers_are_still_reachable_by_their_own_name():

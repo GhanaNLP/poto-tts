@@ -71,6 +71,7 @@ Eight British speakers:
 
 ```python
 tts = load(voice="Emmanuel")
+tts.annotate("Yaw went to Kumasi by bus")   # which words the lexicon supplied
 ```
 
 ```bash
@@ -88,30 +89,6 @@ Kokoro's twenty American speakers and twenty-five other-language speakers are st
 in the model and still reachable by their own names -- `load(voice="af_heart")` -- for
 anyone who wants to try. They are simply not offered.
 
-## Two modes
-
-Both read the same dictionary, so the Ghanaian words are right either way. What
-differs is the accent they are said in -- and, in `gh`, the accent leaks a little
-into the English too:
-
-```python
-tts = load(mode="gh")      # Kwabena /kwabˈɪna/,   Accra /ˈəkɾa/
-tts = load(mode="en")      # Kwabena /kwɑːbˈɪnɑː/, Accra /ˈəkɹɑː/
-```
-
-`gh` adds the `en-gh` voice file, whose rules cannot tell a lexicon word from an
-English one -- they run on everything after lookup. So the names get Ghanaian vowel
-qualities and a tapped r, and ordinary English picks up the FACE monophthong and
-schwa-as-/a/ with them: `late` becomes /let/ and `the` /ða/.
-
-`en` is British English with no voice file at all. The dictionary alone gets the names
-right; they simply carry English vowels, and every other word is untouched --
-identical to what any English TTS would say.
-
-Neither is more correct. `gh` sounds more local throughout, `en` keeps the Ghanaian
-part strictly to the Ghanaian words.
-Hear them side by side: [the Space](https://huggingface.co/spaces/ghananlpcommunity/poto-tts).
-
 ## Cross-platform
 
 sherpa-onnx runs on **Android, iOS, WebAssembly, C++, C, Go, C#, Java, Kotlin, Rust,
@@ -119,7 +96,7 @@ Dart and Swift**, and they all get the same pronunciations as Python, because th
 front-end is data rather than code. There is no Python-only path to fall back from:
 the dictionary and the voice file *are* the front-end.
 
-Ship four things and send plain text with `lang=en-gh`:
+Ship four things and send plain text with `lang=en`:
 
 ```
 onnx/model.onnx      the model
@@ -131,9 +108,9 @@ espeak-ng-data/      the dictionary and the voice -- the Ghanaian part
 > Swap in a stock `espeak-ng-data` and you get a working voice that mispronounces
 > every Ghanaian name, with no error. That directory is the deliverable.
 
-The mode is the `lang` string and nothing more: `en-gh` or `en`. `examples/bare_sherpa_onnx.py`
-synthesises both with no `poto_tts` import at all -- it is there to keep this claim
-testable rather than merely stated.
+Send plain text with `lang=en`. `examples/bare_sherpa_onnx.py` does exactly that with
+no `poto_tts` import at all -- it is there to keep this claim testable rather than
+merely stated.
 
 What does need Python is *authoring* a pronunciation: `poto-tts dict` compiles the
 lexicon into `espeak-ng-data` and wants the `espeak-ng` binary as well. That is a
