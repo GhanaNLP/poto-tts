@@ -196,8 +196,11 @@ def create_app(
     @app.get("/voices")
     def voices(backend: Optional[str] = Query(None)):
         b = get_backend(backend)
-        return {"backend": b.name, "default": b.voice,
-                "recommended": b.recommended, "voices": b.voices}
+        described = b.describe_voices() if hasattr(b, "describe_voices") else [
+            {"name": v, "gender": "", "accent": "", "recommended": v in b.recommended}
+            for v in b.voices]
+        return {"backend": b.name, "default": b.voice, "recommended": b.recommended,
+                "voices": b.voices, "described": described}
 
     @app.get("/platforms")
     def platforms():
@@ -254,7 +257,7 @@ def create_app(
     @app.post("/speak")
     def speak_post(
         text: str = Body(..., description="text to speak"),
-        backend: Optional[str] = Body(None, description="kokoro or piper"),
+        backend: Optional[str] = Body(None, description="synthesis engine"),
         voice: Optional[str] = Body(None, description="speaker name or id"),
         speed: Optional[float] = Body(None, gt=0.1, le=3.0),
     ):

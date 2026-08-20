@@ -1,5 +1,12 @@
 """Compile the Ghana lexicon into an espeak-ng English dictionary.
 
+For deployments that cannot run this library: Android, iOS, WebAssembly, C++. They
+load `espeak-ng-data` and send plain text, so a patched dictionary is the only place
+Ghanaian pronunciations can live for them. Python callers do not need it -- their path
+is the lfn respelling in respell.py, which reaches every word rather than only the
+ones with entries.
+
+
 The output is a patched `espeak-ng-data` directory. Point sherpa-onnx at it with
 `--vits-data-dir` and Ghanaian names come out right from *plain text* -- no
 Python, no inline phonemes, no lexicon file for the caller to ship. That is what
@@ -370,6 +377,11 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(prog="poto-tts dict",
                                  description=__doc__.splitlines()[0])
     ap.add_argument("--out", required=True, help="directory to write espeak-ng-data into")
+    ap.add_argument("--all-words", action="store_true",
+                    help="write entries for ordinary English words too, giving the "
+                         "whole utterance Ghanaian vowels rather than only the "
+                         "Ghanaian words. Stress is taken from espeak's own "
+                         "pronunciation so English keeps its rhythm.")
     ap.add_argument("--extra", default=None,
                     help="your own pronunciations: word<TAB>IPA per line, or "
                          "word<TAB>=mnemonics to bypass the mapping. These "
@@ -408,13 +420,28 @@ def main(argv=None) -> int:
     print("building entries from the Ghana lexicon", file=sys.stderr)
     entries, unmappable, stock = build_entries()
 
-    print("loading the English vocabulary", file=sys.stderr)
-    english = english_vocabulary(out.parent / "words_alpha.txt")
-    print(f"  {len(english)} English words will be left to espeak", file=sys.stderr)
+    if args.all_words:
+        # Every lexicon word gets an entry, so ordinary English is spoken with
+        # Ghanaian vowels too -- /kɔnvɛnʃən/ rather than /kənvˈɛnʃən/. This is the
+        # accent applied to the whole utterance rather than only to Ghanaian words.
+        #
+        # It is off by default because of what it costs if done carelessly. The
+        # first attempt at it moved the stress in 'yesterday', 'January' and
+        # 'Wednesday': the lexicon records segments, not stress, so every entry had
+        # to guess, and the Ghanaian penultimate rule is wrong for English. Here the
+        # stress comes from espeak's own pronunciation of the word, mapped by
+        # syllable position, so the vowels change and the rhythm does not.
+        differing = dict(entries)
+        print(f"  --all-words: entries for all {len(differing)} lexicon words",
+              file=sys.stderr)
+    else:
+        print("loading the English vocabulary", file=sys.stderr)
+        english = english_vocabulary(out.parent / "words_alpha.txt")
+        print(f"  {len(english)} English words will be left to espeak", file=sys.stderr)
 
-    differing = {w: m for w, m in entries.items() if w not in english}
-    print(f"  {len(differing)} of {len(entries)} lexicon words are not English "
-          f"and get an entry", file=sys.stderr)
+        differing = {w: m for w, m in entries.items() if w not in english}
+        print(f"  {len(differing)} of {len(entries)} lexicon words are not English "
+              f"and get an entry", file=sys.stderr)
 
     # User overrides last, so they win -- including over the English-word rule. A
     # caller who writes an entry for 'record' means it, and second-guessing them

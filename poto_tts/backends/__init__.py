@@ -1,11 +1,15 @@
-"""The engines poto-tts can speak through.
+"""The engine poto-tts speaks through.
 
-Adding one is a config, not a front-end, because pronunciation lives in the
-patched `espeak-ng-data` that all of them share.
+One backend, deliberately: Kokoro v1.0, Apache-2.0, with Ghanaian pronunciation
+supplied by the front-end rather than by training. A Piper backend existed here and
+was removed -- a voice trained on Ghanaian broadcast speech sounded worse at 45k
+steps than Kokoro does with a good front-end, and it carried a licence restriction
+the corpus's speakers never consented to lift. The training pipeline is still in
+`tools/` for anyone who wants to train on data they hold rights to.
 
-    kokoro  Apache-2.0 weights, no training needed. Commercial use is fine.
-    piper   Trained on Ghanaian speech, so the accent is in the weights.
-            Non-commercial: see poto_tts/backends/piper.py.
+`Backend` stays a base class rather than being folded into `KokoroBackend`, because
+the interesting part of this project is the front-end and it should be attachable to
+whatever engine comes next.
 """
 
 from __future__ import annotations
@@ -14,27 +18,17 @@ from typing import Dict, Type
 
 from .base import Backend, Synthesis, write_wav
 from .kokoro import KokoroBackend
-from .piper import PiperBackend
 
-BACKENDS: Dict[str, Type[Backend]] = {
-    KokoroBackend.name: KokoroBackend,
-    PiperBackend.name: PiperBackend,
-}
+BACKENDS: Dict[str, Type[Backend]] = {KokoroBackend.name: KokoroBackend}
 
 DEFAULT_BACKEND = KokoroBackend.name
 
 __all__ = ["BACKENDS", "DEFAULT_BACKEND", "Backend", "KokoroBackend",
-           "PiperBackend", "Synthesis", "write_wav", "load"]
+           "Synthesis", "write_wav", "load"]
 
 
 def load(backend: str = DEFAULT_BACKEND, **kw) -> Backend:
-    """Construct a backend by name.
-
-    Kokoro is the default because it is the one anyone can use for anything: the
-    Piper voice sounds more Ghanaian but its training data does not permit
-    commercial use, and a library should not hand you a licence problem unless you
-    asked for it.
-    """
+    """Construct a backend by name."""
     try:
         cls = BACKENDS[backend]
     except KeyError:

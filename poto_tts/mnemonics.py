@@ -1,4 +1,17 @@
-"""Ghanaian IPA -> espeak-ng inline phonemes, for the Piper route.
+"""Ghanaian IPA -> espeak-ng mnemonics, for building the espeak dictionary.
+
+Not the path a Python caller takes -- that is respell.py, which writes lfn and
+reaches every word. This table exists for `poto-tts dict`, which compiles Ghanaian
+pronunciations into espeak's own English dictionary so that **deployments with no
+Python** still get the names right: an Android or iOS app, a WASM build, a C++
+service. Those runtimes load `espeak-ng-data` and send plain text, so the only place
+a correction can live is inside that data.
+
+The two routes differ in reach and fidelity. The dictionary corrects words espeak
+mis-parses, keeps all seven Akan vowels, and leaves ordinary English alone. The lfn
+respelling reaches every word, at the cost of five vowels. Python callers get the
+second; everyone else gets the first.
+
 
 espeak-ng reads `[[...]]` in its input as phonemes rather than letters, in the
 mnemonics of whichever voice is active. That is the hook this module uses: a word

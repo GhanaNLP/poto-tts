@@ -88,9 +88,12 @@ class Backend:
             self.model_dir, self.config = ensure_voice(
                 backend=None if repo_id else self.name, repo_id=repo_id)
 
-        self.speakers: Dict[str, int] = {
+        # Private, exposed through properties: a subclass that knows its speakers
+        # better than the config does (KokoroBackend, which has named aliases and
+        # metadata) overrides the properties, and assigning to them here would fail.
+        self._speakers: Dict[str, int] = {
             name: i for i, name in enumerate(self.config.get("speakers") or [])}
-        self.recommended: List[str] = list(self.config.get("recommended") or [])
+        self._recommended: List[str] = list(self.config.get("recommended") or [])
 
         if espeak_data is not None:
             self.espeak_data = Path(espeak_data)
@@ -147,6 +150,15 @@ class Backend:
         raise NotImplementedError
 
     # -- voices ------------------------------------------------------------
+
+    @property
+    def speakers(self) -> Dict[str, int]:
+        """Speaker name -> id, as the voice's config declares them."""
+        return self._speakers
+
+    @property
+    def recommended(self) -> List[str]:
+        return list(self._recommended)
 
     @property
     def voices(self) -> List[str]:

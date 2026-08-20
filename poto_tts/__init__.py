@@ -1,36 +1,40 @@
 """Ghanaian English speech synthesis on sherpa-onnx.
 
-Pronunciation lives in a patched espeak-ng dictionary rather than in code, so the
-same voice files run wherever sherpa-onnx runs -- Python, C++, Android, iOS,
-WebAssembly -- with no front-end to port.
+Every utterance is respelled before it reaches the model: each word's pronunciation
+comes from a 104,623-word Ghanaian lexicon, is written in Lingua Franca Nova
+orthography, and espeak reads it back into the phonemes Kokoro receives. The
+pronunciation is data, not code, so the same voice files work wherever sherpa-onnx
+runs -- Python, C++, Android, iOS, WebAssembly.
 
     from poto_tts import load
 
-    tts = load("kokoro")                       # Apache-2.0, commercial use fine
+    tts = load()                                   # Kokoro, Apache-2.0
     tts.save("Kwabena went to Achimota", "out.wav")
 
-    tts = load("piper", voice="gh_00")         # trained on Ghanaian speech,
-                                               # non-commercial
+    tts = load(voice="Emmanuel")                   # British male
+    tts.prepare_text("Nyankpani")                  # 'nyankpani' -- what espeak is given
 """
 
-from .backends import BACKENDS, DEFAULT_BACKEND, Backend, KokoroBackend, PiperBackend, Synthesis, load
-from .inject import GhanaInjector
-from .mnemonics import CONSONANTS, LONG_VOWELS, VOWELS, MnemonicError, injection, verify
+from .backends import BACKENDS, DEFAULT_BACKEND, Backend, KokoroBackend, Synthesis, load
+from .frontend import GhanaFrontend
+from .respell import CONSONANTS, VOWELS, respell, respell_ipa
+from .voices import VOICES, Voice, by_name, grouped
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 __all__ = [
     "load",
+    "KokoroBackend",
+    "Backend",
+    "Synthesis",
     "BACKENDS",
     "DEFAULT_BACKEND",
-    "Backend",
-    "KokoroBackend",
-    "PiperBackend",
-    "Synthesis",
-    "GhanaInjector",
-    "injection",
-    "verify",
-    "MnemonicError",
+    "GhanaFrontend",
+    "respell",
+    "respell_ipa",
     "VOWELS",
-    "LONG_VOWELS",
     "CONSONANTS",
+    "VOICES",
+    "Voice",
+    "by_name",
+    "grouped",
 ]

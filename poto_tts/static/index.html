@@ -61,6 +61,8 @@
            <input id="speed" type="number" value="1.0" min="0.5" max="2.0" step="0.05"></div>
     </div>
     <p class="note" id="licence"></p>
+    <p class="note">★ closest to Ghanaian English. Kokoro's own names (<code>bm_george</code>)
+       and speaker ids work too.</p>
   </fieldset>
 
   <fieldset>
@@ -106,9 +108,19 @@ async function loadVoices() {
   try {
     const r = await fetch("voices?backend=" + encodeURIComponent(backend)).then(r => r.json());
     const rec = new Set(r.recommended || []);
-    $("voice").innerHTML = r.voices
-      .map(v => `<option value="${v}"${v === r.default ? " selected" : ""}>${v}${rec.has(v) ? " ★" : ""}</option>`)
-      .join("");
+    // Grouped by accent and gender: a flat list of 28 first names tells you nothing
+    // about which one to pick.
+    const groups = new Map();
+    (r.described || r.voices.map(v => ({name: v}))).forEach(v => {
+      const key = [v.accent, v.gender].filter(Boolean).join(" ") || "voices";
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(v);
+    });
+    $("voice").innerHTML = [...groups].map(([key, vs]) =>
+      `<optgroup label="${key}">` + vs.map(v =>
+        `<option value="${v.name}"${v.name === r.default ? " selected" : ""}>` +
+        `${v.name}${rec.has(v.name) ? " ★" : ""}</option>`).join("") + `</optgroup>`
+    ).join("");
     const b = (await fetch("backends").then(r => r.json())).backends.find(x => x.name === backend);
     if (b && b.licence) {
       $("licence").textContent = `${b.licence}` +

@@ -39,7 +39,7 @@ def main(argv=None) -> int:
     )
     p.add_argument("text", nargs="*", help="text to speak; '-' reads stdin")
     p.add_argument("-o", "--output", default="out.wav")
-    p.add_argument("-b", "--backend", default="kokoro", help="kokoro or piper")
+    p.add_argument("-b", "--backend", default="kokoro", help="synthesis engine")
     p.add_argument("-v", "--voice", default=None)
     p.add_argument("-s", "--speed", type=float, default=1.0)
     p.add_argument("--model-dir", default=None, help="a local voice directory")
@@ -51,8 +51,13 @@ def main(argv=None) -> int:
     p.add_argument("--licence", action="store_true",
                    help="print the backend's licence terms and exit")
     p.add_argument("--phonemes", action="store_true",
-                   help="show what the Ghana lexicon does to the text, without "
-                        "loading a model")
+                   help="show what the front-end sends to espeak, without loading "
+                        "a model")
+    p.add_argument("--no-respell", action="store_true",
+                   help="send the text as it stands. With --espeak-voice en-us that "
+                        "is stock Kokoro, for comparison.")
+    p.add_argument("--espeak-voice", default=None,
+                   help="the espeak voice to phonemise with (default lfn)")
     p.add_argument("--debug", action="store_true", help="sherpa-onnx diagnostics")
     args = p.parse_args(argv)
 
@@ -61,28 +66,32 @@ def main(argv=None) -> int:
         text = sys.stdin.read()
 
     if args.phonemes:
-        # Deliberately model-free: this is for checking a pronunciation, and
-        # loading 300 MB to answer it would be absurd.
-        from .inject import GhanaInjector
-        from .mnemonics import phonemise
+        # Deliberately model-free: this answers "how will it say this?", and loading
+        # 380 MB to answer it would be absurd.
+        from .frontend import GhanaFrontend
+        from .respell import read_back
 
         if not text.strip():
             p.error("--phonemes needs some text")
-        injector = GhanaInjector()
-        injected = injector(text)
-        print(f"injected: {injected}")
+        frontend = GhanaFrontend()
+        respelled = frontend(text)
+        print(f"respelled: {respelled}")
         try:
-            print(f"espeak:   {phonemise(injected)}")
+            print(f"espeak:    {read_back(respelled)}")
         except RuntimeError as exc:
-            print(f"espeak:   ({exc})")
-        print(f"coverage: {injector.coverage(text):.0%} of words are in the lexicon")
+            print(f"espeak:    ({exc})")
+        print(f"coverage:  {frontend.coverage(text):.0%} of words come from the "
+              f"Ghanaian lexicon; the rest fall back to English")
         return 0
 
     from .backends import load
 
     kwargs = dict(model_dir=args.model_dir, repo_id=args.repo_id,
                   espeak_data=args.espeak_data, num_threads=args.threads,
-                  provider=args.provider, debug=args.debug, speed=args.speed)
+                  provider=args.provider, debug=args.debug, speed=args.speed,
+                  respell=not args.no_respell)
+    if args.espeak_voice:
+        kwargs["espeak_voice"] = args.espeak_voice
     if args.voice:
         kwargs["voice"] = args.voice
     backend = load(args.backend, **kwargs)
@@ -98,11 +107,15 @@ def main(argv=None) -> int:
         return 0
 
     if args.voices:
-        for name in backend.voices:
-            mark = " *" if name in backend.recommended else ""
-            print(f"{backend.resolve(name):4d}  {name}{mark}")
-        if backend.recommended:
-            print("\n* recommended", file=sys.stderr)
+        from .voices import grouped
+
+        for group, voices in grouped().items():
+            print(f"\n{group}")
+            for v in voices:
+                mark = " *" if v.recommended else "  "
+                print(f" {mark} {v.name:12s} {v.kokoro:12s} sid {v.sid}")
+        print("\n * closest to Ghanaian English. Kokoro's own names and speaker ids "
+              "work too.", file=sys.stderr)
         return 0
 
     if not text.strip():
